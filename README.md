@@ -8,13 +8,17 @@ Spring Cloud、Docker、Eureka
 
 ------
 
+## 注册中心
+
+server
+
 ## 网管服务
 
 gateway
 
 ## 订单服务
 
-gateway
+order
 
 ## 库存服务
 

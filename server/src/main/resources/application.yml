@@ -1,0 +1,20 @@
+# 集群配置 first-server
+server:
+  port: 8761
+spring:
+  application:
+    name: mall-server
+
+# eureka 服务注册中心配置
+eureka:
+  instance:
+    hostname: localhost
+
+  client:
+    # 代表不向注册中心注册自己
+    register-with-eureka: false
+    # 维护服务不需要检索服务
+    fetch-registry: false
+    # service-url:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka

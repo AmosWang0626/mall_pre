@@ -1,0 +1,12 @@
+# 基础配置
+spring:
+  application:
+    name: mall-integral
+server:
+  port: 8094
+
+# eureka 服务注册中心配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
