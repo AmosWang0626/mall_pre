@@ -14,7 +14,7 @@ gateway
 
 ## 订单服务
 
-gateway
+order
 
 ## 库存服务
 
