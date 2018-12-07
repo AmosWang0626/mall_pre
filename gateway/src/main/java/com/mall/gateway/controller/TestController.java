@@ -22,6 +22,14 @@ public class TestController {
     private RestTemplate restTemplate;
 
     /**
+     * 用户系统
+     */
+    @GetMapping("user")
+    public String user() {
+        return restTemplate.getForEntity("http://mall-user/user/test/", String.class).getBody();
+    }
+
+    /**
      * 订单系统
      */
     @GetMapping("order")
