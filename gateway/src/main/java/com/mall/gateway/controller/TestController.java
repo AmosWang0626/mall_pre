@@ -30,6 +30,14 @@ public class TestController {
     }
 
     /**
+     * 积分系统
+     */
+    @GetMapping("integral")
+    public String integral() {
+        return restTemplate.getForEntity("http://mall-user/integral/test/", String.class).getBody();
+    }
+
+    /**
      * 订单系统
      */
     @GetMapping("order")
@@ -42,7 +50,7 @@ public class TestController {
      */
     @GetMapping("inventory")
     public String inventory() {
-        return restTemplate.getForEntity("http://mall-inventory/inventory/test/", String.class).getBody();
+        return restTemplate.getForEntity("http://mall-warehouse/inventory/test/", String.class).getBody();
     }
 
     /**
@@ -51,14 +59,6 @@ public class TestController {
     @GetMapping("warehouse")
     public String warehouse() {
         return restTemplate.getForEntity("http://mall-warehouse/warehouse/test/", String.class).getBody();
-    }
-
-    /**
-     * 积分系统
-     */
-    @GetMapping("integral")
-    public String integral() {
-        return restTemplate.getForEntity("http://mall-integral/integral/test/", String.class).getBody();
     }
 
 }
