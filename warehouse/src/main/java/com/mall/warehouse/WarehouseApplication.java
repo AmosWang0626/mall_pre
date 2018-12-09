@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 商城系统-仓库系统
+ * 商城系统-仓储系统
  *
  * @author Daoyuan
  * @version 1.0.0

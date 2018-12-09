@@ -3,7 +3,7 @@ spring:
   application:
     name: mall-user
 server:
-  port: 8095
+  port: 8091
 
 # eureka 服务注册中心配置
 eureka:
