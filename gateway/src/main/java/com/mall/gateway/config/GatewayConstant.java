@@ -20,7 +20,7 @@ public interface GatewayConstant {
     /**
      * 物流编号
      */
-    String LOGISTICS = "LOG";
+    String LOG = "LOG";
     /**
      * 物流编号
      */

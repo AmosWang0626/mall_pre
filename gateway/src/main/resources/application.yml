@@ -2,6 +2,19 @@
 spring:
   application:
     name: mall-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: host_route_order
+#          uri: http://mall-order/order/
+#          predicates:
+#            - Path=/order/**
+#
+#        - id: host_route_user
+#          uri: http://localhost:8091/user/
+#          predicates:
+#            - Path=/user/**
+
 server:
   port: 8090
 

@@ -48,7 +48,7 @@ public class OrderController {
             logisticsRequest.setUserId(value);
         } else if (GatewayConstant.PHONE.equalsIgnoreCase(type)) {
             logisticsRequest.setPhoneNo(value);
-        } else if (GatewayConstant.LOGISTICS.equalsIgnoreCase(type)) {
+        } else if (GatewayConstant.LOG.equalsIgnoreCase(type)) {
             logisticsRequest.setLogisticsNo(value);
         } else if (GatewayConstant.ORDER.equalsIgnoreCase(type)) {
             logisticsRequest.setOrderNo(value);
