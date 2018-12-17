@@ -17,5 +17,6 @@
     - 库存管理
     - 物流管理
 
-## 数据库
-[所有表结构](/src/main/resources/static/database.sql)
+## 配置与说明
+- [数据库](README-CONF.sql)
+- [单机/集群配置](README-CONF.md)

@@ -57,7 +57,16 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- 解决maven仓库找不到jar问题 -->
+    <repositories>
+        <repository>
+            <id>spring-milestone-repo</id>
+            <url>http://repo.spring.io/milestone/</url>
+        </repository>
+    </repositories>
+
     <build>
+        <finalName>server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

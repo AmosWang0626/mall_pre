@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * PROJECT: user
@@ -19,7 +20,7 @@ import javax.persistence.Id;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickName;
     private String name;
@@ -28,7 +29,7 @@ public class UserEntity {
     private String salt;
     private String password;
     private String gender;
-    private String createTime;
-    private String updateTime;
+    private Date createTime;
+    private Date updateTime;
 
 }
