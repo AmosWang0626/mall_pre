@@ -86,3 +86,28 @@ eureka:
   instance:
     hostname: slave3
 ```
+
+## 三、安全认证
+
+### maven dependency
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+### application.yml config
+```yaml
+spring:
+  security:
+    user:
+      name: user
+      password: Hello666!
+```
+### defaultZone [server / consumer]
+```yaml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:Hello666!@localhost:8761/eureka/
+```
