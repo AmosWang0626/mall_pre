@@ -1,13 +1,19 @@
 spring:
   application:
     name: mall-server
+
 eureka:
   client:
     service-url:
-      defaultZone: http://slave1:8761/eureka,http://slave2:8762/eureka
+      defaultZone: http://slave1:8761/eureka,http://slave2:8762/eureka,http://slave3:8763/eureka
+
+info:
+  app:
+    name: mall-server
+    description: Eureka 注册中心
+    version: 1.0.0
 
 ---
-# 主机名
 spring:
   profiles:
     slave1
@@ -18,7 +24,6 @@ eureka:
     hostname: slave1
 
 ---
-# 主机名
 spring:
   profiles:
     slave2
@@ -27,3 +32,13 @@ server:
 eureka:
   instance:
     hostname: slave2
+
+---
+spring:
+  profiles:
+    slave3
+server:
+  port: 8763
+eureka:
+  instance:
+    hostname: slave3
