@@ -9,7 +9,7 @@ eureka:
 
 info:
   app:
-    name: mall-server
+    name: ${spring.application.name}
     description: Eureka 注册中心
     version: 1.0.0
 

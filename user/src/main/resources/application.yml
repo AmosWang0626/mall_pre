@@ -5,6 +5,13 @@ spring:
 server:
   port: 8091
 
+info:
+  app:
+    name: ${spring.application.name}
+    description: 用户系统
+    version: 1.0.0
+
+
 # eureka 服务注册中心配置
 eureka:
   client:
