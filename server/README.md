@@ -20,3 +20,4 @@
 ## 配置与说明
 - [数据库](README-CONF.sql)
 - [单机/集群配置](README-CONF.md)
+- [Docker集群配置](docker-compose.yml)

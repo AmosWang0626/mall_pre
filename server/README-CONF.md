@@ -111,3 +111,44 @@ eureka:
     service-url:
       defaultZone: http://user:Hello666!@localhost:8761/eureka/
 ```
+
+## 四、启动后传统方式指定 profiles
+```java
+@EnableEurekaServer
+@SpringBootApplication
+public class ServerApplication {
+
+    private static final Map<String, String> ENV_MAP = new TreeMap<>();
+
+    static {
+        ENV_MAP.put("s1", "slave1");
+        ENV_MAP.put("s2", "slave2");
+        ENV_MAP.put("s3", "slave3");
+    }
+
+    /**
+     * 最大错误次数
+     */
+    private static final int ERROR_COUNT = 5;
+
+    public static void main(String[] args) {
+        int errorCount = 0;
+        while (errorCount < ERROR_COUNT) {
+            System.out.print("请选择运行环境" + ENV_MAP.keySet() + ": ");
+            String profiles = new Scanner(System.in).nextLine();
+            if (ENV_MAP.containsKey(profiles)) {
+                profiles = ENV_MAP.get(profiles);
+            } else {
+                System.out.println("请输入正确的运行环境呦~~~");
+                errorCount++;
+                continue;
+            }
+            new SpringApplicationBuilder(ServerApplication.class).profiles(profiles).run(args);
+        }
+        System.exit(0);
+    }
+}
+```
+## 五、Docker 启动
+- mvn package
+- docker-compose up -d

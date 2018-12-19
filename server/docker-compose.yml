@@ -1,0 +1,36 @@
+version: '3.5'
+services:
+  slave1:
+    container_name: s1
+    image: mall/server:1.0.0
+    networks:
+      - mall-server-net
+    ports:
+      - 8761:8761
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave1
+
+  slave2:
+    container_name: s2
+    image: mall/server:1.0.0
+    networks:
+      - mall-server-net
+    ports:
+      - 8762:8762
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave2
+
+  slave3:
+    container_name: s3
+    image: mall/server:1.0.0
+    networks:
+      - mall-server-net
+    ports:
+      - 8763:8763
+    environment:
+      - SPRING_PROFILES_ACTIVE=slave3
+
+networks:
+  mall-server-net:
+    name: mall-server-net
+    driver: bridge

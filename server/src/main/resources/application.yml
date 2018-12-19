@@ -3,8 +3,8 @@ spring:
     name: mall-server
 
 eureka:
-  server:
-    enable-self-preservation: false
+  #  关闭自我保护模式
+  #  eureka.server.enable-self-preservation: false
   client:
     healthcheck:
       enabled: true
