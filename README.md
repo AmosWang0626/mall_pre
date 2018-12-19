@@ -1,4 +1,4 @@
-# mall（商城）
+# [mall（商城）](https://amoswang0626.github.io/mall/)
 
 > Spring Cloud Mall
 
@@ -71,3 +71,4 @@ return(yes)->change->warehouse
   - 评价 EVALUATION
   - 申请售后 AFTER_SALE
 - 交易关闭 CLOSE
+
