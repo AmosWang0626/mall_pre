@@ -18,6 +18,5 @@
     - 物流管理
 
 ## 配置与说明
-- [数据库](README-CONF.sql)
-- [单机/集群配置](README-CONF.md)
+- [单机/集群配置](server-config.md)
 - [Docker集群配置](docker-compose.yml)

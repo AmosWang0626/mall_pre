@@ -6,6 +6,8 @@
 
 Spring Cloud、Docker、Eureka
 
+- [数据库结构](mall-database.sql)
+
 ---
 ## 所有服务
 - 注册中心 server
@@ -15,7 +17,7 @@ Spring Cloud、Docker、Eureka
 - 仓储服务 warehouse
 
 ---
-## 项目架构
+## 项目架构【下图可用Typora查看】
 ```mermaid
 graph TD
 server(注册中心)
@@ -30,7 +32,7 @@ warehouse-->logistics(物流)
 warehouse-->inventory(库存)
 ```
 
-## 流程图
+## 流程图【下图可用Typora查看】
 ```flow
 begin=>start: 用户进入
 account=>condition: 有账号?
