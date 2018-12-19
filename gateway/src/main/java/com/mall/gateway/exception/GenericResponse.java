@@ -103,20 +103,24 @@ public class GenericResponse<T> implements Serializable {
         return this;
     }
 
-    public boolean isSuccessful() {
+    public boolean successful() {
         return SUCCESS.getCode().equalsIgnoreCase(this.getCode());
     }
 
-    public boolean isFailure() {
-        return !isSuccessful();
+    public boolean failure() {
+        return !successful();
     }
 
-    private String getCode() {
+    public String getCode() {
         return code;
     }
 
-    private String getMessage() {
+    public String getMessage() {
         return message;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     private void setMessage(String message) {

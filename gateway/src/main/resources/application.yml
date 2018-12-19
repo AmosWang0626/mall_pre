@@ -1,5 +1,8 @@
 # 基础配置
+
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: mall-gateway
 #  cloud:
@@ -16,7 +19,7 @@ spring:
 #            - Path=/user/**
 
 server:
-  port: 8090
+  port: 8000
 
 info:
   app:
@@ -27,5 +30,11 @@ info:
 # eureka 服务注册中心配置
 eureka:
   client:
+    healthcheck:
+      enabled: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+ribbon:
+  #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

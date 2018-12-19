@@ -71,7 +71,3 @@ return(yes)->change->warehouse
   - 评价 EVALUATION
   - 申请售后 AFTER_SALE
 - 交易关闭 CLOSE
-
-## 梳理
-
-用户提交订单，

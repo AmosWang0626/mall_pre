@@ -3,7 +3,11 @@ spring:
     name: mall-server
 
 eureka:
+  server:
+    enable-self-preservation: false
   client:
+    healthcheck:
+      enabled: true
     service-url:
       defaultZone: http://slave1:8761/eureka/,http://slave2:8762/eureka/,http://slave3:8763/eureka/
 

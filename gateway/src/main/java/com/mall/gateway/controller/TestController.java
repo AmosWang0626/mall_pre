@@ -1,5 +1,9 @@
 package com.mall.gateway.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +22,13 @@ import javax.annotation.Resource;
 @RequestMapping("test")
 public class TestController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
+
     @Resource
     private RestTemplate restTemplate;
+
+    @Resource
+    private LoadBalancerClient loadBalancerClient;
 
     /**
      * 用户系统
@@ -59,6 +68,12 @@ public class TestController {
     @GetMapping("warehouse")
     public String warehouse() {
         return restTemplate.getForEntity("http://mall-warehouse/warehouse/test/", String.class).getBody();
+    }
+
+    @GetMapping("log-user")
+    public void logUser() {
+        ServiceInstance serviceInstance = loadBalancerClient.choose("mall-user");
+        LOGGER.info("{}:{}:{}", serviceInstance.getServiceId(), serviceInstance.getHost(), serviceInstance.getPort());
     }
 
 }
