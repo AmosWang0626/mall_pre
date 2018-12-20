@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 @RequestMapping("order")
-public class OrderController {
+public class OrderController extends BaseController {
 
     @Resource
     private RestTemplate restTemplate;
@@ -30,9 +30,9 @@ public class OrderController {
     /**
      * 创建订单
      */
-    @GetMapping("create/{type}")
-    public String create(@PathVariable("type") String type) {
-        return restTemplate.getForEntity("http://mall-order/order/test/" + type, String.class).getBody();
+    @GetMapping("create/}")
+    public String create() {
+        return null;
     }
 
     /**

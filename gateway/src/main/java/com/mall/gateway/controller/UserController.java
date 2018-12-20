@@ -34,6 +34,29 @@ public class UserController extends BaseController {
     @Resource
     private RestTemplate restTemplate;
 
+    /*
+     * 注册
+     * {
+     * 	"type": "register",
+     * 	"phoneNo": "18937128861",
+     * 	"email": "",
+     * 	"password": "666666"
+     * }
+     * 登录
+     * {
+     * 	"phoneNo": "18937128861",
+     * 	"email": "",
+     * 	"password": "666666"
+     * }
+     */
+
+    /**
+     * 登录注册接口
+     *
+     * @param login         表单
+     * @param bindingResult 表单验证
+     * @return 通用状态
+     */
     @PostMapping("login")
     public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
