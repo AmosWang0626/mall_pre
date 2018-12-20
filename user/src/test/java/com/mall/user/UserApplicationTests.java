@@ -19,9 +19,15 @@ public class UserApplicationTests {
     private UserMapper userMapper;
 
     @Test
-    public void contextLoads() {
+    public void findById() {
         Optional<UserEntity> optional = userMapper.findById(10000L);
         optional.ifPresent(userEntity -> System.out.println(JSON.toJSONString(userEntity)));
+    }
+
+    @Test
+    public void findByPhoneNoOrEmail() {
+        UserEntity userEntity = userMapper.findByPhoneNoOrEmail("18937128861", null);
+        System.out.println(JSON.toJSONString(userEntity));
     }
 
 }

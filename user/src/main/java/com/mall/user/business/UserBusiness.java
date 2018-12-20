@@ -1,5 +1,8 @@
 package com.mall.user.business;
 
+import com.mall.user.common.GenericResponse;
+import com.mall.user.request.LoginRequest;
+
 /**
  * PROJECT: user
  * DESCRIPTION: note
@@ -9,9 +12,20 @@ package com.mall.user.business;
  */
 public interface UserBusiness {
 
-//
-//    Boolean register();
-//
-//    Boolean login();
+    /**
+     * 注册
+     *
+     * @param loginRequest 注册表单
+     * @return UserEntity
+     */
+    GenericResponse register(LoginRequest loginRequest);
+
+    /**
+     * 登录
+     *
+     * @param loginRequest 登录表单
+     * @return UserEntity
+     */
+    GenericResponse login(LoginRequest loginRequest);
 
 }

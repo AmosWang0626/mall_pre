@@ -23,12 +23,16 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickName;
-    private String name;
     private String phoneNo;
     private String email;
+    /**
+     * 密码 / 密码盐
+     */
     private String salt;
     private String password;
-    private String gender;
+    private String name;
+    private Boolean gender;
+    private String identityNo;
     private Date createTime;
     private Date updateTime;
 

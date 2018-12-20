@@ -1,4 +1,4 @@
-package com.mall.gateway.exception;
+package com.mall.user.common;
 
 /**
  * PROJECT: gateway
@@ -10,15 +10,13 @@ package com.mall.gateway.exception;
 public enum ExceptionEnum {
 
     /**
-     * generic 0000 开头【业务系统禁用0000开头】
+     * user 10000 开头
      */
-    SERVICE_BUSY("SYS0000", "服务器繁忙，请稍后重试"),
-    ERROR_PARAM_FORMAT("SYS0001", "参数格式错误[{0}]"),
-
-    /**
-     * user 1000 开头
-     */
-    REGISTER_PHONE_EMAIL_BOTH_NULL("USER1000", "邮箱手机号不能同时为空"),
+    REGISTER_ALREADY_PHONE_EMAIL("10000", "手机号或邮箱已被注册"),
+    REGISTER_FAIL_DB_ERROR("10001", "注册失败，服务器异常"),
+    LOGIN_ACCOUNT_NOT_FOUND("10002", "账号未注册"),
+    LOGIN_PASSWORD_ERROR("10003", "密码错误"),
+    PHONE_NO_FORMAT_ERROE("10004", "手机号格式错误"),
     ;
 
     private final String code;

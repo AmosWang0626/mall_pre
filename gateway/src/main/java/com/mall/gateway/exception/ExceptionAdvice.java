@@ -21,7 +21,8 @@ public class ExceptionAdvice {
     @ResponseBody
     @ExceptionHandler(value = Throwable.class)
     public GenericResponse handleThrowable(Throwable e) {
-        LOGGER.error("{} 位置: {}", e.toString(), e.getStackTrace()[0]);
+        LOGGER.error("{} \n位置: {}", e.toString(), e.getStackTrace()[0]);
+        e.printStackTrace();
         return GenericResponse.FAIL;
     }
 }

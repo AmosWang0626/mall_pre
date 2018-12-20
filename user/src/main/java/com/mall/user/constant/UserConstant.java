@@ -9,4 +9,6 @@ package com.mall.user.constant;
  */
 public interface UserConstant {
 
+    String TOKEN_SECRET = "famAjaxDisPat";
+
 }

@@ -21,12 +21,12 @@ public class GenericResponse<T> implements Serializable {
     private static final long serialVersionUID = -8600893080428359242L;
 
     /**
-     * 系统级状态码，其他状态码禁用 1 开头
+     * 系统级状态码，其他状态码禁用 0 开头
      */
-    public static final GenericResponse SUCCESS = new GenericResponse("1000", "成功!");
-    public static final GenericResponse FAIL = new GenericResponse("1001", "失败!");
-    public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", "参数异常!");
-    public static final GenericResponse ILLEGAL = new GenericResponse("1003", "非法请求!");
+    public static final GenericResponse SUCCESS = new GenericResponse("0000", "成功!");
+    public static final GenericResponse FAIL = new GenericResponse("0001", "失败!");
+    public static final GenericResponse ERROR_PARAM = new GenericResponse("0002", "参数异常!");
+    public static final GenericResponse ILLEGAL = new GenericResponse("0003", "非法请求!");
 
     /**
      * 状态码
@@ -40,6 +40,9 @@ public class GenericResponse<T> implements Serializable {
      * 对应body
      */
     private T body;
+
+    public GenericResponse() {
+    }
 
     public GenericResponse(T body) {
         this.code = SUCCESS.getCode();
@@ -63,7 +66,7 @@ public class GenericResponse<T> implements Serializable {
      * @param params 多个参数
      * @return GenericResponse
      */
-    public GenericResponse setParam(String... params) {
+    public GenericResponse buildParam(String... params) {
         if (params != null && params.length > 0) {
             StringBuilder sb = new StringBuilder();
             Iterator<String> iterator = Arrays.asList(params).iterator();
@@ -86,19 +89,11 @@ public class GenericResponse<T> implements Serializable {
      * @return GenericResponse
      * @see ObjectError#getDefaultMessage()
      */
-    public GenericResponse setParam(List<ObjectError> list) {
+    public GenericResponse buildParam(List<ObjectError> list) {
         if (CollectionUtils.isEmpty(list)) {
             return this;
         }
-        StringBuilder sb = new StringBuilder();
-        Iterator<ObjectError> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            sb.append(iterator.next().getDefaultMessage());
-            while (iterator.hasNext()) {
-                sb.append(", ");
-            }
-        }
-        this.setMessage(MessageFormat.format(this.getMessage(), sb.toString()));
+        this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
 
         return this;
     }
@@ -115,15 +110,15 @@ public class GenericResponse<T> implements Serializable {
         return code;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public void setCode(String code) {
         this.code = code;
     }
 
-    private void setMessage(String message) {
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 

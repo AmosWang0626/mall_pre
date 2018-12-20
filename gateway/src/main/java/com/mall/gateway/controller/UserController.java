@@ -3,10 +3,8 @@ package com.mall.gateway.controller;
 import com.mall.gateway.exception.ExceptionEnum;
 import com.mall.gateway.exception.GenericResponse;
 import com.mall.gateway.request.LoginRequest;
-import com.mall.gateway.request.RegisterRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,36 +24,32 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    /**
+     * 登录类型 - 注册
+     */
+    private static final String LOGIN_TYPE_REGISTER = "register";
 
     @Resource
     private RestTemplate restTemplate;
 
-    @PostMapping("register")
-    public GenericResponse register(@Valid @RequestBody RegisterRequest register, BindingResult bindingResult) {
-        // 参数校验
-        if (bindingResult.hasErrors()) {
-            return new GenericResponse<>(ExceptionEnum.ERROR_PARAM_FORMAT).setParam(bindingResult.getAllErrors());
-        }
-        if (StringUtils.isAnyBlank(register.getPhoneNo(), register.getEmail())) {
-
-        }
-
-
-        return GenericResponse.SUCCESS;
-    }
-
     @PostMapping("login")
     public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
-        // 参数校验
         if (bindingResult.hasErrors()) {
-            return new GenericResponse<>(ExceptionEnum.ERROR_PARAM_FORMAT).setParam(bindingResult.getAllErrors());
+            return new GenericResponse<>(ExceptionEnum.ERROR_PARAM_FORMAT).buildParam(bindingResult.getAllErrors());
+        }
+        if (StringUtils.isAllBlank(login.getPhoneNo(), login.getEmail())) {
+            return new GenericResponse<>(ExceptionEnum.REGISTER_PHONE_EMAIL_BOTH_NULL);
+        }
+        ResponseEntity<String> responseEntity;
+        if (login.getType() != null && LOGIN_TYPE_REGISTER.equalsIgnoreCase(login.getType())) {
+            responseEntity = restTemplate.postForEntity("http://mall-user/user/register/", login, String.class);
+        } else {
+            responseEntity = restTemplate.postForEntity("http://mall-user/user/login/", login, String.class);
         }
 
-
-        return GenericResponse.SUCCESS;
+        return genericResponse(responseEntity);
     }
 
 }
