@@ -30,7 +30,7 @@ public class OrderController extends BaseController {
     /**
      * 创建订单
      */
-    @GetMapping("create/}")
+    @GetMapping("create")
     public String create() {
         return null;
     }

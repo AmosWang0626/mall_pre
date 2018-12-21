@@ -41,17 +41,17 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `ID` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `NICK_NAME` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '昵称',
-  `NAME` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名字',
   `PHONE_NO` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '手机号',
   `EMAIL` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '邮箱',
   `SALT` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '密码盐',
   `PASSWORD` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '密码',
-  `GENDER` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '性别',
+  `NAME` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名字',
+  `GENDER` tinyint(1) DEFAULT NULL COMMENT '性别',
+  `IDENTITY_NO` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '身份证号',
   `CREATE_TIME` datetime NOT NULL COMMENT '创建时间',
   `UPDATE_TIME` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户表';
-
+) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户表';
 
 
 

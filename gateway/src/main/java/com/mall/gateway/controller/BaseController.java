@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * @author Daoyuan
  * @date 2018/12/20
  */
-public class BaseController {
+public abstract class BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 

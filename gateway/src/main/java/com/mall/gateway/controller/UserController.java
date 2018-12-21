@@ -2,15 +2,14 @@ package com.mall.gateway.controller;
 
 import com.mall.gateway.exception.ExceptionEnum;
 import com.mall.gateway.exception.GenericResponse;
+import com.mall.gateway.feign.UserFeignClient;
 import com.mall.gateway.request.LoginRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -31,8 +30,12 @@ public class UserController extends BaseController {
      */
     private static final String LOGIN_TYPE_REGISTER = "register";
 
+    /**
+     * 改用 feign
+     * {@code RestTemplate restTemplate;}
+     */
     @Resource
-    private RestTemplate restTemplate;
+    private UserFeignClient userFeignClient;
 
     /*
      * 注册
@@ -65,14 +68,16 @@ public class UserController extends BaseController {
         if (StringUtils.isAllBlank(login.getPhoneNo(), login.getEmail())) {
             return new GenericResponse<>(ExceptionEnum.REGISTER_PHONE_EMAIL_BOTH_NULL);
         }
-        ResponseEntity<String> responseEntity;
+        /*ResponseEntity<String> responseEntity;*/
         if (login.getType() != null && LOGIN_TYPE_REGISTER.equalsIgnoreCase(login.getType())) {
-            responseEntity = restTemplate.postForEntity("http://mall-user/user/register/", login, String.class);
+            /*responseEntity = restTemplate.postForEntity("http://mall-user/user/register/", login, String.class);*/
+            return userFeignClient.register(login);
         } else {
-            responseEntity = restTemplate.postForEntity("http://mall-user/user/login/", login, String.class);
+            /*responseEntity = restTemplate.postForEntity("http://mall-user/user/login/", login, String.class);*/
+            return userFeignClient.login(login);
         }
 
-        return genericResponse(responseEntity);
+        /*return genericResponse(responseEntity);*/
     }
 
 }
