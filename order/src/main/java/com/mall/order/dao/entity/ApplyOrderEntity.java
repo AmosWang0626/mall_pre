@@ -1,11 +1,9 @@
 package com.mall.order.dao.entity;
 
+import com.mall.order.common.OrderStatusEnum;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -58,7 +56,8 @@ public class ApplyOrderEntity {
     /**
      * 订单状态
      */
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatusEnum orderStatus;
     /**
      * 创建时间
      */

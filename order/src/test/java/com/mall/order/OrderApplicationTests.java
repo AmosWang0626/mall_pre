@@ -1,5 +1,6 @@
 package com.mall.order;
 
+import com.mall.order.common.OrderStatusEnum;
 import com.mall.order.dao.entity.ApplyOrderEntity;
 import com.mall.order.dao.entity.OrderDetailEntity;
 import com.mall.order.dao.mapper.ApplyOrderMapper;
@@ -57,14 +58,14 @@ public class OrderApplicationTests {
 
         ApplyOrderEntity applyOrderEntity = new ApplyOrderEntity();
         applyOrderEntity.setOrderNo(orderNo);
-        applyOrderEntity.setOrderStatus("PAYMENT_SUCCESS");
+        applyOrderEntity.setOrderStatus(OrderStatusEnum.AWAIT_PAY);
         applyOrderEntity.setConsumeAmount(totalAmount);
         applyOrderEntity.setConsumeDate(new Date());
         applyOrderEntity.setConsumeTime(new Date());
         applyOrderEntity.setCreateTime(new Date());
         applyOrderEntity.setReduceAmount(BigDecimal.ZERO);
         applyOrderEntity.setReduceReason(null);
-        applyOrderEntity.setSerialNo("ALI_PAY_" + System.currentTimeMillis());
+        // applyOrderEntity.setSerialNo("ALI_PAY_" + System.currentTimeMillis());
         applyOrderEntity.setUserId(10000L);
 
         applyOrderMapper.save(applyOrderEntity);
