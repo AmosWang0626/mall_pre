@@ -72,5 +72,5 @@ return(yes)->change->warehouse
 - 交易完成 FINISH
   - 评价 EVALUATION
   - 申请售后 AFTER_SALE
-- 交易关闭 CLOSE
+- 交易终态 DONE
 

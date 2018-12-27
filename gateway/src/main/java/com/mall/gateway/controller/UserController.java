@@ -1,10 +1,14 @@
 package com.mall.gateway.controller;
 
 import com.mall.gateway.exception.ExceptionEnum;
+import com.mall.gateway.exception.GenericException;
 import com.mall.gateway.exception.GenericResponse;
 import com.mall.gateway.feign.UserFeignClient;
 import com.mall.gateway.request.LoginRequest;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +28,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("user")
 public class UserController extends BaseController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     /**
      * 登录类型 - 注册
@@ -59,7 +65,9 @@ public class UserController extends BaseController {
      * @param login         表单
      * @param bindingResult 表单验证
      * @return 通用状态
+     * ignoreExceptions: 指定不触发回退的异常
      */
+    @HystrixCommand(fallbackMethod = "loginFallback", ignoreExceptions = {GenericException.class})
     @PostMapping("login")
     public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -68,16 +76,19 @@ public class UserController extends BaseController {
         if (StringUtils.isAllBlank(login.getPhoneNo(), login.getEmail())) {
             return new GenericResponse<>(ExceptionEnum.REGISTER_PHONE_EMAIL_BOTH_NULL);
         }
-        /*ResponseEntity<String> responseEntity;*/
         if (login.getType() != null && LOGIN_TYPE_REGISTER.equalsIgnoreCase(login.getType())) {
-            /*responseEntity = restTemplate.postForEntity("http://mall-user/user/register/", login, String.class);*/
             return userFeignClient.register(login);
         } else {
-            /*responseEntity = restTemplate.postForEntity("http://mall-user/user/login/", login, String.class);*/
             return userFeignClient.login(login);
         }
-
-        /*return genericResponse(responseEntity);*/
     }
 
+    /**
+     * 容错配置，如果user服务器挂掉，则进入本方法
+     * 注意：参数要和原方法一直，包括后边的 BindingResult
+     */
+    public GenericResponse loginFallback(LoginRequest login, BindingResult bindingResult, Throwable throwable) {
+        LOGGER.error("Fallback catch Exception with: >>> {}", throwable.getMessage());
+        return new GenericResponse(ExceptionEnum.SERVICE_BUSY);
+    }
 }

@@ -7,7 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -21,6 +23,9 @@ import java.nio.charset.StandardCharsets;
 public abstract class BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
+
+    @Resource
+    protected RestTemplate restTemplate;
 
     /**
      * 通用 response

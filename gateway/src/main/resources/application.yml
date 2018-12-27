@@ -35,6 +35,11 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+management:
+  endpoint:
+    health:
+      show-details: always
+
 ribbon:
   #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
   NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
