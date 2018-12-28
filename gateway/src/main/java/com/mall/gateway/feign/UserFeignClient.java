@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author Daoyuan
  * @date 2018/12/21
  */
-@FeignClient(name = "mall-user")
+@FeignClient(name = "mall-user", fallbackFactory = UserFeignFallbackFactory.class)
 public interface UserFeignClient {
 
     /**

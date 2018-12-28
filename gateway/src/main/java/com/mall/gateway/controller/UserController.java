@@ -1,11 +1,9 @@
 package com.mall.gateway.controller;
 
 import com.mall.gateway.exception.ExceptionEnum;
-import com.mall.gateway.exception.GenericException;
 import com.mall.gateway.exception.GenericResponse;
 import com.mall.gateway.feign.UserFeignClient;
 import com.mall.gateway.request.LoginRequest;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +65,6 @@ public class UserController extends BaseController {
      * @return 通用状态
      * ignoreExceptions: 指定不触发回退的异常
      */
-    @HystrixCommand(fallbackMethod = "loginFallback", ignoreExceptions = {GenericException.class})
     @PostMapping("login")
     public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -83,12 +80,4 @@ public class UserController extends BaseController {
         }
     }
 
-    /**
-     * 容错配置，如果user服务器挂掉，则进入本方法
-     * 注意：参数要和原方法一直，包括后边的 BindingResult
-     */
-    public GenericResponse loginFallback(LoginRequest login, BindingResult bindingResult, Throwable throwable) {
-        LOGGER.error("Fallback catch Exception with: >>> {}", throwable.getMessage());
-        return new GenericResponse(ExceptionEnum.SERVICE_BUSY);
-    }
 }

@@ -35,6 +35,10 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+feign:
+  hystrix:
+    enabled: true
+
 management:
   endpoint:
     health:
@@ -43,3 +47,7 @@ management:
 ribbon:
   #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
   NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#turbine:
+#  cluster-name-expression: "default"
+#  app-config-list: []

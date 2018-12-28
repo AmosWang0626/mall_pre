@@ -3,6 +3,7 @@ package com.mall.gateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -10,10 +11,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * @author Daoyuan
  * @version 1.0.0
+ * {@code @EnableTurbine}
  */
 @SpringBootApplication
 @EnableFeignClients
 @EnableHystrix
+@EnableHystrixDashboard
 public class GatewayApplication {
 
     public static void main(String[] args) {
