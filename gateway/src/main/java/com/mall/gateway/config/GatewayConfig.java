@@ -16,11 +16,20 @@ import org.springframework.web.client.RestTemplate;
 public class GatewayConfig {
 
     /**
-     * @code @LoadBalanced 负载均衡组件
+     * @code @LoadBalanced 负载均衡支持
      */
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    /**
+     * @code @LoadBalanced 负载均衡一霸，但是访问外网地址，会抛异常
+     * eg. java.lang.IllegalStateException: No instances available for google.com
+     */
+    @Bean
+    public RestTemplate simpleRestTemplate() {
         return new RestTemplate();
     }
 
