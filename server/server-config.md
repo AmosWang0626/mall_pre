@@ -31,6 +31,10 @@ eureka:
 - 路径：C:\Windows\System32\drivers\etc
 - 修改hosts文件：127.0.0.1 slave1 slave2 slave3
 
+### 单机配置多个host [mac篇]
+- sudo vim /etc/hosts
+- 修改hosts文件：127.0.0.1 slave1 slave2 slave3
+
 ### 项目打包与启动
 - 生成 server.jar
   - mvn package
