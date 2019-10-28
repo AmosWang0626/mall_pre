@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mall</groupId>
-        <artifactId>framework</artifactId>
+        <artifactId>mall</artifactId>
         <version>1.0.0</version>
     </parent>
     <artifactId>gateway</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>gateway</name>
+    <name>base-gateway</name>
     <description>mall-gateway</description>
 
     <properties>
@@ -19,6 +19,14 @@
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
     </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
 
 
     <build>

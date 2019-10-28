@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mall</groupId>
-        <artifactId>framework</artifactId>
+        <artifactId>mall</artifactId>
         <version>1.0.0</version>
     </parent>
     <artifactId>warehouse</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>warehouse</name>
+    <name>mall-warehouse</name>
     <description>mall-warehouse</description>
 
     <properties>
@@ -20,5 +20,22 @@
         <skipTests>true</skipTests>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>warehouse</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
