@@ -11,13 +11,13 @@ Spring Cloud、Docker、Eureka
 ---
 ## 所有服务
 - 注册中心 server
-- 网管服务 gateway
+- 网关服务 gateway
 - 用户服务 user
 - 订单服务 order
 - 仓储服务 warehouse
 
 ---
-## 项目架构【下图可用Typora查看】
+## 项目架构【下图可用 Typora 查看】
 ```mermaid
 graph TD
 server(注册中心)
@@ -57,20 +57,4 @@ pay(no)->cancle->end
 return(no)->enter->end
 return(yes)->change->warehouse
 ```
-
-## 订单状态
-
-- 待支付 AWAIT_PAY
-  - 付款 PAY_SUCCESS
-  - 取消订单 PAY_CANCEL
-  - 确认信息(多件商品) INFO_CONFIRM
-- 待发货 AWAIT_SHIP
-  - 待发货退款 AWAIT_SHIP_CANCEL
-- 待收货 SHIPPED
-  - 确认收货 RECEIVED
-  - 待收货退款 SHIPPED_CANCEL
-- 交易完成 FINISH
-  - 评价 EVALUATION
-  - 申请售后 AFTER_SALE
-- 交易终态 DONE
 

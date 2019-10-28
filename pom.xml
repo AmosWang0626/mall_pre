@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mall</groupId>
+    <artifactId>mall</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!-- 当前pom仅用于识别内部各模块 -->
+
+    <modules>
+        <!-- 项目依赖管理 -->
+        <module>framework</module>
+        <!-- 服务注册中心 -->
+        <module>server</module>
+        <!-- 网关管理模块 -->
+        <module>gateway</module>
+        <!-- 用户模块 -->
+        <module>user</module>
+        <!-- 订单模块 -->
+        <module>order</module>
+        <!-- 仓储模块 -->
+        <module>warehouse</module>
+    </modules>
+
+</project>
