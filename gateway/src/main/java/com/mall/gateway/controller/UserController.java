@@ -1,7 +1,7 @@
 package com.mall.gateway.controller;
 
-import com.mall.gateway.exception.ExceptionEnum;
-import com.mall.gateway.exception.GenericResponse;
+import com.mall.common.response.GenericResponse;
+import com.mall.gateway.exception.OrderExceptionEnum;
 import com.mall.gateway.feign.UserFeignClient;
 import com.mall.gateway.request.LoginRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -68,10 +68,10 @@ public class UserController extends BaseController {
     @PostMapping("login")
     public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new GenericResponse<>(ExceptionEnum.ERROR_PARAM_FORMAT).buildParam(bindingResult.getAllErrors());
+            return new GenericResponse<>(OrderExceptionEnum.ERROR_PARAM_FORMAT).buildParam(bindingResult.getAllErrors());
         }
         if (StringUtils.isAllBlank(login.getPhoneNo(), login.getEmail())) {
-            return new GenericResponse<>(ExceptionEnum.REGISTER_PHONE_EMAIL_BOTH_NULL);
+            return new GenericResponse<>(OrderExceptionEnum.REGISTER_PHONE_EMAIL_BOTH_NULL);
         }
         if (login.getType() != null && LOGIN_TYPE_REGISTER.equalsIgnoreCase(login.getType())) {
             return userFeignClient.register(login);

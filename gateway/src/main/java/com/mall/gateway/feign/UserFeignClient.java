@@ -1,6 +1,6 @@
 package com.mall.gateway.feign;
 
-import com.mall.gateway.exception.GenericResponse;
+import com.mall.common.response.GenericResponse;
 import com.mall.gateway.request.LoginRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

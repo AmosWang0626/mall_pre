@@ -1,5 +1,6 @@
 package com.mall.gateway.exception;
 
+import com.mall.common.response.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,8 +1,12 @@
 package com.mall.common.response;
 
 import com.alibaba.fastjson.JSON;
+import org.springframework.util.CollectionUtils;
+import org.springframework.validation.ObjectError;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * PROJECT: gateway
@@ -19,6 +23,7 @@ public class GenericResponse<T> implements Serializable {
     public static final GenericResponse FAIL = new GenericResponse("1001", "失败!");
     public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", "参数错误!");
     public static final GenericResponse SERVER_EXCEPTION = new GenericResponse("1003", "系统异常!");
+    public static final GenericResponse ILLEGAL = new GenericResponse("1004", "非法请求!");
 
 
     /**
@@ -78,4 +83,22 @@ public class GenericResponse<T> implements Serializable {
     public String toString() {
         return JSON.toJSONString(this);
     }
+
+
+    /**
+     * 将多个 ObjectError.getDefaultMessage 合成一个 String，然后 setMessage
+     *
+     * @param list 多个参数
+     * @return GenericResponse
+     * @see ObjectError#getDefaultMessage()
+     */
+    public GenericResponse buildParam(List<ObjectError> list) {
+        if (CollectionUtils.isEmpty(list)) {
+            return this;
+        }
+        this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
+
+        return this;
+    }
+
 }

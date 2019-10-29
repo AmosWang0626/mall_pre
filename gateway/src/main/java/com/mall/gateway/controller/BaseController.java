@@ -1,8 +1,8 @@
 package com.mall.gateway.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall.gateway.exception.ExceptionEnum;
-import com.mall.gateway.exception.GenericResponse;
+import com.mall.common.response.GenericResponse;
+import com.mall.gateway.exception.OrderExceptionEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public abstract class BaseController {
         }
         LOGGER.error("服务器异常! {}", responseEntity == null ? null : responseEntity.getStatusCode());
 
-        return new GenericResponse<>(ExceptionEnum.SERVICE_BUSY);
+        return new GenericResponse<>(OrderExceptionEnum.SERVICE_BUSY);
     }
 
 }
