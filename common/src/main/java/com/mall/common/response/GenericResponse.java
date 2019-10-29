@@ -1,4 +1,6 @@
-package com.mall.user.common;
+package com.mall.common.response;
+
+import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
 
@@ -13,11 +15,11 @@ public class GenericResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -8600893080428359242L;
 
-    /*
-     * user 系统 状态码 1000
-     */
+    public static final GenericResponse SUCCESS = new GenericResponse("1000", "成功!");
+    public static final GenericResponse FAIL = new GenericResponse("1001", "失败!");
+    public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", "参数错误!");
+    public static final GenericResponse SERVER_EXCEPTION = new GenericResponse("1003", "系统异常!");
 
-    public static final GenericResponse SUCCESS = new GenericResponse("0000", "成功!");
 
     /**
      * 状态码
@@ -43,7 +45,7 @@ public class GenericResponse<T> implements Serializable {
         this.message = message;
     }
 
-    public GenericResponse(ExceptionEnum exceptionEnum) {
+    public GenericResponse(IExceptionEnum exceptionEnum) {
         this.code = exceptionEnum.getCode();
         this.message = exceptionEnum.getMessage();
     }
@@ -74,6 +76,6 @@ public class GenericResponse<T> implements Serializable {
 
     @Override
     public String toString() {
-        return this.code + " " + this.message;
+        return JSON.toJSONString(this);
     }
 }

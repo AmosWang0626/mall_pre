@@ -1,7 +1,7 @@
 package com.mall.user.controller;
 
+import com.mall.common.response.GenericResponse;
 import com.mall.user.business.UserBusiness;
-import com.mall.user.common.GenericResponse;
 import com.mall.user.request.LoginRequest;
 import org.springframework.web.bind.annotation.*;
 

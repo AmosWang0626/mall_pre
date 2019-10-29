@@ -1,8 +1,8 @@
 package com.mall.user.business.impl;
 
+import com.mall.common.response.GenericResponse;
 import com.mall.user.business.UserBusiness;
-import com.mall.user.common.ExceptionEnum;
-import com.mall.user.common.GenericResponse;
+import com.mall.user.common.UserExceptionEnum;
 import com.mall.user.constant.UserConstant;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
@@ -34,12 +34,12 @@ public class UserBusinessImpl implements UserBusiness {
     @Override
     public GenericResponse register(LoginRequest loginRequest) {
         if (!CheckUtil.isPhoneNo(loginRequest.getPhoneNo())) {
-            return new GenericResponse(ExceptionEnum.PHONE_NO_FORMAT_ERROE);
+            return new GenericResponse(UserExceptionEnum.PHONE_NO_FORMAT_ERROR);
         }
         UserEntity userEntity = getUserEntity(loginRequest);
 
         if (userEntity != null) {
-            return new GenericResponse(ExceptionEnum.REGISTER_ALREADY_PHONE_EMAIL);
+            return new GenericResponse(UserExceptionEnum.REGISTER_ALREADY_PHONE_EMAIL);
         }
 
         userEntity = new UserEntity();
@@ -56,18 +56,18 @@ public class UserBusinessImpl implements UserBusiness {
             return new GenericResponse<>(generateLoginSuccessVO(entity));
         }
 
-        return new GenericResponse(ExceptionEnum.REGISTER_FAIL_DB_ERROR);
+        return new GenericResponse(UserExceptionEnum.REGISTER_FAIL_DB_ERROR);
     }
 
     @Override
     public GenericResponse login(LoginRequest loginRequest) {
         if (!CheckUtil.isPhoneNo(loginRequest.getPhoneNo())) {
-            return new GenericResponse(ExceptionEnum.PHONE_NO_FORMAT_ERROE);
+            return new GenericResponse(UserExceptionEnum.PHONE_NO_FORMAT_ERROR);
         }
         UserEntity userEntity = getUserEntity(loginRequest);
 
         if (userEntity == null) {
-            return new GenericResponse(ExceptionEnum.LOGIN_ACCOUNT_NOT_FOUND);
+            return new GenericResponse(UserExceptionEnum.LOGIN_ACCOUNT_NOT_FOUND);
         }
 
         String salt = userEntity.getSalt();
@@ -76,7 +76,7 @@ public class UserBusinessImpl implements UserBusiness {
             return new GenericResponse<>(generateLoginSuccessVO(userEntity));
         }
 
-        return new GenericResponse(ExceptionEnum.LOGIN_PASSWORD_ERROR);
+        return new GenericResponse(UserExceptionEnum.LOGIN_PASSWORD_ERROR);
     }
 
     private LoginSuccessVO generateLoginSuccessVO(UserEntity userEntity) {

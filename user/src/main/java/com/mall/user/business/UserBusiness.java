@@ -1,6 +1,6 @@
 package com.mall.user.business;
 
-import com.mall.user.common.GenericResponse;
+import com.mall.common.response.GenericResponse;
 import com.mall.user.request.LoginRequest;
 
 /**
