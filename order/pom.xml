@@ -6,6 +6,7 @@
         <groupId>com.mall</groupId>
         <artifactId>common</artifactId>
         <version>1.0.0</version>
+        <relativePath>../../common/pom.xml</relativePath>
     </parent>
     <artifactId>order</artifactId>
     <version>1.0.0</version>
