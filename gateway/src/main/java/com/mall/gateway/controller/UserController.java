@@ -4,6 +4,7 @@ import com.mall.common.response.GenericResponse;
 import com.mall.gateway.exception.OrderExceptionEnum;
 import com.mall.gateway.feign.UserFeignClient;
 import com.mall.gateway.request.LoginRequest;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
  * @author Daoyuan
  * @date 2018/12/11
  */
+@Api(tags = "A1用户相关")
 @RestController
 @RequestMapping("user")
 public class UserController extends BaseController {

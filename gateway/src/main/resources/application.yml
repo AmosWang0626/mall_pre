@@ -51,3 +51,13 @@ ribbon:
 #turbine:
 #  cluster-name-expression: "default"
 #  app-config-list: []
+
+# log config
+logging:
+  level:
+    springfox:
+      documentation: WARN
+
+# show swagger-ui
+swagger:
+  enable: true
