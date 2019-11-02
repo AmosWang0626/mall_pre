@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mall</groupId>
-        <artifactId>common</artifactId>
+        <artifactId>mall</artifactId>
         <version>1.0.0</version>
-        <relativePath>../../common/pom.xml</relativePath>
     </parent>
     <artifactId>order</artifactId>
     <version>1.0.0</version>

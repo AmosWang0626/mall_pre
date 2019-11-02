@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.mall</groupId>
-        <artifactId>common</artifactId>
+        <artifactId>mall</artifactId>
         <version>1.0.0</version>
-        <relativePath>../../common/pom.xml</relativePath>
     </parent>
     <artifactId>warehouse</artifactId>
     <version>1.0.0</version>
@@ -21,6 +20,14 @@
         <skipTests>true</skipTests>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>warehouse</finalName>
