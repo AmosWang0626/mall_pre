@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * 商城系统-用户系统
@@ -12,6 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @author Daoyuan
  * @version 1.0.0
  */
+@EnableJpaAuditing
 @EnableEurekaClient
 @SpringBootApplication
 @EntityScan("com.mall.user.dao.entity")

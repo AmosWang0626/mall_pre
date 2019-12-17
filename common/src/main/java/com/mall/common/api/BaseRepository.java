@@ -20,7 +20,6 @@ public interface BaseRepository<T extends BaseEntity, ID> extends CrudRepository
      *
      * @param entity condition
      */
-    @Modifying
     void deleteByLogic(T entity);
 
     /**

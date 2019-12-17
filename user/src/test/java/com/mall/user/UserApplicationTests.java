@@ -7,15 +7,19 @@ import com.mall.user.util.DesSecretUtil;
 import com.mall.user.util.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@EntityScan("com.mall.user.dao.entity")
 public class UserApplicationTests {
 
     @Resource
@@ -40,8 +44,21 @@ public class UserApplicationTests {
 
     @Test
     public void findById() {
-        Optional<UserEntity> optional = userMapper.findById("");
+        Optional<UserEntity> optional = userMapper.findById("4028ab7b6f140c9e016f140cc3a70000");
         optional.ifPresent(userEntity -> System.out.println(JSON.toJSONString(userEntity)));
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(i);
+        }
+        System.out.println(list);
+        List<Integer> tempList = new ArrayList<>();
+        tempList.add(list.get(0));
+        tempList.addAll(list.subList(6, list.size()));
+        tempList.addAll(list.subList(1, 6));
+        System.out.println(tempList);
     }
 
 }

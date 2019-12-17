@@ -2,12 +2,14 @@ package com.mall.common.pojo.dao;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,8 +22,10 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@Entity
+@MappedSuperclass
+@Accessors(chain = true)
 @Where(clause = "DELETE_FLAG=0")
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
     @Id
@@ -33,13 +37,13 @@ public class BaseEntity {
     private LocalDateTime createTime;
 
     @CreatedBy
-    private BaseUserEntity createUser;
+    private String createUser;
 
     @LastModifiedDate
     private LocalDateTime modifyTime;
 
     @LastModifiedBy
-    private BaseUserEntity modifyUser;
+    private String modifyUser;
 
     @Column(name = "DELETE_FLAG", nullable = false)
     private Boolean deleteFlag;
