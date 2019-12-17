@@ -1,12 +1,11 @@
 package com.mall.user.dao.entity;
 
+import com.mall.common.pojo.dao.BaseUserEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.Table;
 
 /**
  * PROJECT: user
@@ -15,25 +14,14 @@ import java.util.Date;
  * @author Daoyuan
  * @date 2018/12/11
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(name = "user")
-public class UserEntity {
+@Accessors(chain = true)
+@Table(name = "org_user")
+public class UserEntity extends BaseUserEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nickName;
-    private String phoneNo;
-    private String email;
-    /**
-     * 密码 / 密码盐
-     */
     private String salt;
     private String password;
-    private String name;
-    private Boolean gender;
-    private String identityNo;
-    private Date createTime;
-    private Date updateTime;
+    private Integer status;
 
 }

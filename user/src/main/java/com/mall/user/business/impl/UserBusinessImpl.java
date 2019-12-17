@@ -8,15 +8,14 @@ import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
 import com.mall.user.request.LoginRequest;
 import com.mall.user.response.LoginSuccessVO;
-import com.mall.user.util.CheckUtil;
 import com.mall.user.util.DesSecretUtil;
 import com.mall.user.util.RandomUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * PROJECT: user
@@ -33,80 +32,53 @@ public class UserBusinessImpl implements UserBusiness {
 
     @Override
     public GenericResponse register(LoginRequest loginRequest) {
-        if (!CheckUtil.isPhoneNo(loginRequest.getPhoneNo())) {
-            return new GenericResponse(UserExceptionEnum.PHONE_NO_FORMAT_ERROR);
-        }
-        UserEntity userEntity = getUserEntity(loginRequest);
+        Optional<UserEntity> userOptional = getUserEntity(loginRequest);
 
-        if (userEntity != null) {
-            return new GenericResponse(UserExceptionEnum.REGISTER_ALREADY_PHONE_EMAIL);
+        if (userOptional.isPresent()) {
+            return new GenericResponse(UserExceptionEnum.REGISTER_ACCOUNT_EXISTED);
         }
 
-        userEntity = new UserEntity();
+        UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(loginRequest, userEntity);
         String pwd = loginRequest.getPassword();
         String salt = RandomUtil.generateString(8);
         String encryptPwd = DesSecretUtil.encrypt(pwd, salt);
         userEntity.setSalt(salt);
         userEntity.setPassword(encryptPwd);
-        userEntity.setCreateTime(new Date());
+        userEntity.setCreateTime(LocalDateTime.now());
         UserEntity entity = userMapper.save(userEntity);
 
-        if (entity != null) {
-            return new GenericResponse<>(generateLoginSuccessVO(entity));
-        }
-
-        return new GenericResponse(UserExceptionEnum.REGISTER_FAIL_DB_ERROR);
+        return new GenericResponse<>(generateLoginSuccessVO(entity));
     }
 
     @Override
     public GenericResponse login(LoginRequest loginRequest) {
-        if (!CheckUtil.isPhoneNo(loginRequest.getPhoneNo())) {
-            return new GenericResponse(UserExceptionEnum.PHONE_NO_FORMAT_ERROR);
-        }
-        UserEntity userEntity = getUserEntity(loginRequest);
+        Optional<UserEntity> userOptional = getUserEntity(loginRequest);
 
-        if (userEntity == null) {
+        if (!userOptional.isPresent()) {
             return new GenericResponse(UserExceptionEnum.LOGIN_ACCOUNT_NOT_FOUND);
         }
-
-        String salt = userEntity.getSalt();
-        String encryptPwd = DesSecretUtil.encrypt(loginRequest.getPassword(), salt);
-        if (encryptPwd.equals(userEntity.getPassword())) {
-            return new GenericResponse<>(generateLoginSuccessVO(userEntity));
+        UserEntity userEntity = userOptional.get();
+        String encryptPwd = DesSecretUtil.encrypt(loginRequest.getPassword(), userEntity.getSalt());
+        if (!encryptPwd.equals(userEntity.getPassword())) {
+            return new GenericResponse(UserExceptionEnum.LOGIN_PASSWORD_ERROR);
         }
 
-        return new GenericResponse(UserExceptionEnum.LOGIN_PASSWORD_ERROR);
+        return new GenericResponse<>(generateLoginSuccessVO(userEntity));
     }
 
     private LoginSuccessVO generateLoginSuccessVO(UserEntity userEntity) {
         LoginSuccessVO successVO = new LoginSuccessVO();
         BeanUtils.copyProperties(userEntity, successVO);
-        if (userEntity.getGender() != null) {
-            successVO.setGender(userEntity.getGender() ? 1 : 0);
-        }
-        successVO.setToken(DesSecretUtil.encrypt(userEntity.getId().toString(), UserConstant.TOKEN_SECRET));
+        successVO.setToken(DesSecretUtil.encrypt(userEntity.getId(), UserConstant.TOKEN_SECRET));
         return successVO;
     }
 
-    private UserEntity getUserEntity(LoginRequest loginRequest) {
-        UserEntity userEntity = null;
-        boolean phoneNotBlank = StringUtils.isNotBlank(loginRequest.getPhoneNo());
-        boolean emailNotBlank = StringUtils.isNotBlank(loginRequest.getEmail());
-        if (!phoneNotBlank) {
-            loginRequest.setPhoneNo(null);
-        }
-        if (!emailNotBlank) {
-            loginRequest.setEmail(null);
-        }
-        if (phoneNotBlank && emailNotBlank) {
-            userEntity = userMapper.findByPhoneNoOrEmail(loginRequest.getPhoneNo(), loginRequest.getEmail());
-        } else if (phoneNotBlank) {
-            userEntity = userMapper.findByPhoneNo(loginRequest.getPhoneNo());
-        } else if (emailNotBlank) {
-            userEntity = userMapper.findByEmail(loginRequest.getEmail());
-        }
-        return userEntity;
+    /**
+     * 获取用户
+     */
+    private Optional<UserEntity> getUserEntity(LoginRequest loginRequest) {
+        return userMapper.findByAccount(loginRequest.getAccount());
     }
 
 }

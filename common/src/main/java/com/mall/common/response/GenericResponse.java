@@ -1,6 +1,7 @@
 package com.mall.common.response;
 
 import com.alibaba.fastjson.JSON;
+import com.mall.common.constant.WordConstant;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
 
@@ -19,11 +20,11 @@ public class GenericResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -8600893080428359242L;
 
-    public static final GenericResponse SUCCESS = new GenericResponse("1000", "成功!");
-    public static final GenericResponse FAIL = new GenericResponse("1001", "失败!");
-    public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", "参数错误!");
-    public static final GenericResponse SERVER_EXCEPTION = new GenericResponse("1003", "系统异常!");
-    public static final GenericResponse ILLEGAL = new GenericResponse("1004", "非法请求!");
+    public static final GenericResponse SUCCESS = new GenericResponse("1000", WordConstant.SUCCESS);
+    public static final GenericResponse FAIL = new GenericResponse("1001", WordConstant.FAIL);
+    public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", WordConstant.ERROR_PARAM);
+    public static final GenericResponse SYSTEM_ERROR = new GenericResponse("1003", WordConstant.SYSTEM_ERROR);
+    public static final GenericResponse REQUEST_ILLEGAL = new GenericResponse("1004", WordConstant.REQUEST_ILLEGAL);
 
 
     /**

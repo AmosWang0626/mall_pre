@@ -15,8 +15,7 @@ public enum UserExceptionEnum implements IExceptionEnum {
     /**
      * exception code message
      */
-    REGISTER_ALREADY_PHONE_EMAIL("1000", "手机号或邮箱已被注册"),
-    REGISTER_FAIL_DB_ERROR("1001", "注册失败，服务器异常"),
+    REGISTER_ACCOUNT_EXISTED("1001", "账号已占用"),
     LOGIN_ACCOUNT_NOT_FOUND("1002", "账号未注册"),
     LOGIN_PASSWORD_ERROR("1003", "密码错误"),
     PHONE_NO_FORMAT_ERROR("1004", "手机号格式错误"),
