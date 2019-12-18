@@ -1,4 +1,4 @@
-package com.mall.user.constant;
+package com.mall.user.common.constant;
 
 /**
  * PROJECT: user

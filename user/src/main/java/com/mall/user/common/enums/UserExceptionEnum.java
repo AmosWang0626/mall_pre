@@ -1,4 +1,4 @@
-package com.mall.user.common;
+package com.mall.user.common.enums;
 
 import com.mall.common.response.ExceptionCodePrefix;
 import com.mall.common.response.IExceptionEnum;

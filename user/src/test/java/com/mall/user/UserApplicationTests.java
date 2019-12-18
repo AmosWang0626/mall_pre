@@ -1,10 +1,10 @@
 package com.mall.user;
 
 import com.alibaba.fastjson.JSON;
+import com.mall.common.util.DesSecretUtil;
+import com.mall.common.util.RandomUtil;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
-import com.mall.user.util.DesSecretUtil;
-import com.mall.user.util.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

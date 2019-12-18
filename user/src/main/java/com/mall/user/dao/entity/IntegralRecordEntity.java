@@ -1,6 +1,6 @@
 package com.mall.user.dao.entity;
 
-import com.mall.user.enums.IntegralChangeType;
+import com.mall.user.common.enums.IntegralChangeType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,7 +21,10 @@ public class IntegralRecordEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderId;
-    private String change;
+    /**
+     * 积分变动
+     */
+    private Long modify;
     @Enumerated(EnumType.STRING)
     private IntegralChangeType type;
     private String reason;
