@@ -1,7 +1,7 @@
 package com.mall.user.dao.mapper;
 
+import com.mall.common.api.BaseRepository;
 import com.mall.user.dao.entity.UserEntity;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author DaoYuanWang
  */
 @Repository
-public interface UserMapper extends CrudRepository<UserEntity, String> {
+public interface UserMapper extends BaseRepository<UserEntity, String> {
 
     Optional<UserEntity> findByAccount(String account);
 

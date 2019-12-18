@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * DESCRIPTION: 封装 JPA 默认 CRUD
@@ -20,7 +21,10 @@ public interface BaseRepository<T extends BaseEntity, ID> extends CrudRepository
      *
      * @param entity condition
      */
-    void deleteByLogic(T entity);
+    default void deleteLogic(T entity) {
+        entity.setDeleteFlag(true);
+        save(entity);
+    }
 
     /**
      * 根据 ID 进行逻辑删除
@@ -28,7 +32,8 @@ public interface BaseRepository<T extends BaseEntity, ID> extends CrudRepository
      * @param id ID
      */
     @Modifying
+    @Transactional(rollbackFor = RuntimeException.class)
     @Query("update #{#entityName} e set e.deleteFlag=true where e.id=?1")
-    void deleteByLogic(ID id);
+    void deleteLogic(ID id);
 
 }
