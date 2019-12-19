@@ -1,8 +1,8 @@
-package com.mall.user.enums;
+package com.mall.user.common.enums;
 
 /**
  * PROJECT: user
- * DESCRIPTION: note
+ * DESCRIPTION: 积分类型
  *
  * @author Daoyuan
  * @date 2019/1/11

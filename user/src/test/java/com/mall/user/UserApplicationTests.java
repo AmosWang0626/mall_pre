@@ -1,10 +1,10 @@
 package com.mall.user;
 
 import com.alibaba.fastjson.JSON;
+import com.mall.common.util.DesSecretUtil;
+import com.mall.common.util.RandomUtil;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
-import com.mall.user.util.DesSecretUtil;
-import com.mall.user.util.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -44,8 +44,26 @@ public class UserApplicationTests {
 
     @Test
     public void findById() {
-        Optional<UserEntity> optional = userMapper.findById("4028ab7b6f140c9e016f140cc3a70000");
+        Optional<UserEntity> optional = userMapper.findById("402881ed6f1451c1016f1452403f0000");
         optional.ifPresent(userEntity -> System.out.println(JSON.toJSONString(userEntity)));
+    }
+
+    @Test
+    public void deleteById() {
+        userMapper.deleteById("402881ed6f1451c1016f1452403f0000");
+    }
+
+    @Test
+    public void logicDeleteById() {
+        userMapper.deleteLogic("402881ed6f190e67016f190e76400000");
+    }
+
+    @Test
+    public void logicDeleteByEntity() {
+        userMapper.findById("402881ed6f190e67016f190e76400000").ifPresent(userEntity -> {
+            System.out.println(JSON.toJSONString(userEntity));
+            userMapper.deleteLogic(userEntity);
+        });
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.mall.user.request;
+package com.mall.user.common.pojo.request;
 
 import lombok.Data;
 

@@ -1,15 +1,15 @@
 package com.mall.user.business.impl;
 
 import com.mall.common.response.GenericResponse;
+import com.mall.common.util.DesSecretUtil;
+import com.mall.common.util.RandomUtil;
 import com.mall.user.business.UserBusiness;
-import com.mall.user.common.UserExceptionEnum;
-import com.mall.user.constant.UserConstant;
+import com.mall.user.common.constant.UserConstant;
+import com.mall.user.common.enums.UserExceptionEnum;
+import com.mall.user.common.pojo.request.LoginRequest;
+import com.mall.user.common.pojo.response.LoginSuccessVO;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
-import com.mall.user.request.LoginRequest;
-import com.mall.user.response.LoginSuccessVO;
-import com.mall.user.util.DesSecretUtil;
-import com.mall.user.util.RandomUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,7 @@ public class UserBusinessImpl implements UserBusiness {
 
     @Override
     public GenericResponse register(LoginRequest loginRequest) {
-        Optional<UserEntity> userOptional = getUserEntity(loginRequest);
+        Optional<UserEntity> userOptional = userMapper.findByAccount(loginRequest.getAccount());
 
         if (userOptional.isPresent()) {
             return new GenericResponse(UserExceptionEnum.REGISTER_ACCOUNT_EXISTED);
@@ -53,14 +53,14 @@ public class UserBusinessImpl implements UserBusiness {
 
     @Override
     public GenericResponse login(LoginRequest loginRequest) {
-        Optional<UserEntity> userOptional = getUserEntity(loginRequest);
+        Optional<UserEntity> userOptional = userMapper.findByAccount(loginRequest.getAccount());
 
         if (!userOptional.isPresent()) {
             return new GenericResponse(UserExceptionEnum.LOGIN_ACCOUNT_NOT_FOUND);
         }
         UserEntity userEntity = userOptional.get();
         String encryptPwd = DesSecretUtil.encrypt(loginRequest.getPassword(), userEntity.getSalt());
-        if (!encryptPwd.equals(userEntity.getPassword())) {
+        if (!userEntity.getPassword().equals(encryptPwd)) {
             return new GenericResponse(UserExceptionEnum.LOGIN_PASSWORD_ERROR);
         }
 
@@ -74,11 +74,5 @@ public class UserBusinessImpl implements UserBusiness {
         return successVO;
     }
 
-    /**
-     * 获取用户
-     */
-    private Optional<UserEntity> getUserEntity(LoginRequest loginRequest) {
-        return userMapper.findByAccount(loginRequest.getAccount());
-    }
 
 }

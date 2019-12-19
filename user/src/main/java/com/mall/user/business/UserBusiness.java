@@ -1,7 +1,7 @@
 package com.mall.user.business;
 
 import com.mall.common.response.GenericResponse;
-import com.mall.user.request.LoginRequest;
+import com.mall.user.common.pojo.request.LoginRequest;
 
 /**
  * PROJECT: user
