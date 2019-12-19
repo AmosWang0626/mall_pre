@@ -3,7 +3,7 @@ package com.mall.order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 商城系统-订单系统
@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @version 1.0.0
  */
 @SpringBootApplication
-@EnableEurekaClient
+@EnableDiscoveryClient
 @EntityScan("com.mall.order.dao.entity")
 public class OrderApplication {
 

@@ -2,6 +2,10 @@
 spring:
   application:
     name: mall-warehouse
+  cloud:
+    nacos:
+      discovery:
+        server-addr: amos.wang:8088
 server:
   port: 8030
 
@@ -10,11 +14,3 @@ info:
     name: ${spring.application.name}
     description: 仓储系统
     version: 1.0.0
-
-# eureka 服务注册中心配置
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka

@@ -5,6 +5,10 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: mall-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: amos.wang:8088
 #  cloud:
 #    gateway:
 #      routes:
@@ -26,14 +30,6 @@ info:
     name: ${spring.application.name}
     description: 网关系统
     version: 1.0.0
-
-# eureka 服务注册中心配置
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 
 feign:
   hystrix:

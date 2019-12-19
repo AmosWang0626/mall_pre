@@ -2,7 +2,7 @@ package com.mall.warehouse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 商城系统-仓储系统
@@ -11,7 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @version 1.0.0
  */
 @SpringBootApplication
-@EnableEurekaClient
+@EnableDiscoveryClient
 public class WarehouseApplication {
 
     public static void main(String[] args) {
