@@ -8,24 +8,22 @@
     <artifactId>mall</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>base</name>
+    <name>mall</name>
     <description>mall</description>
 
     <!-- 当前pom仅用于识别内部各模块 -->
 
     <modules>
         <!-- 项目依赖管理 -->
-        <module>common</module>
-        <!-- 服务注册中心 -->
-        <module>server</module>
+        <module>mall-common</module>
         <!-- 网关管理模块 -->
-        <module>gateway</module>
+        <module>mall-gateway</module>
         <!-- 用户模块 -->
-        <module>user</module>
+        <module>mall-user</module>
         <!-- 订单模块 -->
-        <module>order</module>
+        <module>mall-order</module>
         <!-- 仓储模块 -->
-        <module>warehouse</module>
+        <module>mall-warehouse</module>
     </modules>
 
     <parent>

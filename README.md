@@ -4,15 +4,14 @@
 
 ##### 技术栈
 
-Spring Cloud、Docker、Nacos
+Spring Cloud、Jpa、Docker、Nacos、Swagger
 
 ---
 ## 所有服务
-- 注册中心 server
-- 网关服务 gateway
-- 用户服务 user
-- 订单服务 order
-- 仓储服务 warehouse
+- 网关服务 mall-gateway
+- 用户服务 mall-user
+- 订单服务 mall-order
+- 仓储服务 mall-warehouse
 
 ---
 ## 项目架构
