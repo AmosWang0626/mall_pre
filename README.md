@@ -15,7 +15,7 @@ Spring Cloud、Jpa、Docker、Nacos、Swagger
 
 ---
 ## 项目架构
-![mall 架构图](doc/mall_architecture.jpg)
+![mall 架构图](resources/mall_architecture.jpg)
 
 ## 流程图
-![mall 流程图](doc/mall_flow_chart.jpg)
+![mall 流程图](resources/mall_flow_chart.jpg)
