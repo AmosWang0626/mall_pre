@@ -1,16 +1,14 @@
-package com.mall.gateway.controller;
+package com.mall.gateway.web.controller;
 
+import com.mall.gateway.common.BaseController;
+import com.mall.gateway.common.request.LogisticsRequest;
 import com.mall.gateway.config.GatewayConstant;
-import com.mall.gateway.request.LogisticsRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
 
 /**
  * PROJECT: gateway
@@ -23,9 +21,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("order")
 public class OrderController extends BaseController {
-
-    @Resource
-    private RestTemplate restTemplate;
 
     /**
      * 创建订单

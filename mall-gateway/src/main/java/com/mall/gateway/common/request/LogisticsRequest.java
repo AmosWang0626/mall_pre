@@ -1,4 +1,4 @@
-package com.mall.gateway.request;
+package com.mall.gateway.common.request;
 
 import lombok.Data;
 

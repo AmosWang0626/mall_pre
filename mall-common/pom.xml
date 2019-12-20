@@ -8,7 +8,7 @@
         <artifactId>mall</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>common</artifactId>
+    <artifactId>mall-common</artifactId>
     <version>1.0.0</version>
 
     <packaging>jar</packaging>

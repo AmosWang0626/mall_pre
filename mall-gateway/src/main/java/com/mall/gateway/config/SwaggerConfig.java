@@ -46,7 +46,7 @@ public class SwaggerConfig {
                 .enable(enable)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.mall.gateway.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.mall"))
                 // .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()

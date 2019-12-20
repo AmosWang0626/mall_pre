@@ -1,8 +1,8 @@
 package com.mall.common.response;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.nacos.client.naming.utils.CollectionUtils;
 import com.mall.common.constant.WordConstant;
-import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
 
 import java.io.Serializable;
@@ -40,10 +40,7 @@ public class GenericResponse<T> implements Serializable {
      */
     private T body;
 
-    public GenericResponse(T body) {
-        this.code = SUCCESS.getCode();
-        this.message = SUCCESS.getMessage();
-        this.body = body;
+    public GenericResponse() {
     }
 
     public GenericResponse(String code, String message) {
@@ -51,9 +48,30 @@ public class GenericResponse<T> implements Serializable {
         this.message = message;
     }
 
+    public GenericResponse(String code, String message, T body) {
+        this.code = code;
+        this.message = message;
+        this.body = body;
+    }
+
+    public GenericResponse(T body) {
+        this.code = SUCCESS.getCode();
+        this.message = SUCCESS.getMessage();
+        this.body = body;
+    }
+
     public GenericResponse(IExceptionEnum exceptionEnum) {
         this.code = exceptionEnum.getCode();
         this.message = exceptionEnum.getMessage();
+    }
+
+    public GenericResponse(IExceptionEnum exceptionEnum, List<ObjectError> list) {
+        this.code = exceptionEnum.getCode();
+        if (CollectionUtils.isEmpty(list)) {
+            this.message = exceptionEnum.getMessage();
+            return;
+        }
+        this.message = MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage());
     }
 
     public String getCode() {
@@ -83,23 +101,6 @@ public class GenericResponse<T> implements Serializable {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
-    }
-
-
-    /**
-     * 将多个 ObjectError.getDefaultMessage 合成一个 String，然后 setMessage
-     *
-     * @param list 多个参数
-     * @return GenericResponse
-     * @see ObjectError#getDefaultMessage()
-     */
-    public GenericResponse buildParam(List<ObjectError> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return this;
-        }
-        this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
-
-        return this;
     }
 
 }

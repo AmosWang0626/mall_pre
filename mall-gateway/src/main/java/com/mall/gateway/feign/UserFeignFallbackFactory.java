@@ -1,8 +1,7 @@
 package com.mall.gateway.feign;
 
 import com.mall.common.response.GenericResponse;
-import com.mall.gateway.exception.OrderExceptionEnum;
-import com.mall.gateway.request.LoginRequest;
+import com.mall.gateway.common.request.LoginRequest;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +27,13 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
             @Override
             public GenericResponse register(LoginRequest register) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
-                return new GenericResponse(OrderExceptionEnum.SERVICE_BUSY);
+                return GenericResponse.SYSTEM_ERROR;
             }
 
             @Override
             public GenericResponse login(LoginRequest login) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
-                return new GenericResponse(OrderExceptionEnum.SERVICE_BUSY);
+                return GenericResponse.SYSTEM_ERROR;
             }
         };
     }

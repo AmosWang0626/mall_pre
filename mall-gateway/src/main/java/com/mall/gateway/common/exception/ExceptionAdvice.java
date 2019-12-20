@@ -1,4 +1,4 @@
-package com.mall.gateway.exception;
+package com.mall.gateway.common.exception;
 
 import com.mall.common.response.GenericResponse;
 import org.slf4j.Logger;

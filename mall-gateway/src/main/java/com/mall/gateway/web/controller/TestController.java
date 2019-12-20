@@ -1,5 +1,6 @@
-package com.mall.gateway.controller;
+package com.mall.gateway.web.controller;
 
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
  * @author Daoyuan
  * @date 2018/12/7
  */
+@Api(tags = "Z1测试相关")
 @RestController
 @RequestMapping("test")
 public class TestController {

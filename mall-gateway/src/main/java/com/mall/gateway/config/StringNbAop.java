@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
  */
 @Aspect
 @Configuration
-public class StringBlankNullAop {
+public class StringNbAop {
 
     @Before("@annotation(stringBlankNull)")
     public void doCheck(JoinPoint joinPoint, StringBlankNull stringBlankNull) {
