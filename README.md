@@ -1,10 +1,10 @@
-# [mall（商城）](https://amoswang0626.github.io/mall/)
+# mall（商城）
 
 > Spring Cloud Mall
 
 ##### 技术栈
 
-Spring Cloud、Jpa、Docker、Nacos、Swagger
+Spring Cloud、JPA、Docker、Nacos、Swagger、Shiro、JWT
 
 ---
 ## 所有服务
@@ -12,6 +12,10 @@ Spring Cloud、Jpa、Docker、Nacos、Swagger
 - 用户服务 mall-user
 - 订单服务 mall-order
 - 仓储服务 mall-warehouse
+
+---
+### [研发计划](resources/develop-plan.md)
+### [项目亮点](resources/develop-core.md)
 
 ---
 ## 项目架构
