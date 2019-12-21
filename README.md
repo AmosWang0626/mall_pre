@@ -14,12 +14,12 @@ Spring Cloud、JPA、Docker、Nacos、Swagger、Shiro、JWT
 - 仓储服务 mall-warehouse
 
 ---
-### [研发计划](resources/develop-plan.md)
-### [项目亮点](resources/develop-core.md)
+### [研发计划](doc/develop-plan.md)
+### [项目亮点](doc/develop-core.md)
 
 ---
 ## 项目架构
-![mall 架构图](resources/mall_architecture.jpg)
+![mall 架构图](doc/mall_architecture.jpg)
 
 ## 流程图
-![mall 流程图](resources/mall_flow_chart.jpg)
+![mall 流程图](doc/mall_flow_chart.jpg)
