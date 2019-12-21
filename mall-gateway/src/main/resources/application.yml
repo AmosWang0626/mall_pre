@@ -1,7 +1,6 @@
-# 基础配置
-
 spring:
   main:
+    # 后定义的bean会覆盖之前定义的相同名称的bean
     allow-bean-definition-overriding: true
   application:
     name: mall-gateway
@@ -9,18 +8,21 @@ spring:
     nacos:
       discovery:
         server-addr: amos.wang:8088
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: host_route_order
-#          uri: http://mall-order/order/
-#          predicates:
-#            - Path=/order/**
-#
-#        - id: host_route_user
-#          uri: http://localhost:8091/user/
-#          predicates:
-#            - Path=/user/**
+    gateway:
+      routes:
+        - id: route_order
+          uri: http://mall-order/order/
+          predicates:
+            - Path=/order/**
+
+        - id: route_user
+          uri: http://mall-user/user/
+          predicates:
+            - Path=/user/**
+  redis:
+    host: amos.wang
+    database: 1
+    port: 1998
 
 server:
   port: 8000
@@ -53,7 +55,3 @@ logging:
   level:
     springfox:
       documentation: WARN
-
-# show swagger-ui
-swagger:
-  enable: true

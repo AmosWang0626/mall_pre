@@ -1,7 +1,7 @@
 package com.mall.common.util;
 
 /**
- * PROJECT: estate
+ * PROJECT: mall
  * DESCRIPTION: 脱敏工具类
  *
  * @author amos

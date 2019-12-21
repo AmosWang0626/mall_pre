@@ -14,3 +14,6 @@ info:
     name: ${spring.application.name}
     description: 用户系统
     version: 1.0.0
+
+swagger:
+  enable: true

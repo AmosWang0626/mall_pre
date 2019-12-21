@@ -20,11 +20,11 @@ public class GenericResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -8600893080428359242L;
 
-    public static final GenericResponse SUCCESS = new GenericResponse("1000", WordConstant.SUCCESS);
-    public static final GenericResponse FAIL = new GenericResponse("1001", WordConstant.FAIL);
-    public static final GenericResponse ERROR_PARAM = new GenericResponse("1002", WordConstant.ERROR_PARAM);
-    public static final GenericResponse SYSTEM_ERROR = new GenericResponse("1003", WordConstant.SYSTEM_ERROR);
-    public static final GenericResponse REQUEST_ILLEGAL = new GenericResponse("1004", WordConstant.REQUEST_ILLEGAL);
+    public static final GenericResponse SUCCESS = new GenericResponse<>("1000", WordConstant.SUCCESS);
+    public static final GenericResponse FAIL = new GenericResponse<>("1001", WordConstant.FAIL);
+    public static final GenericResponse ERROR_PARAM = new GenericResponse<>("1002", WordConstant.ERROR_PARAM);
+    public static final GenericResponse SYSTEM_ERROR = new GenericResponse<>("1003", WordConstant.SYSTEM_ERROR);
+    public static final GenericResponse REQUEST_ILLEGAL = new GenericResponse<>("1004", WordConstant.REQUEST_ILLEGAL);
 
 
     /**
@@ -55,30 +55,35 @@ public class GenericResponse<T> implements Serializable {
     }
 
     public GenericResponse(T body) {
-        this.code = SUCCESS.getCode();
-        this.message = SUCCESS.getMessage();
-        this.body = body;
+        this(SUCCESS.getCode(), SUCCESS.getMessage(), body);
     }
 
     public GenericResponse(IExceptionEnum exceptionEnum) {
-        this.code = exceptionEnum.getCode();
-        this.message = exceptionEnum.getMessage();
+        this(exceptionEnum.getCode(), exceptionEnum.getMessage(), null);
     }
 
     public GenericResponse(IExceptionEnum exceptionEnum, List<ObjectError> list) {
-        this.code = exceptionEnum.getCode();
+        this.setCode(exceptionEnum.getCode());
         if (CollectionUtils.isEmpty(list)) {
-            this.message = exceptionEnum.getMessage();
+            this.setMessage(exceptionEnum.getMessage());
             return;
         }
-        this.message = MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage());
+        this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
+    }
+
+    public boolean isSuccessful() {
+        return SUCCESS.getCode().equals(this.getCode());
+    }
+
+    public boolean unSuccessful() {
+        return !SUCCESS.getCode().equals(this.getCode());
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    private void setCode(String code) {
         this.code = code;
     }
 
@@ -86,7 +91,7 @@ public class GenericResponse<T> implements Serializable {
         return message;
     }
 
-    public void setMessage(String message) {
+    private void setMessage(String message) {
         this.message = message;
     }
 

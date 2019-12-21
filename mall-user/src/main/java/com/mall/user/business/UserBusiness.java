@@ -2,6 +2,7 @@ package com.mall.user.business;
 
 import com.mall.common.response.GenericResponse;
 import com.mall.user.common.pojo.request.LoginRequest;
+import com.mall.user.common.pojo.response.AuthUserVO;
 
 /**
  * PROJECT: user
@@ -18,7 +19,7 @@ public interface UserBusiness {
      * @param loginRequest 注册表单
      * @return UserEntity
      */
-    GenericResponse register(LoginRequest loginRequest);
+    GenericResponse<AuthUserVO> register(LoginRequest loginRequest);
 
     /**
      * 登录
@@ -26,6 +27,14 @@ public interface UserBusiness {
      * @param loginRequest 登录表单
      * @return UserEntity
      */
-    GenericResponse login(LoginRequest loginRequest);
+    GenericResponse<AuthUserVO> login(LoginRequest loginRequest);
+
+    /**
+     * 获取登录鉴权信息
+     *
+     * @param loginRequest 登录表单
+     * @return UserEntity
+     */
+    GenericResponse<AuthUserVO> authLoginInfo(LoginRequest loginRequest);
 
 }

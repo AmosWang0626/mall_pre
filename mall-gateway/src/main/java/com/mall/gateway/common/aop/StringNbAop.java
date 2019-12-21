@@ -1,4 +1,4 @@
-package com.mall.gateway.config;
+package com.mall.gateway.common.aop;
 
 import com.mall.common.api.StringBlankNull;
 import org.apache.commons.lang3.StringUtils;

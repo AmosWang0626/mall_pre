@@ -1,8 +1,8 @@
 package com.mall.gateway.web.controller;
 
 import com.mall.gateway.common.BaseController;
-import com.mall.gateway.common.request.LogisticsRequest;
-import com.mall.gateway.config.GatewayConstant;
+import com.mall.gateway.common.constant.GatewayConstant;
+import com.mall.gateway.common.pojo.request.LogisticsRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,10 +39,10 @@ public class OrderController extends BaseController {
             return "参数错误!";
         }
         LogisticsRequest logisticsRequest = new LogisticsRequest();
-        if (GatewayConstant.USER.equalsIgnoreCase(type)) {
+        if (GatewayConstant.ACCOUNT.equalsIgnoreCase(type)) {
+            logisticsRequest.setAccount(value);
+        } else if (GatewayConstant.USER_ID.equalsIgnoreCase(type)) {
             logisticsRequest.setUserId(value);
-        } else if (GatewayConstant.PHONE.equalsIgnoreCase(type)) {
-            logisticsRequest.setPhoneNo(value);
         } else if (GatewayConstant.LOG.equalsIgnoreCase(type)) {
             logisticsRequest.setLogisticsNo(value);
         } else if (GatewayConstant.ORDER.equalsIgnoreCase(type)) {

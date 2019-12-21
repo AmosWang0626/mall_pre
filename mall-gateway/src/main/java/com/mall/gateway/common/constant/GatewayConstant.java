@@ -1,4 +1,4 @@
-package com.mall.gateway.config;
+package com.mall.gateway.common.constant;
 
 /**
  * PROJECT: gateway
@@ -12,11 +12,11 @@ public interface GatewayConstant {
     /**
      * 手机号
      */
-    String PHONE = "PHONE";
+    String ACCOUNT = "ACCOUNT";
     /**
      * 用户编号
      */
-    String USER = "USER";
+    String USER_ID = "USER_ID";
     /**
      * 物流编号
      */

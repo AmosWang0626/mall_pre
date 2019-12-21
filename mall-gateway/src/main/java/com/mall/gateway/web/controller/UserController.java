@@ -3,9 +3,11 @@ package com.mall.gateway.web.controller;
 import com.mall.common.response.GenericResponse;
 import com.mall.gateway.common.BaseController;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
-import com.mall.gateway.common.request.LoginRequest;
+import com.mall.gateway.common.pojo.dto.AuthUserVO;
+import com.mall.gateway.common.pojo.request.LoginRequest;
+import com.mall.gateway.common.pojo.response.LoginInfoVO;
+import com.mall.gateway.common.utils.JwtUtils;
 import com.mall.gateway.feign.UserFeignClient;
-import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.UUID;
 
 /**
  * PROJECT: gateway
@@ -24,7 +27,6 @@ import javax.validation.Valid;
  * @author Daoyuan
  * @date 2018/12/11
  */
-@Api(tags = "A1用户相关")
 @RestController
 @RequestMapping("user")
 public class UserController extends BaseController {
@@ -48,7 +50,7 @@ public class UserController extends BaseController {
             return new GenericResponse<>(GatewayExceptionEnum.ERROR_PARAM_FORMAT, bindingResult.getAllErrors());
         }
 
-        return userFeignClient.register(login);
+        return generateLoginResponse(userFeignClient.register(login));
     }
 
     /**
@@ -64,7 +66,26 @@ public class UserController extends BaseController {
             return new GenericResponse<>(GatewayExceptionEnum.ERROR_PARAM_FORMAT, bindingResult.getAllErrors());
         }
 
-        return userFeignClient.login(login);
+        return generateLoginResponse(userFeignClient.login(login));
+    }
+
+
+    /**
+     * 生成登录相关信息
+     */
+    private GenericResponse generateLoginResponse(GenericResponse<AuthUserVO> response) {
+        if (response.unSuccessful()) {
+            return response;
+        }
+        AuthUserVO authUserVO = response.getBody();
+
+        LoginInfoVO loginInfoVO = new LoginInfoVO();
+        loginInfoVO.setUserId(authUserVO.getUserId());
+        loginInfoVO.setAccount(authUserVO.getAccount());
+        loginInfoVO.setUsername(authUserVO.getUsername());
+        loginInfoVO.setToken(JwtUtils.sign(authUserVO, UUID.randomUUID().toString()));
+
+        return new GenericResponse<>(loginInfoVO);
     }
 
 }

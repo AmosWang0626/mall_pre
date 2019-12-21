@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * PROJECT: estate
+ * PROJECT: mall
  * DESCRIPTION: note
  *
  * @author daoyuan

@@ -1,7 +1,8 @@
 package com.mall.gateway.feign;
 
 import com.mall.common.response.GenericResponse;
-import com.mall.gateway.common.request.LoginRequest;
+import com.mall.gateway.common.pojo.request.LoginRequest;
+import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +26,19 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
     public UserFeignClient create(Throwable throwable) {
         return new UserFeignClient() {
             @Override
-            public GenericResponse register(LoginRequest register) {
+            public GenericResponse<AuthUserVO> register(LoginRequest register) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
                 return GenericResponse.SYSTEM_ERROR;
             }
 
             @Override
-            public GenericResponse login(LoginRequest login) {
+            public GenericResponse<AuthUserVO> login(LoginRequest login) {
+                LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
+                return GenericResponse.SYSTEM_ERROR;
+            }
+
+            @Override
+            public GenericResponse<AuthUserVO> authLoginInfo(LoginRequest login) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
                 return GenericResponse.SYSTEM_ERROR;
             }

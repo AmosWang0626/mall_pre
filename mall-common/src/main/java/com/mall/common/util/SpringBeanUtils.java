@@ -3,7 +3,7 @@ package com.mall.common.util;
 import org.springframework.context.ApplicationContext;
 
 /**
- * PROJECT: estate
+ * PROJECT: mall
  * DESCRIPTION: 静态获取 bean
  *
  * @author amos

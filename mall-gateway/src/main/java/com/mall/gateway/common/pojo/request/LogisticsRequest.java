@@ -1,4 +1,4 @@
-package com.mall.gateway.common.request;
+package com.mall.gateway.common.pojo.request;
 
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class LogisticsRequest implements Serializable {
 
     private String userId;
 
-    private String phoneNo;
+    private String account;
 
     private String orderNo;
 

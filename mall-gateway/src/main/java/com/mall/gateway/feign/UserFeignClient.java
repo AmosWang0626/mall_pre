@@ -1,7 +1,8 @@
 package com.mall.gateway.feign;
 
 import com.mall.common.response.GenericResponse;
-import com.mall.gateway.common.request.LoginRequest;
+import com.mall.gateway.common.pojo.request.LoginRequest;
+import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ public interface UserFeignClient {
      * @return GenericResponse
      */
     @PostMapping("/user/register")
-    GenericResponse register(@RequestBody LoginRequest register);
+    GenericResponse<AuthUserVO> register(@RequestBody LoginRequest register);
 
     /**
      * 登录
@@ -32,6 +33,15 @@ public interface UserFeignClient {
      * @return GenericResponse
      */
     @PostMapping("/user/login")
-    GenericResponse login(@RequestBody LoginRequest login);
+    GenericResponse<AuthUserVO> login(@RequestBody LoginRequest login);
+
+    /**
+     * 根据账号获取用户信息
+     *
+     * @param login form
+     * @return GenericResponse
+     */
+    @PostMapping("/user/authLoginInfo")
+    GenericResponse<AuthUserVO> authLoginInfo(@RequestBody LoginRequest login);
 
 }
