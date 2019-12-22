@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 默认        id, createTime, createUser, modifyTime, modifyUser, deleteFlag, ***很多字段
- * 修改源码后   id, ***很多字段, createTime, createUser, modifyTime, modifyUser, deleteFlag
- * 修改的代码   230 >>> 238
+ * 自定义数据库字段顺序, 代码位置 [230~240]  FIXME 已标示
+ * 修改代码前:  id, createTime, ..., deleteFlag, XXX很多字段
+ * 修改源码后:  id, XXX很多字段, createTime, ..., deleteFlag
  * <p>
  * Some extra data to the inheritance position of a class.
  *
@@ -227,6 +227,7 @@ public class InheritanceState {
                 throw new AnnotationException("No identifier specified for entity: " + clazz.getName());
             }
             elements.trimToSize();
+            // FIXME 自定义字段顺序开始
             if (elements.size() > 6
                     && "id".equals(elements.get(0).getPropertyName())
                     && "deleteFlag".equals(elements.get(5).getPropertyName())) {
@@ -236,6 +237,7 @@ public class InheritanceState {
                 tempElements.addAll(elements.subList(1, 6));
                 elements = tempElements;
             }
+            // FIXME 自定义字段顺序结束
             elementsToProcess = new ElementsToProcess(elements, idPropertyCount);
         }
         return elementsToProcess;

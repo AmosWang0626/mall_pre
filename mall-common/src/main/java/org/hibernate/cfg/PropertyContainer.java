@@ -28,7 +28,7 @@ import java.util.*;
 
 /**
  * 控制JPA自动创建表,表内字段顺序与实体类字段顺序一致
- * TreeMap >>> LinkedHashMap 再把修改后报错的地方改对即可
+ * 将本类中的 TreeMap 改成 LinkedHashMap, 有报错的地方改对即可
  * <p>
  * A helper class to keep the {@code XProperty}s of a class ordered by access type.
  *
