@@ -9,8 +9,6 @@ import com.mall.common.util.RedisUtils;
 import com.mall.gateway.common.constant.JwtConstant;
 import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
@@ -22,9 +20,6 @@ import java.util.Date;
  * @date 2019/7/23
  */
 public class JwtUtils {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
-
 
     /**
      * 登录

@@ -78,6 +78,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
             return authError(response, new GenericResponse(GatewayExceptionEnum.USER_ACCOUNT_LOGIN_ELSEWHERE));
         }
 
+        // 在 header 中设置 user_id, 方便业务系统拿到 user_id
         ServerHttpRequest request = exchange.getRequest().mutate()
                 .header(ServiceConstant.USER_ID, authUserVO.getUserId())
                 .build();

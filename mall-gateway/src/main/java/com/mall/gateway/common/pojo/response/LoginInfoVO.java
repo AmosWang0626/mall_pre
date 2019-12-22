@@ -1,7 +1,6 @@
 package com.mall.gateway.common.pojo.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
@@ -10,8 +9,7 @@ import lombok.experimental.Accessors;
  * @author <a href="mailto:amos.wang@xiaoi.com">amos.wang</a>
  * @date 2019/12/21
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 public class LoginInfoVO {
 
@@ -32,6 +30,5 @@ public class LoginInfoVO {
      * token
      */
     private String token;
-
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  * @date 2018/12/7
  */
 @Configuration
-public class BeanRegisterConfig {
+public class BeansConfig {
 
     /**
      * @code @LoadBalanced 负载均衡支持
