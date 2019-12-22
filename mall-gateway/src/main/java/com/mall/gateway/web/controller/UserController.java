@@ -2,7 +2,6 @@ package com.mall.gateway.web.controller;
 
 import com.mall.common.response.GenericResponse;
 import com.mall.gateway.common.BaseController;
-import com.mall.gateway.common.exception.GatewayExceptionEnum;
 import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.pojo.response.LoginInfoVO;
@@ -10,11 +9,11 @@ import com.mall.gateway.common.utils.JwtUtils;
 import com.mall.gateway.feign.UserFeignClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -40,33 +39,25 @@ public class UserController extends BaseController {
     /**
      * 注册接口
      *
-     * @param login         表单
-     * @param bindingResult 表单验证
-     * @return GenericResponse
+     * @param login 表单
+     * @return Mono
      */
     @PostMapping("register")
-    public GenericResponse register(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new GenericResponse<>(GatewayExceptionEnum.ERROR_PARAM_FORMAT, bindingResult.getAllErrors());
-        }
-
-        return generateLoginResponse(userFeignClient.register(login));
+    public Mono<GenericResponse> register(@Valid @RequestBody Mono<LoginRequest> login) {
+        return login.map(loginRequest -> generateLoginResponse(userFeignClient.register(loginRequest)))
+                .onErrorResume(errorHandlerByWebFlux());
     }
 
     /**
      * 登录接口
      *
-     * @param login         表单
-     * @param bindingResult 表单验证
-     * @return GenericResponse
+     * @param login 表单
+     * @return Mono
      */
-    @PostMapping("login")
-    public GenericResponse login(@Valid @RequestBody LoginRequest login, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new GenericResponse<>(GatewayExceptionEnum.ERROR_PARAM_FORMAT, bindingResult.getAllErrors());
-        }
-
-        return generateLoginResponse(userFeignClient.login(login));
+    @PostMapping(value = "login")
+    public Mono<GenericResponse> login(@Valid @RequestBody Mono<LoginRequest> login) {
+        return login.map(loginRequest -> generateLoginResponse(userFeignClient.login(loginRequest)))
+                .onErrorResume(errorHandlerByWebFlux());
     }
 
 
@@ -83,8 +74,9 @@ public class UserController extends BaseController {
         loginInfoVO.setUserId(authUserVO.getUserId());
         loginInfoVO.setAccount(authUserVO.getAccount());
         loginInfoVO.setUsername(authUserVO.getUsername());
+        // 登录成功, 设置Token, 设置登录标识(用于单设备登录)
         loginInfoVO.setToken(JwtUtils.sign(authUserVO, UUID.randomUUID().toString()));
-
+        LOGGER.info("用户 [{}] 登录成功", authUserVO.getUsername());
         return new GenericResponse<>(loginInfoVO);
     }
 

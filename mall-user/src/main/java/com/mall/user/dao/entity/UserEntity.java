@@ -26,6 +26,9 @@ public class UserEntity extends BaseEntity {
     private String username;
     private String salt;
     private String password;
+    /**
+     * 0: 禁用; 1: 启用
+     */
     private Integer status;
 
 }

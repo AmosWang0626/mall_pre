@@ -4,7 +4,7 @@
 
 ##### 技术栈
 
-Spring Cloud、JPA、Docker、Nacos、Swagger、Shiro、JWT
+Spring Cloud、JPA、Gateway、Docker、Nacos、Swagger、JWT
 
 ---
 ## 所有服务

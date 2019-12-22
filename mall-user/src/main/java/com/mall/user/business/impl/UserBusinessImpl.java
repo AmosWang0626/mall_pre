@@ -7,6 +7,7 @@ import com.mall.user.business.UserBusiness;
 import com.mall.user.common.enums.UserExceptionEnum;
 import com.mall.user.common.pojo.request.LoginRequest;
 import com.mall.user.common.pojo.response.AuthUserVO;
+import com.mall.user.common.pojo.response.UserInfoVO;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +44,7 @@ public class UserBusinessImpl implements UserBusiness {
         String salt = RandomUtil.generateString(8);
         String encryptPwd = DesSecretUtil.encrypt(pwd, salt);
         userEntity.setSalt(salt);
+        userEntity.setStatus(1);
         userEntity.setPassword(encryptPwd);
         userEntity.setCreateTime(LocalDateTime.now());
         UserEntity entity = userMapper.save(userEntity);
@@ -75,6 +77,18 @@ public class UserBusinessImpl implements UserBusiness {
         return new GenericResponse<>(authUserVO);
     }
 
+    @Override
+    public GenericResponse<UserInfoVO> getUserInfo(String userId) {
+        UserInfoVO userInfoVO = new UserInfoVO();
+        userMapper.findById(userId)
+                .ifPresent(userEntity -> {
+                    userInfoVO.setUserId(userEntity.getId());
+                    userInfoVO.setAccount(userEntity.getAccount());
+                    userInfoVO.setUsername(userEntity.getUsername());
+                });
+
+        return new GenericResponse<>(userInfoVO);
+    }
 
     private AuthUserVO generateAuthUserVO(AuthUserVO authUserVO, UserEntity userEntity) {
         BeanUtils.copyProperties(userEntity, authUserVO);

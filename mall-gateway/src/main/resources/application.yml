@@ -11,12 +11,12 @@ spring:
     gateway:
       routes:
         - id: route_order
-          uri: http://mall-order/order/
+          uri: lb://mall-order/order/
           predicates:
             - Path=/order/**
 
         - id: route_user
-          uri: http://mall-user/user/
+          uri: lb://mall-user/user/
           predicates:
             - Path=/user/**
   redis:
@@ -43,15 +43,23 @@ management:
       show-details: always
 
 ribbon:
-  #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
+  # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+  ReadTimeout: 5000
+  # 指的是建立连接后从服务器读取到可用资源所用的时间。
+  ConnectTimeout: 5000
+  # 负载均衡策略 com.netflix.loadbalancer.BestAvailableRule
   NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
+#配置请求超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 7000
 
 #turbine:
 #  cluster-name-expression: "default"
 #  app-config-list: []
-
-# log config
-logging:
-  level:
-    springfox:
-      documentation: WARN

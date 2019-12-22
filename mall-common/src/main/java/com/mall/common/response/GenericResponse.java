@@ -64,11 +64,10 @@ public class GenericResponse<T> implements Serializable {
 
     public GenericResponse(IExceptionEnum exceptionEnum, List<ObjectError> list) {
         this.setCode(exceptionEnum.getCode());
-        if (CollectionUtils.isEmpty(list)) {
-            this.setMessage(exceptionEnum.getMessage());
-            return;
+        this.setMessage(exceptionEnum.getMessage());
+        if (!CollectionUtils.isEmpty(list)) {
+            this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
         }
-        this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
     }
 
     public boolean isSuccessful() {

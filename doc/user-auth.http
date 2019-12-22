@@ -1,0 +1,23 @@
+### register
+POST http://localhost:8000/user/register
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "username": "amos.wang",
+  "password": "123456"
+}
+
+### login
+POST http://localhost:8000/user/login
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "password": "123456"
+}
+
+### getUserInfo
+GET http://localhost:8000/user/getUserInfo
+Content-Type: application/json
+token: 写入注册或者登录返回的token

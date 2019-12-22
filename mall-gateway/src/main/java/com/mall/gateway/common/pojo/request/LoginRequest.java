@@ -23,6 +23,10 @@ public class LoginRequest implements Serializable {
 
     @NotBlank(message = "账号不能为空")
     private String account;
+    /**
+     * 用户名(非必填)
+     */
+    private String username;
 
     @NotBlank(message = "密码不能为空")
     @Size(min = 6, max = 16, message = "密码长度 6 ~ 16")
