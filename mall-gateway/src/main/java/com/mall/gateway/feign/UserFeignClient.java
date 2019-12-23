@@ -1,8 +1,8 @@
 package com.mall.gateway.feign;
 
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.pojo.request.LoginRequest;
-import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

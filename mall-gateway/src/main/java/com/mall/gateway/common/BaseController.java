@@ -1,7 +1,7 @@
 package com.mall.gateway.common;
 
 import com.mall.common.api.CommonController;
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

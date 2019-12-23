@@ -1,8 +1,8 @@
 package com.mall.user.business;
 
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.user.common.pojo.request.LoginRequest;
-import com.mall.user.common.pojo.response.AuthUserVO;
 import com.mall.user.common.pojo.response.UserInfoVO;
 
 /**

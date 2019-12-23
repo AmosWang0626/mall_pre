@@ -1,11 +1,10 @@
-package com.mall.common.response;
+package com.mall.common.base;
 
 /**
- * PROJECT: mall
- * DESCRIPTION: 异常状态码前缀
+ * DESCRIPTION: 错误码前缀
  *
  * @author amos
- * @date 2019/10/29
+ * @date 2019-12-23
  */
 public interface ExceptionCodePrefix {
 

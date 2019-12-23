@@ -1,8 +1,8 @@
 package com.mall.gateway.web.controller;
 
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.BaseController;
-import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.pojo.response.LoginInfoVO;
 import com.mall.gateway.common.utils.JwtUtils;

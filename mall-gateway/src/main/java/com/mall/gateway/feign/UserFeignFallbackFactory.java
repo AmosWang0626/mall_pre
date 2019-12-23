@@ -1,8 +1,8 @@
 package com.mall.gateway.feign;
 
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.pojo.request.LoginRequest;
-import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

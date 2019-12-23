@@ -9,5 +9,6 @@ package com.mall.common.constant;
 public interface ServiceConstant {
 
     String USER_ID = "USER_ID";
+    String TOKEN = "TOKEN";
 
 }

@@ -1,4 +1,6 @@
-package com.mall.user.config;
+package com.mall.common.auth;
+
+import com.mall.common.pojo.response.AuthUserVO;
 
 /**
  * DESCRIPTION: thread local save local user
@@ -8,20 +10,20 @@ package com.mall.user.config;
  */
 public class CurrentUserContext {
 
-    private static ThreadLocal<String> USER_ID = new ThreadLocal<>();
+    private static ThreadLocal<AuthUserVO> USER_ID = new ThreadLocal<>();
 
     public CurrentUserContext() {
     }
 
-    public static String getUserId() {
+    public static AuthUserVO getAuthUser() {
         return USER_ID.get();
     }
 
-    public static void setUserId(String userId) {
+    public static void setAuthUser(AuthUserVO userId) {
         USER_ID.set(userId);
     }
 
-    public static void removeUserId() {
+    public static void removeAuthUser() {
         USER_ID.remove();
     }
 

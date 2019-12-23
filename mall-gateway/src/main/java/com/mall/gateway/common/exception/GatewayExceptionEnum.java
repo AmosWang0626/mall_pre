@@ -1,7 +1,7 @@
 package com.mall.gateway.common.exception;
 
-import com.mall.common.response.ExceptionCodePrefix;
-import com.mall.common.response.IExceptionEnum;
+import com.mall.common.base.ExceptionCodePrefix;
+import com.mall.common.base.IExceptionEnum;
 
 /**
  * PROJECT: gateway

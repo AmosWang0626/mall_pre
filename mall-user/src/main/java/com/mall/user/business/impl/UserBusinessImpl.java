@@ -1,12 +1,12 @@
 package com.mall.user.business.impl;
 
-import com.mall.common.response.GenericResponse;
+import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.common.util.DesSecretUtil;
 import com.mall.common.util.RandomUtil;
 import com.mall.user.business.UserBusiness;
 import com.mall.user.common.enums.UserExceptionEnum;
 import com.mall.user.common.pojo.request.LoginRequest;
-import com.mall.user.common.pojo.response.AuthUserVO;
 import com.mall.user.common.pojo.response.UserInfoVO;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;

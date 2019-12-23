@@ -1,9 +1,9 @@
 package com.mall.gateway.config;
 
+import com.mall.common.base.GenericResponse;
 import com.mall.common.constant.ServiceConstant;
-import com.mall.common.response.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
-import com.mall.gateway.common.pojo.dto.AuthUserVO;
 import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.utils.JwtUtils;
 import com.mall.gateway.feign.UserFeignClient;
@@ -57,7 +57,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        String token = exchange.getRequest().getHeaders().getFirst("token");
+        String token = exchange.getRequest().getHeaders().getFirst(ServiceConstant.TOKEN);
         ServerHttpResponse response = exchange.getResponse();
 
         if (StringUtils.isBlank(token)) {

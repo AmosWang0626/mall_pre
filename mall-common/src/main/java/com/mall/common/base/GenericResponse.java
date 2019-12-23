@@ -1,4 +1,4 @@
-package com.mall.common.response;
+package com.mall.common.base;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.client.naming.utils.CollectionUtils;

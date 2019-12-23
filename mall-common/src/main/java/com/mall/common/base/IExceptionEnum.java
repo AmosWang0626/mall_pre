@@ -1,4 +1,4 @@
-package com.mall.common.response;
+package com.mall.common.base;
 
 /**
  * PROJECT: mall
