@@ -5,8 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.common.auth.JwtBaseUtils;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.common.util.RedisUtils;
 import com.mall.gateway.common.constant.JwtConstant;
 import org.apache.commons.lang3.StringUtils;
@@ -28,13 +28,14 @@ public class JwtUtils extends JwtBaseUtils {
     public static String sign(AuthUserVO authUserVO, String loginId) {
         Algorithm algorithm = Algorithm.HMAC256(authUserVO.getPassword());
         saveLoginId(authUserVO.getUserId(), loginId);
+        saveOperational(authUserVO.getUserId(), authUserVO.getAccount());
         return JWT.create()
                 .withClaim(JwtConstant.ACCOUNT, authUserVO.getAccount())
                 .withClaim(JwtConstant.USERNAME, authUserVO.getUsername())
                 .withClaim(JwtConstant.USER_ID, authUserVO.getUserId())
                 .withClaim(JwtConstant.LOGIN_ID, loginId)
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtConstant.EXPIRE_TIME))
+                .withExpiresAt(new Date(System.currentTimeMillis() + JwtConstant.JWT_EXPIRE_TIME))
                 .sign(algorithm);
     }
 
@@ -109,7 +110,17 @@ public class JwtUtils extends JwtBaseUtils {
      * @param loginId 登录ID
      */
     private static void saveLoginId(String userId, String loginId) {
-        RedisUtils.setByIndex("login:" + userId, loginId, 1);
+        RedisUtils.setByIndex(JwtConstant.REDIS_KEY_LOGIN_ID + userId, loginId, 1);
+    }
+
+    /**
+     * 设置n分钟无操作强制退出
+     *
+     * @param userId  用户编号
+     * @param account 用户账号
+     */
+    public static void saveOperational(String userId, String account) {
+        RedisUtils.set(JwtConstant.REDIS_KEY_OPERATIONAL + userId, account, 1, JwtConstant.OPERATIONAL_EXPIRE_TIME);
     }
 
     /**
@@ -124,7 +135,7 @@ public class JwtUtils extends JwtBaseUtils {
         if (loginId == null) {
             return false;
         }
-        String savedLoginId = RedisUtils.get("login:" + userId, 1);
+        String savedLoginId = RedisUtils.get(JwtConstant.REDIS_KEY_LOGIN_ID + userId, 1);
         if (StringUtils.isBlank(savedLoginId)) {
             return false;
         }

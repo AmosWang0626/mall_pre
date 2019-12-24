@@ -19,9 +19,9 @@ public enum GatewayExceptionEnum implements IExceptionEnum {
     /**
      * user
      */
-    USER_ACCOUNT_NOT_EXIST("10011", "账号不存在"),
-    USER_TOKEN_EXPIRED("10012", "Token已过期"),
-    USER_ACCOUNT_LOGIN_ELSEWHERE("10013", "您的账号在其他地方登录, 请重新登录"),
+    USER_TOKEN_EXPIRED("10011", "Token已过期"),
+    USER_ACCOUNT_LOGIN_ELSEWHERE("10012", "您的账号在其他地方登录, 请重新登录"),
+    USER_IDLE_TIME_TO_LONG("10013", "长时间未操作, 请重新登录"),
     ;
 
     /**

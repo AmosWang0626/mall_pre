@@ -11,8 +11,18 @@ import com.mall.common.auth.JwtBaseConstant;
 public interface JwtConstant extends JwtBaseConstant {
 
     /**
-     * token 超时时间 (2小时 2 * 60 * 60 * 1000)
+     * jwt 超时时间 12小时 (12 * 60 * 60 * 1000) 毫秒
      */
-    long EXPIRE_TIME = 7200000;
+    long JWT_EXPIRE_TIME = 43200000;
+
+    /**
+     * token 解密信息默认保存 36小时 (12 * 60 * 60) 秒
+     */
+    int SECRET_EXPIRE_TIME = 129600;
+
+    /**
+     * 长时间无操作自动退出 5分钟 (5 * 60) 秒
+     */
+    int OPERATIONAL_EXPIRE_TIME = 300;
 
 }
