@@ -1,6 +1,5 @@
 package com.mall.gateway.common;
 
-import com.mall.common.api.CommonController;
 import com.mall.common.base.GenericResponse;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ import java.util.function.Function;
  * @author Daoyuan
  * @date 2018/12/20
  */
-public abstract class BaseController implements CommonController {
+public abstract class BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 

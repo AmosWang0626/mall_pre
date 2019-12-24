@@ -1,7 +1,7 @@
 package com.mall.user.web.controller;
 
-import com.mall.common.api.CommonController;
 import com.mall.common.api.Token;
+import com.mall.common.auth.CurrentUserContext;
 import com.mall.common.base.GenericResponse;
 import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.user.business.UserBusiness;
@@ -10,7 +10,6 @@ import com.mall.user.common.pojo.response.UserInfoVO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * PROJECT: user
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("user")
-public class UserController implements CommonController {
+public class UserController {
 
     @Resource
     private UserBusiness userBusiness;
@@ -46,8 +45,8 @@ public class UserController implements CommonController {
     }
 
     @GetMapping("getUserInfo")
-    public GenericResponse<UserInfoVO> getUserInfo(HttpServletRequest request) {
-        return userBusiness.getUserInfo(getUserId(request));
+    public GenericResponse<UserInfoVO> getUserInfo() {
+        return userBusiness.getUserInfo(CurrentUserContext.getAuthUser().getUserId());
     }
 
 }

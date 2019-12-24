@@ -14,7 +14,6 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -78,12 +77,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
             return authError(response, new GenericResponse(GatewayExceptionEnum.USER_ACCOUNT_LOGIN_ELSEWHERE));
         }
 
-        // 在 header 中设置 user_id, 方便业务系统拿到 user_id
-        ServerHttpRequest request = exchange.getRequest().mutate()
-                .header(ServiceConstant.USER_ID, authUserVO.getUserId())
-                .build();
-
-        return chain.filter(exchange.mutate().request(request).build());
+        return chain.filter(exchange);
     }
 
     private Mono<Void> authError(ServerHttpResponse response, GenericResponse genericResponse) {
