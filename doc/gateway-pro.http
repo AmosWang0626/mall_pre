@@ -1,0 +1,25 @@
+### register
+POST http://api.amos.wang/user/register
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "username": "amos.wang",
+  "password": "123456"
+}
+
+### login
+POST http://api.amos.wang/user/login
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "password": "123456"
+}
+
+### getUserInfo
+GET http://api.amos.wang/user/getUserInfo
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiMTVkMzcxMDMtOTM3YS00ZTUwLWE2NzctMzk5YjYzZjZlYjg4IiwiZXhwIjoxNTc3NTQ0Mjk1LCJ1c2VySWQiOiI4YTgwY2I4MTZmMmJkOWY2MDE2ZjJiZGEzZWUwMDAwMCIsImlhdCI6MTU3NzUwMTA5NSwiYWNjb3VudCI6ImFtb3MiLCJ1c2VybmFtZSI6ImFtb3Mud2FuZyJ9.nkzYSXGgojfEPeximcIzRFzefAIS1eMoU-J_QV5g5-s
+
+###
