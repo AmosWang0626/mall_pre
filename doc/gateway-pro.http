@@ -1,5 +1,5 @@
 ### register
-POST http://api.amos.wang/user/register
+POST https://api.amos.wang/user/register
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 }
 
 ### login
-POST http://api.amos.wang/user/login
+POST https://api.amos.wang/user/login
 Content-Type: application/json
 
 {
@@ -18,8 +18,8 @@ Content-Type: application/json
 }
 
 ### getUserInfo
-GET http://api.amos.wang/user/getUserInfo
+GET https://api.amos.wang/user/getUserInfo
 Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiMTVkMzcxMDMtOTM3YS00ZTUwLWE2NzctMzk5YjYzZjZlYjg4IiwiZXhwIjoxNTc3NTQ0Mjk1LCJ1c2VySWQiOiI4YTgwY2I4MTZmMmJkOWY2MDE2ZjJiZGEzZWUwMDAwMCIsImlhdCI6MTU3NzUwMTA5NSwiYWNjb3VudCI6ImFtb3MiLCJ1c2VybmFtZSI6ImFtb3Mud2FuZyJ9.nkzYSXGgojfEPeximcIzRFzefAIS1eMoU-J_QV5g5-s
+token: 写入注册或者登录返回的token
 
 ###
