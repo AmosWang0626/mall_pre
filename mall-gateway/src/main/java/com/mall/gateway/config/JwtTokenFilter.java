@@ -1,14 +1,17 @@
 package com.mall.gateway.config;
 
+import com.alibaba.fastjson.JSON;
 import com.mall.common.base.GenericResponse;
 import com.mall.common.constant.ServiceConstant;
 import com.mall.common.pojo.response.AuthUserVO;
+import com.mall.common.util.RedisUtils;
+import com.mall.gateway.common.constant.JwtConstant;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
 import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.utils.JwtUtils;
 import com.mall.gateway.feign.UserFeignClient;
 import lombok.extern.java.Log;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -63,19 +66,43 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
             return authError(response, GenericResponse.REQUEST_ILLEGAL);
         }
 
-        GenericResponse<AuthUserVO> loginInfo = userFeignClient.authLoginInfo(new LoginRequest().setAccount(JwtUtils.getAccount(token)));
-        AuthUserVO authUserVO = loginInfo.getBody();
-        if (authUserVO == null) {
-            return authError(response, new GenericResponse(GatewayExceptionEnum.USER_ACCOUNT_NOT_EXIST));
+        String account = JwtUtils.getAccount(token);
+        if (StringUtils.isBlank(account)) {
+            return authError(response, GenericResponse.REQUEST_ILLEGAL);
         }
 
+        // 获取解密 token 密码
+        AuthUserVO authUserVO;
+        String secretInfo = RedisUtils.get(JwtConstant.REDIS_KEY_SECRET + account, 1);
+        if (StringUtils.isNotBlank(secretInfo)) {
+            authUserVO = JSON.parseObject(secretInfo, AuthUserVO.class);
+            if (authUserVO == null) {
+                return authError(response, GenericResponse.REQUEST_ILLEGAL);
+            }
+        } else {
+            GenericResponse<AuthUserVO> loginInfo = userFeignClient.authLoginInfo(new LoginRequest().setAccount(account));
+            authUserVO = loginInfo.getBody();
+            if (authUserVO == null) {
+                return authError(response, GenericResponse.REQUEST_ILLEGAL);
+            }
+            RedisUtils.set(JwtConstant.REDIS_KEY_SECRET + account, JSON.toJSONString(authUserVO), 1, JwtConstant.SECRET_EXPIRE_TIME);
+        }
+
+        // 校验 token 是否过期
         if (JwtUtils.isLoginExpired(token, authUserVO.getAccount(), authUserVO.getPassword())) {
             return authError(response, new GenericResponse(GatewayExceptionEnum.USER_TOKEN_EXPIRED));
         }
 
+        // 校验 其他设备 登录
         if (JwtUtils.isLoginElsewhere(authUserVO.getUserId(), token)) {
             return authError(response, new GenericResponse(GatewayExceptionEnum.USER_ACCOUNT_LOGIN_ELSEWHERE));
         }
+
+        // 校验 长时间不操作自动退出
+        if (StringUtils.isBlank(RedisUtils.get(JwtConstant.REDIS_KEY_OPERATIONAL + authUserVO.getUserId(), 1))) {
+            return authError(response, new GenericResponse(GatewayExceptionEnum.USER_IDLE_TIME_TO_LONG));
+        }
+        JwtUtils.saveOperational(authUserVO.getUserId(), account);
 
         return chain.filter(exchange);
     }

@@ -13,4 +13,17 @@ public interface JwtBaseConstant {
     String ACCOUNT = "account";
     String LOGIN_ID = "loginId";
 
+    /**
+     * 用于 单设备登录
+     */
+    String REDIS_KEY_LOGIN_ID = "login:";
+    /**
+     * 用于 token 解密
+     */
+    String REDIS_KEY_SECRET = "secret:";
+    /**
+     * 用于 实现n分钟不操作限制登录
+     */
+    String REDIS_KEY_OPERATIONAL = "operational:";
+
 }

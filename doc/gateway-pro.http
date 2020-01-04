@@ -1,0 +1,25 @@
+### register
+POST https://api.amos.wang/user/register
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "username": "amos.wang",
+  "password": "123456"
+}
+
+### login
+POST https://api.amos.wang/user/login
+Content-Type: application/json
+
+{
+  "account": "amos",
+  "password": "123456"
+}
+
+### getUserInfo
+GET https://api.amos.wang/user/getUserInfo
+Content-Type: application/json
+token: 写入注册或者登录返回的token
+
+###
