@@ -5,6 +5,8 @@
 - 主要原因：比 MyBatis 约束强点，上手没那么简单
 - 自动建表相关优化 [附1](#appendix-01)
 
+## 2、nacos-server（集群）
+参考：[集群搭建手册](develop-cluster.md)
 
 ---
 ### appendix-01
