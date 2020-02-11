@@ -1,9 +1,12 @@
-package com.mall.user.config;
+package com.mall.gateway.config;
 
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,33 +14,34 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
 import java.util.*;
 
 /**
- * PROJECT: base
- * DESCRIPTION: SwaggerConfig
+ * PROJECT: gateway
+ * DESCRIPTION: WebFlux Swagger
  *
  * @author amos
  * @date 2019/6/2
  */
 @Configuration
-@EnableSwagger2WebMvc
+@EnableSwagger2WebFlux
 public class SwaggerConfig {
 
     @Value("${swagger.enable}")
     private Boolean enable;
 
     @Bean
-    public Docket createRestApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, new ArrayList<>())
                 .globalResponseMessage(RequestMethod.POST, new ArrayList<>())
+                .genericModelSubstitutes(Mono.class, Flux.class, Publisher.class)
                 .enable(enable)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.mall"))
+                .apis(RequestHandlerSelectors.basePackage("com.mall.gateway"))
                 // .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
@@ -46,12 +50,13 @@ public class SwaggerConfig {
                 .securityContexts(securityContexts());
     }
 
+
     /**
      * API 页面上半部分展示信息
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("mall user")
+                .title("mall gateway")
                 .description("技术栈: Spring Boot|JPA|Docker|Swagger")
                 .contact(new Contact("AmosWang0626", null, "daoyuan0626@gmail.com"))
                 .version("1.0")

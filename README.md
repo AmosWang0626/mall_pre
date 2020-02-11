@@ -16,6 +16,8 @@ Spring Cloud、JPA、Gateway、Docker、Nacos、Swagger、JWT
 ---
 ### [研发计划](doc/develop-plan.md)
 ### [项目亮点](doc/develop-core.md)
+### 特别说明
+- Swagger WebMvc和WebFlux [详参](doc/swagger-webmvc-webflux.md)
 
 ---
 ## 项目架构

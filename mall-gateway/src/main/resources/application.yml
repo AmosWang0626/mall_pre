@@ -63,3 +63,7 @@ hystrix:
 #turbine:
 #  cluster-name-expression: "default"
 #  app-config-list: []
+
+# set enable status
+swagger:
+  enable: true
