@@ -1,0 +1,3 @@
+# access swagger
+swagger:
+  enable: true

@@ -1,5 +1,6 @@
 package com.mall.gateway.common.pojo.request;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,14 +23,15 @@ public class LoginRequest implements Serializable {
     private static final long serialVersionUID = -8562669854109829185L;
 
     @NotBlank(message = "账号不能为空")
+    @ApiModelProperty(value = "账号", required = true)
     private String account;
-    /**
-     * 用户名(非必填)
-     */
+
+    @ApiModelProperty("用户名")
     private String username;
 
     @NotBlank(message = "密码不能为空")
     @Size(min = 6, max = 16, message = "密码长度 6 ~ 16")
+    @ApiModelProperty(value = "密码", required = true)
     private String password;
 
 }

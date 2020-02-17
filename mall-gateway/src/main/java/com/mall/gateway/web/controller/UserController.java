@@ -7,6 +7,8 @@ import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.pojo.response.LoginInfoVO;
 import com.mall.gateway.common.utils.JwtUtils;
 import com.mall.gateway.feign.UserFeignClient;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("user")
+@Api(tags = "用户相关")
 public class UserController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -43,6 +46,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping("register")
+    @ApiOperation(value = "注册接口")
     public Mono<GenericResponse> register(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> generateLoginResponse(userFeignClient.register(loginRequest)))
                 .onErrorResume(errorHandlerByWebFlux());
@@ -55,6 +59,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping(value = "login")
+    @ApiOperation(value = "登录接口")
     public Mono<GenericResponse> login(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> generateLoginResponse(userFeignClient.login(loginRequest)))
                 .onErrorResume(errorHandlerByWebFlux());
