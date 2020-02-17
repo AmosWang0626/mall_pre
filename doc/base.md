@@ -4,6 +4,8 @@
 - 端口：8000
 - application-name：mall-gateway
 - 涉及技术：spring-cloud-gateway、JWT、Webflux
+- 端口：8001 sentinel-server
+- 端口：8002 sentinel-dashboard
 
 ## user 用户服务
 - 端口：8010

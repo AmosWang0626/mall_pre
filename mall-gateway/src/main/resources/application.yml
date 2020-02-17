@@ -1,6 +1,5 @@
 spring:
   main:
-    # 后定义的bean会覆盖之前定义的相同名称的bean
     allow-bean-definition-overriding: true
   application:
     name: mall-gateway
@@ -10,6 +9,10 @@ spring:
     nacos:
       discovery:
         server-addr: amos.wang:8088
+    sentinel:
+      transport:
+        port: 8001
+        dashboard: localhost:8002
     gateway:
       routes:
         - id: route_order
@@ -36,32 +39,5 @@ info:
     version: 1.0.0
 
 feign:
-  hystrix:
+  sentinel:
     enabled: true
-
-management:
-  endpoint:
-    health:
-      show-details: always
-
-ribbon:
-  # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
-  ReadTimeout: 5000
-  # 指的是建立连接后从服务器读取到可用资源所用的时间。
-  ConnectTimeout: 5000
-  # 负载均衡策略 com.netflix.loadbalancer.BestAvailableRule
-  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-
-
-#配置请求超时时间
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 7000
-
-#turbine:
-#  cluster-name-expression: "default"
-#  app-config-list: []

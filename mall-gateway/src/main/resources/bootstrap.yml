@@ -1,13 +1,6 @@
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
 spring:
   cloud:
     nacos:
       config:
         server-addr: amos.wang:8088
         file-extension: yaml
-        # prefix: *** default: spring.application.name

@@ -1,5 +1,6 @@
 package com.mall.gateway.web.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.mall.common.base.GenericResponse;
 import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.BaseController;
@@ -46,6 +47,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping("register")
+    @SentinelResource("register")
     @ApiOperation(value = "注册接口")
     public Mono<GenericResponse> register(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> generateLoginResponse(userFeignClient.register(loginRequest)))
@@ -59,6 +61,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping(value = "login")
+    @SentinelResource("login")
     @ApiOperation(value = "登录接口")
     public Mono<GenericResponse> login(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> generateLoginResponse(userFeignClient.login(loginRequest)))
