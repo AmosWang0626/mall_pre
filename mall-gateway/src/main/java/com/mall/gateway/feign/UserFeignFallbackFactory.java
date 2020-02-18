@@ -28,19 +28,19 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
             @Override
             public GenericResponse<AuthUserVO> register(LoginRequest register) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
-                return GenericResponse.SYSTEM_ERROR;
+                return GenericResponse.format(GenericResponse.SYSTEM_ERROR);
             }
 
             @Override
             public GenericResponse<AuthUserVO> login(LoginRequest login) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
-                return GenericResponse.SYSTEM_ERROR;
+                return GenericResponse.format(GenericResponse.SYSTEM_ERROR);
             }
 
             @Override
             public GenericResponse<AuthUserVO> authLoginInfo(LoginRequest login) {
                 LOGGER.error(ERROR_LOG, Thread.currentThread().getStackTrace()[1].getMethodName(), throwable.getMessage());
-                return GenericResponse.SYSTEM_ERROR;
+                return GenericResponse.format(GenericResponse.SYSTEM_ERROR);
             }
         };
     }

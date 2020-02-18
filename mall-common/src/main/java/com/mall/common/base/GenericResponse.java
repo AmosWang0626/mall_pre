@@ -20,11 +20,11 @@ public class GenericResponse<T> implements Serializable {
 
     private static final long serialVersionUID = -8600893080428359242L;
 
-    public static final GenericResponse SUCCESS = new GenericResponse<>("1000", WordConstant.SUCCESS);
-    public static final GenericResponse FAIL = new GenericResponse<>("1001", WordConstant.FAIL);
-    public static final GenericResponse ERROR_PARAM = new GenericResponse<>("1002", WordConstant.ERROR_PARAM);
-    public static final GenericResponse SYSTEM_ERROR = new GenericResponse<>("1003", WordConstant.SYSTEM_ERROR);
-    public static final GenericResponse REQUEST_ILLEGAL = new GenericResponse<>("1004", WordConstant.REQUEST_ILLEGAL);
+    public static final GenericResponse<String> SUCCESS = new GenericResponse<>("1000", WordConstant.SUCCESS);
+    public static final GenericResponse<String> FAIL = new GenericResponse<>("1001", WordConstant.FAIL);
+    public static final GenericResponse<String> ERROR_PARAM = new GenericResponse<>("1002", WordConstant.ERROR_PARAM);
+    public static final GenericResponse<String> SYSTEM_ERROR = new GenericResponse<>("1003", WordConstant.SYSTEM_ERROR);
+    public static final GenericResponse<String> REQUEST_ILLEGAL = new GenericResponse<>("1004", WordConstant.REQUEST_ILLEGAL);
 
 
     /**
@@ -70,12 +70,24 @@ public class GenericResponse<T> implements Serializable {
         }
     }
 
+    /**
+     * 处理泛型类型不一致的异常
+     *
+     * @param response 原始 GenericResponse<F>
+     * @param <T>      返回 response 的类型
+     * @param <F>      入参 response 的类型
+     * @return GenericResponse<T>
+     */
+    public static <T, F> GenericResponse<T> format(GenericResponse<F> response) {
+        return new GenericResponse<>(response.getCode(), response.getMessage());
+    }
+
     public boolean isSuccessful() {
         return SUCCESS.getCode().equals(this.getCode());
     }
 
     public boolean unSuccessful() {
-        return !SUCCESS.getCode().equals(this.getCode());
+        return !isSuccessful();
     }
 
     public String getCode() {

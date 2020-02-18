@@ -27,23 +27,23 @@ public abstract class BaseController {
     protected RestTemplate restTemplate;
 
 
-    public GenericResponse generateResponse(ResponseEntity<GenericResponse> responseEntity) {
+    public <T> GenericResponse<T> format(ResponseEntity<GenericResponse<T>> responseEntity) {
         if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
         }
 
-        LOGGER.error("服务器异常! {}", responseEntity == null ? null : responseEntity.getStatusCode());
+        LOGGER.error("服务器异常! ResponseEntity[{}]", responseEntity == null ? null : responseEntity.getStatusCode());
 
-        return GenericResponse.SYSTEM_ERROR;
+        return GenericResponse.format(GenericResponse.SYSTEM_ERROR);
     }
 
-    public Function<Throwable, Mono<? extends GenericResponse>> errorHandlerByWebFlux() {
+    public <T> Function<Throwable, Mono<? extends GenericResponse<T>>> fallback() {
         return throwable -> {
             if (throwable instanceof WebExchangeBindException) {
-                return Mono.just(new GenericResponse(GatewayExceptionEnum.ERROR_PARAM_FORMAT,
+                return Mono.just(new GenericResponse<T>(GatewayExceptionEnum.ERROR_PARAM_FORMAT,
                         ((WebExchangeBindException) throwable).getAllErrors()));
             } else {
-                return Mono.just(GenericResponse.FAIL);
+                return Mono.just(GenericResponse.format(GenericResponse.FAIL));
             }
         };
     }

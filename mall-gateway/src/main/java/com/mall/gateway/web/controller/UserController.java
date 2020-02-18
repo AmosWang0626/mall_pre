@@ -49,9 +49,9 @@ public class UserController extends BaseController {
     @PostMapping("register")
     @SentinelResource("register")
     @ApiOperation(value = "注册接口")
-    public Mono<GenericResponse> register(@Valid @RequestBody Mono<LoginRequest> login) {
-        return login.map(loginRequest -> generateLoginResponse(userFeignClient.register(loginRequest)))
-                .onErrorResume(errorHandlerByWebFlux());
+    public Mono<GenericResponse<LoginInfoVO>> register(@Valid @RequestBody Mono<LoginRequest> login) {
+        return login.map(loginRequest -> formatLoginInfo(userFeignClient.register(loginRequest)))
+                .onErrorResume(fallback());
     }
 
     /**
@@ -63,18 +63,18 @@ public class UserController extends BaseController {
     @PostMapping(value = "login")
     @SentinelResource("login")
     @ApiOperation(value = "登录接口")
-    public Mono<GenericResponse> login(@Valid @RequestBody Mono<LoginRequest> login) {
-        return login.map(loginRequest -> generateLoginResponse(userFeignClient.login(loginRequest)))
-                .onErrorResume(errorHandlerByWebFlux());
+    public Mono<GenericResponse<LoginInfoVO>> login(@Valid @RequestBody Mono<LoginRequest> login) {
+        return login.map(loginRequest -> formatLoginInfo(userFeignClient.login(loginRequest)))
+                .onErrorResume(fallback());
     }
 
 
     /**
      * 生成登录相关信息
      */
-    private GenericResponse generateLoginResponse(GenericResponse<AuthUserVO> response) {
+    private GenericResponse<LoginInfoVO> formatLoginInfo(GenericResponse<AuthUserVO> response) {
         if (response.unSuccessful()) {
-            return response;
+            return GenericResponse.format(response);
         }
         AuthUserVO authUserVO = response.getBody();
 

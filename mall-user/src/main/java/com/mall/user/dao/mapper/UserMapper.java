@@ -15,6 +15,12 @@ import java.util.Optional;
 @Repository
 public interface UserMapper extends BaseRepository<UserEntity, String> {
 
+    /**
+     * findByAccount
+     *
+     * @param account account
+     * @return UserEntity
+     */
     Optional<UserEntity> findByAccount(String account);
 
 }

@@ -1,5 +1,7 @@
 package com.mall.common.util;
 
+import com.mall.common.constant.MagicValueConstant;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -82,14 +84,14 @@ public class DesSecretUtil {
     }
 
     private static int getHexValue(char paramChar) {
-        if ((paramChar >= '0') && (paramChar <= '9')) {
-            return (paramChar - '0');
+        if ((paramChar >= MagicValueConstant.CHAT_ONE) && (paramChar <= MagicValueConstant.CHAT_NINE)) {
+            return (paramChar - MagicValueConstant.CHAT_ONE);
         }
-        if ((paramChar >= 'a') && (paramChar <= 'f')) {
-            return (paramChar - 'a' + 10);
+        if ((paramChar >= MagicValueConstant.CHAT_LOWER_A) && (paramChar <= MagicValueConstant.CHAT_LOWER_F)) {
+            return (paramChar - MagicValueConstant.CHAT_LOWER_A + 10);
         }
-        if ((paramChar >= 'A') && (paramChar <= 'F')) {
-            return (paramChar - 'A' + 10);
+        if ((paramChar >= MagicValueConstant.CHAT_UPPER_A) && (paramChar <= MagicValueConstant.CHAT_UPPER_F)) {
+            return (paramChar - MagicValueConstant.CHAT_UPPER_A + 10);
         }
         throw new RuntimeException("invalid_char");
     }
