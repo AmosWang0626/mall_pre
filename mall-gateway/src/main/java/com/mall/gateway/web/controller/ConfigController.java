@@ -17,9 +17,9 @@ import reactor.core.publisher.Mono;
  */
 @RestController
 @RefreshScope
-@RequestMapping("nacos-config")
-@Api(tags = "Nacos配置")
-public class NacosConfigController {
+@RequestMapping("config")
+@Api(tags = "B01-Nacos配置")
+public class ConfigController {
 
     @Value("${email:default@amos.wang}")
     private String email;

@@ -10,9 +10,19 @@ spring:
       discovery:
         server-addr: amos.wang:8088
     sentinel:
+      filter:
+        enabled: false
       transport:
         port: 8001
         dashboard: localhost:8002
+      datasource:
+        ds:
+          nacos:
+            server-addr: amos.wang:8088
+            data-id: ${spring.application.name}-sentinel
+            group-id: DEFAULT_GROUP
+            rule-type: flow
+            # data-type: json [default: json]
     gateway:
       routes:
         - id: route_order

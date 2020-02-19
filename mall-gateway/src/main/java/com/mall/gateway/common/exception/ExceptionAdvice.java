@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.UndeclaredThrowableException;
+
 /**
  * PROJECT: gateway
  * DESCRIPTION: note
@@ -21,12 +23,17 @@ public class ExceptionAdvice {
 
     @ResponseBody
     @ExceptionHandler(value = Throwable.class)
-    public GenericResponse handleThrowable(Throwable e) {
+    public GenericResponse<String> handleThrowable(Throwable e) {
         LOGGER.error("{} \n位置: {}", e.toString(), e.getStackTrace()[0]);
         e.printStackTrace();
         return GenericResponse.FAIL;
     }
-    
-    
-    
+
+    @ResponseBody
+    @ExceptionHandler(value = UndeclaredThrowableException.class)
+    public GenericResponse<String> handleUndeclaredThrowable(Throwable e) {
+        LOGGER.error("{} \n操作过于频繁: {}", e.toString(), e.getStackTrace()[0]);
+        return GenericResponse.OPERATION_FREQUENTLY;
+    }
+
 }

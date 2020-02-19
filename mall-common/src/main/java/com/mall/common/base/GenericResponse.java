@@ -25,6 +25,7 @@ public class GenericResponse<T> implements Serializable {
     public static final GenericResponse<String> ERROR_PARAM = new GenericResponse<>("1002", WordConstant.ERROR_PARAM);
     public static final GenericResponse<String> SYSTEM_ERROR = new GenericResponse<>("1003", WordConstant.SYSTEM_ERROR);
     public static final GenericResponse<String> REQUEST_ILLEGAL = new GenericResponse<>("1004", WordConstant.REQUEST_ILLEGAL);
+    public static final GenericResponse<String> OPERATION_FREQUENTLY = new GenericResponse<>("1005", WordConstant.OPERATION_FREQUENTLY);
 
 
     /**

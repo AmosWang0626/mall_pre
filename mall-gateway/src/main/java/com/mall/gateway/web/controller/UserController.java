@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("user")
-@Api(tags = "用户相关")
+@Api(tags = "A01-用户相关")
 public class UserController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -47,7 +47,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping("register")
-    @SentinelResource("register")
+    @SentinelResource("/user/register")
     @ApiOperation(value = "注册接口")
     public Mono<GenericResponse<LoginInfoVO>> register(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> formatLoginInfo(userFeignClient.register(loginRequest)))
@@ -61,7 +61,7 @@ public class UserController extends BaseController {
      * @return Mono
      */
     @PostMapping(value = "login")
-    @SentinelResource("login")
+    @SentinelResource("/user/login")
     @ApiOperation(value = "登录接口")
     public Mono<GenericResponse<LoginInfoVO>> login(@Valid @RequestBody Mono<LoginRequest> login) {
         return login.map(loginRequest -> formatLoginInfo(userFeignClient.login(loginRequest)))

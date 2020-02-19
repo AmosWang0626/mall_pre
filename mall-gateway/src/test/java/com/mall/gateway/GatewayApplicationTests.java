@@ -1,5 +1,6 @@
 package com.mall.gateway;
 
+import com.mall.gateway.config.NacosConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,16 @@ public class GatewayApplicationTests {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://mall-user/user/test", String.class);
         System.out.println(responseEntity.getStatusCode());
         System.out.println(responseEntity.getBody());
+    }
+
+    @Resource
+    private NacosConfig nacosConfig;
+
+    @Test
+    public void loadNacosConfig() {
+        System.out.println(nacosConfig.getDataId());
+        System.out.println(nacosConfig.getGroupId());
+        System.out.println(nacosConfig.getServerAddr());
     }
 
 }

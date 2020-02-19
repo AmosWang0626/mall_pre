@@ -13,5 +13,6 @@ public interface WordConstant {
     String ERROR_PARAM = "参数错误";
     String REQUEST_ILLEGAL = "非法请求";
     String SYSTEM_ERROR = "系统异常";
+    String OPERATION_FREQUENTLY = "操作频繁";
 
 }
