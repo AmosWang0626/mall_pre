@@ -54,6 +54,8 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
         Set<String> passUrls = new HashSet<>();
         passUrls.add("/user/login");
         passUrls.add("/user/register");
+        passUrls.add("/mall-user/v2/api-docs");
+        passUrls.add("/mall-order/v2/api-docs");
 
         if (passUrls.contains(url)) {
             return chain.filter(exchange);

@@ -39,6 +39,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-webmvc</artifactId>
+        </dependency>
     </dependencies>
 
 

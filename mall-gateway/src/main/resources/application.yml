@@ -25,15 +25,36 @@ spring:
             # data-type: json [default: json]
     gateway:
       routes:
+        # mall-order
         - id: route_order
           uri: lb://mall-order/order/
           predicates:
             - Path=/order/**
+          filters:
+            - StripPrefix=1
 
+        - id: route_order_swagger
+          uri: lb://mall-order/
+          predicates:
+            - Path=/mall-order/**
+          filters:
+            - StripPrefix=1
+
+        # mall-user
         - id: route_user
           uri: lb://mall-user/user/
           predicates:
             - Path=/user/**
+          filters:
+            - StripPrefix=1
+
+        - id: route_user_swagger
+          uri: lb://mall-user/
+          predicates:
+            - Path=/mall-user/**
+          filters:
+            - StripPrefix=1
+
   redis:
     host: amos.wang
     database: 1
