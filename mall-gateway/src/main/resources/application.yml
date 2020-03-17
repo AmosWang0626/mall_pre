@@ -54,6 +54,17 @@ spring:
             - Path=/mall-user/**
           filters:
             - StripPrefix=1
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings: 
+          hello-in:
+            destination: hello
+            content-type: application/json
+          hello-out:
+            destination: hello
+            content-type: application/json
 
   redis:
     host: amos.wang
