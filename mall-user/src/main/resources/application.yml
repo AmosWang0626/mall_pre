@@ -5,6 +5,12 @@ spring:
     nacos:
       discovery:
         server-addr: amos.wang:8088
+    stream:
+      kafka:
+        binder:
+          brokers: localhost
+        bindings: 
+          
 
 server:
   port: 8010
