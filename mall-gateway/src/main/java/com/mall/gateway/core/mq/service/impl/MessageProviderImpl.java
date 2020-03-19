@@ -1,8 +1,8 @@
 package com.mall.gateway.core.mq.service.impl;
 
 import com.mall.gateway.core.mq.service.MessageProvider;
+import com.mall.gateway.core.mq.source.HelloSource;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -16,10 +16,10 @@ import javax.annotation.Resource;
  * @author amos.wang
  * @date 2020/3/17 18:09
  */
-@EnableBinding(Source.class)
+@EnableBinding(HelloSource.class)
 public class MessageProviderImpl implements MessageProvider {
 
-    @Resource
+    @Resource(name = HelloSource.HELLO_OUTPUT)
     private MessageChannel output;
 
     @Override
