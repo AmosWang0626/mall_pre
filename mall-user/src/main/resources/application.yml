@@ -8,7 +8,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 172.16.35.22:9092
+          brokers: 172.16.23.35:9092
         bindings:
           hello-in:
             destination: hello
