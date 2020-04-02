@@ -8,9 +8,14 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost
-        bindings: 
-          
+          brokers: 172.16.23.35:9092
+        bindings:
+          hello-in:
+            destination: hello
+            content-type: application/json
+          hello-out:
+            destination: hello
+            content-type: application/json
 
 server:
   port: 8010

@@ -46,7 +46,7 @@ services:
       - kafka-net
     environment:
       KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: 172.16.23.35
     depends_on:
       - zoo1
       - zoo2
