@@ -11,9 +11,9 @@ public interface InventoryBusiness {
     /**
      * 扣减库存
      *
-     * @param name 订单号
+     * @param orderId 订单号
      * @return 结果
      */
-    String consume(String name);
+    String consume(String orderId);
 
 }

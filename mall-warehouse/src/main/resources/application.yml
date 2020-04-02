@@ -11,6 +11,10 @@ spring:
     database: 1
     port: 6379
 
+redisson:
+  singleServerConfig:
+    address: 127.0.0.1:6379
+
 server:
   port: 8030
 
