@@ -6,6 +6,11 @@ spring:
     nacos:
       discovery:
         server-addr: amos.wang:8088
+  redis:
+    host: localhost
+    database: 1
+    port: 6379
+
 server:
   port: 8030
 
