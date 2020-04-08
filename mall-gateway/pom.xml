@@ -101,7 +101,7 @@
                         <goals>
                             <goal>build</goal>
                             <!-- open when you need to push -->
-                            <goal>push</goal>
+                            <!--<goal>push</goal>-->
                         </goals>
                     </execution>
                 </executions>
