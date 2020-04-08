@@ -1,6 +1,7 @@
 package com.mall.common.pojo.response;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -13,8 +14,9 @@ import java.io.Serializable;
  * @date 2019/7/26
  */
 @Accessors(chain = true)
-@Data
-public class AuthUserVO implements Serializable {
+@Getter
+@Setter
+public class AuthUserVO extends BaseVO implements Serializable {
 
     private static final long serialVersionUID = 8887971998850780679L;
 
