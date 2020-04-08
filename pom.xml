@@ -53,6 +53,7 @@
         <shiro-spring-boot.version>1.4.1</shiro-spring-boot.version>
         <auth0-java-jwt.version>3.8.1</auth0-java-jwt.version>
         <swagger.version>3.0.0-SNAPSHOT</swagger.version>
+        <mapstruct.version>1.3.1.Final</mapstruct.version>
     </properties>
 
     <dependencies>
@@ -178,6 +179,11 @@
                 <groupId>com.auth0</groupId>
                 <artifactId>java-jwt</artifactId>
                 <version>${auth0-java-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

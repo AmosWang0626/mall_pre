@@ -6,11 +6,12 @@ import com.mall.common.util.DesSecretUtil;
 import com.mall.common.util.RandomUtil;
 import com.mall.user.business.UserBusiness;
 import com.mall.user.common.enums.UserExceptionEnum;
+import com.mall.user.common.pojo.UserConverter;
 import com.mall.user.common.pojo.request.LoginRequest;
 import com.mall.user.common.pojo.response.UserInfoVO;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
-import org.springframework.beans.BeanUtils;
+import com.mall.user.web.exception.AccountErrorException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,6 +30,8 @@ public class UserBusinessImpl implements UserBusiness {
 
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserConverter userConverter;
 
     @Override
     public GenericResponse<AuthUserVO> register(LoginRequest loginRequest) {
@@ -38,8 +41,7 @@ public class UserBusinessImpl implements UserBusiness {
             return new GenericResponse<>(UserExceptionEnum.REGISTER_ACCOUNT_EXISTED);
         }
 
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(loginRequest, userEntity);
+        UserEntity userEntity = userConverter.convert(loginRequest);
         String pwd = loginRequest.getPassword();
         String salt = RandomUtil.generateString(8);
         String encryptPwd = DesSecretUtil.encrypt(pwd, salt);
@@ -47,9 +49,8 @@ public class UserBusinessImpl implements UserBusiness {
         userEntity.setStatus(1);
         userEntity.setPassword(encryptPwd);
         userEntity.setCreateTime(LocalDateTime.now());
-        UserEntity entity = userMapper.save(userEntity);
 
-        return new GenericResponse<>(generateAuthUserVO(new AuthUserVO(), entity));
+        return new GenericResponse<>(userConverter.reduction(userMapper.save(userEntity)));
     }
 
     @Override
@@ -65,35 +66,25 @@ public class UserBusinessImpl implements UserBusiness {
             return new GenericResponse<>(UserExceptionEnum.LOGIN_PASSWORD_ERROR);
         }
 
-        return new GenericResponse<>(generateAuthUserVO(new AuthUserVO(), userEntity));
+        return new GenericResponse<>(userConverter.reduction(userEntity));
     }
 
     @Override
     public GenericResponse<AuthUserVO> authLoginInfo(LoginRequest loginRequest) {
-        AuthUserVO authUserVO = new AuthUserVO();
-        userMapper.findByAccount(loginRequest.getAccount())
-                .ifPresent(userEntity -> generateAuthUserVO(authUserVO, userEntity));
-
-        return new GenericResponse<>(authUserVO);
+        return new GenericResponse<>(Optional.ofNullable(userMapper
+                .findByAccount(loginRequest.getAccount())
+                .orElseThrow(() -> new AccountErrorException(loginRequest.getAccount() + " 账号不存在"))
+        ).map(userEntity -> userConverter.reduction(userEntity)).get());
     }
 
     @Override
     public GenericResponse<UserInfoVO> getUserInfo(String userId) {
         UserInfoVO userInfoVO = new UserInfoVO();
         userMapper.findById(userId)
-                .ifPresent(userEntity -> {
-                    userInfoVO.setUserId(userEntity.getId());
-                    userInfoVO.setAccount(userEntity.getAccount());
-                    userInfoVO.setUsername(userEntity.getUsername());
-                });
+                .ifPresent(userEntity -> userInfoVO.setUserId(userEntity.getId())
+                        .setAccount(userEntity.getAccount()).setUsername(userEntity.getUsername()));
 
         return new GenericResponse<>(userInfoVO);
-    }
-
-    private AuthUserVO generateAuthUserVO(AuthUserVO authUserVO, UserEntity userEntity) {
-        BeanUtils.copyProperties(userEntity, authUserVO);
-        authUserVO.setUserId(userEntity.getId());
-        return authUserVO;
     }
 
 }

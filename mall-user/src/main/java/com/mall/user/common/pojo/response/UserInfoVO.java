@@ -1,6 +1,7 @@
 package com.mall.user.common.pojo.response;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @author amos
  * @date 2019/7/26
  */
+@Accessors(chain = true)
 @Data
 public class UserInfoVO implements Serializable {
 
