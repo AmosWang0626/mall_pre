@@ -1,5 +1,11 @@
 # 各服务默认配置
 
+## 先决条件
+- Zookeeper + Kafka
+- Redis
+- Nacos
+- Sentinel
+
 ## gateway 网关服务
 - 端口：8000
 - application-name：mall-gateway

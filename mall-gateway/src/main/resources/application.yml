@@ -57,13 +57,11 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 172.16.23.35:9092
-        bindings: 
-          hello-in:
-            destination: hello
-            content-type: application/json
-          hello-out:
-            destination: hello
+          brokers: 192.168.1.188:9092 # kafka url
+          auto-create-topics: true
+        bindings:
+          hello_chan:                 # channelName
+            destination: hello        # topic
             content-type: application/json
 
   redis:

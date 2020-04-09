@@ -8,14 +8,17 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 172.16.23.35:9092
+          brokers: 192.168.1.188:9092 # kafka url
+          auto-create-topics: true
         bindings:
-          hello-in:
+          hello_chan:
             destination: hello
             content-type: application/json
-          hello-out:
-            destination: hello
-            content-type: application/json
+
+  redis:
+    host: amos.wang
+    database: 1
+    port: 1998
 
 server:
   port: 8010

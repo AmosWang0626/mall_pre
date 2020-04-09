@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @EnableBinding(HelloSource.class)
 public class MessageProviderImpl implements MessageProvider {
 
-    @Resource(name = HelloSource.HELLO_OUTPUT)
+    @Resource(name = HelloSource.HELLO_CHAN)
     private MessageChannel output;
 
     @Override
