@@ -5,6 +5,24 @@
 - Redis
 - Nacos
 - Sentinel
+- MySQL
+
+## 服务占用端口
+| 服务类型 | 服务名称 | 占用端口 |
+| --- | --- | --- |
+| ops | zk         |2181|
+| ops | mysql      |3306|
+| ops | redis      |6379|
+| ops | kafka      |9092|
+| ops | nacos      |8848|
+| ops | sentinel   |8001|
+| ops | sentinel dashboard |8002|
+| --- | --- | --- |
+| dev | gateway    |8000|
+| dev | user       |8010|
+| dev | order      |8020|
+| dev | warehouse  |8030|
+
 
 ## gateway 网关服务
 - 端口：8000

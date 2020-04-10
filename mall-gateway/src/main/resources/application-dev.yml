@@ -1,3 +1,51 @@
 # access swagger
 swagger:
   enable: true
+
+spring:
+  application:
+    name: mall-gateway
+
+  datasource:
+    username: root
+    password: ENC(6YKavYkUMuJtySAlihNSd3zBfz0GwtmMAIq/VrAq3YyuW9vgMpwBH5eRIc6VMSyY)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${devops.mysql-addr}/mall
+
+  redis:
+    host: ${devops.host}
+    database: 1
+    port: ${devops.redis-port}
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${devops.nacos-addr}
+      config:
+        server-addr: ${devops.nacos-addr}
+        file-extension: yaml
+
+    sentinel:
+      filter:
+        enabled: false
+      transport:
+        port: ${devops.sentinel-port} # current service exec sentinel
+        dashboard: ${devops.sentinel-dashboard-addr}
+      datasource:
+        ds:
+          nacos:
+            server-addr: ${devops.nacos-addr}
+            data-id: ${spring.application.name}-sentinel
+            group-id: DEFAULT_GROUP
+            rule-type: flow
+            data-type: json
+
+    stream:
+      kafka:
+        binder:
+          brokers: ${devops.kafka-addr}
+          auto-create-topics: true
+        bindings:
+          hello_chan: # custom channel name
+            destination: hello
+            content-type: application/json

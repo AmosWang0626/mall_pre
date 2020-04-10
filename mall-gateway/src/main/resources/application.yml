@@ -1,28 +1,23 @@
+server:
+  port: 8000
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: 网关系统
+    version: 1.0.0
+
+feign:
+  sentinel:
+    enabled: true
+
 spring:
-  main:
-    allow-bean-definition-overriding: true
   application:
     name: mall-gateway
   profiles:
     active: dev
+
   cloud:
-    nacos:
-      discovery:
-        server-addr: amos.wang:8088
-    sentinel:
-      filter:
-        enabled: false
-      transport:
-        port: 8001
-        dashboard: localhost:8002
-      datasource:
-        ds:
-          nacos:
-            server-addr: amos.wang:8088
-            data-id: ${spring.application.name}-sentinel
-            group-id: DEFAULT_GROUP
-            rule-type: flow
-            # data-type: json [default: json]
     gateway:
       routes:
         # mall-order
@@ -54,30 +49,3 @@ spring:
             - Path=/mall-user/**
           filters:
             - StripPrefix=1
-    stream:
-      kafka:
-        binder:
-          brokers: 192.168.1.188:9092 # kafka url
-          auto-create-topics: true
-        bindings:
-          hello_chan:                 # channelName
-            destination: hello        # topic
-            content-type: application/json
-
-  redis:
-    host: amos.wang
-    database: 1
-    port: 1998
-
-server:
-  port: 8000
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: 网关系统
-    version: 1.0.0
-
-feign:
-  sentinel:
-    enabled: true
