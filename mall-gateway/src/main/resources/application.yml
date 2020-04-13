@@ -1,12 +1,6 @@
 server:
   port: 8000
 
-info:
-  app:
-    name: ${spring.application.name}
-    description: 网关系统
-    version: 1.0.0
-
 feign:
   sentinel:
     enabled: true
