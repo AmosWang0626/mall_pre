@@ -1,13 +1,10 @@
 package com.mall.common.base;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.nacos.client.naming.utils.CollectionUtils;
 import com.mall.common.constant.WordConstant;
-import org.springframework.validation.ObjectError;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.List;
 
 /**
  * PROJECT: gateway
@@ -23,6 +20,7 @@ public class GenericResponse<T> implements Serializable {
     public static final GenericResponse<String> SUCCESS = new GenericResponse<>("1000", WordConstant.SUCCESS);
     public static final GenericResponse<String> FAIL = new GenericResponse<>("1001", WordConstant.FAIL);
     public static final GenericResponse<String> ERROR_PARAM = new GenericResponse<>("1002", WordConstant.ERROR_PARAM);
+    public static final GenericResponse<String> ERROR_PARAM_BY = new GenericResponse<>("1002", WordConstant.ERROR_PARAM_BY);
     public static final GenericResponse<String> SYSTEM_ERROR = new GenericResponse<>("1003", WordConstant.SYSTEM_ERROR);
     public static final GenericResponse<String> REQUEST_ILLEGAL = new GenericResponse<>("1004", WordConstant.REQUEST_ILLEGAL);
     public static final GenericResponse<String> OPERATION_FREQUENTLY = new GenericResponse<>("1005", WordConstant.OPERATION_FREQUENTLY);
@@ -63,14 +61,6 @@ public class GenericResponse<T> implements Serializable {
         this(exceptionEnum.getCode(), exceptionEnum.getMessage(), null);
     }
 
-    public GenericResponse(IExceptionEnum exceptionEnum, List<ObjectError> list) {
-        this.setCode(exceptionEnum.getCode());
-        this.setMessage(exceptionEnum.getMessage());
-        if (!CollectionUtils.isEmpty(list)) {
-            this.setMessage(MessageFormat.format(this.getMessage(), list.get(0).getDefaultMessage()));
-        }
-    }
-
     /**
      * 处理泛型类型不一致的异常
      *
@@ -81,6 +71,16 @@ public class GenericResponse<T> implements Serializable {
      */
     public static <T, F> GenericResponse<T> format(GenericResponse<F> response) {
         return new GenericResponse<>(response.getCode(), response.getMessage());
+    }
+
+    /**
+     * 处理泛型类型不一致的异常
+     *
+     * @return GenericResponse<T>
+     */
+    public GenericResponse<T> format(String info) {
+        this.message = MessageFormat.format(getMessage(), info);
+        return this;
     }
 
     public boolean isSuccessful() {
@@ -95,24 +95,12 @@ public class GenericResponse<T> implements Serializable {
         return code;
     }
 
-    private void setCode(String code) {
-        this.code = code;
-    }
-
     public String getMessage() {
         return message;
     }
 
-    private void setMessage(String message) {
-        this.message = message;
-    }
-
     public T getBody() {
         return body;
-    }
-
-    public void setBody(T body) {
-        this.body = body;
     }
 
     @Override

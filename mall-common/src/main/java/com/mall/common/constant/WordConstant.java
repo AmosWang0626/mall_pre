@@ -11,6 +11,7 @@ public interface WordConstant {
     String SUCCESS = "成功!";
     String FAIL = "失败!";
     String ERROR_PARAM = "参数错误";
+    String ERROR_PARAM_BY = "参数错误[{0}]";
     String REQUEST_ILLEGAL = "非法请求";
     String SYSTEM_ERROR = "系统异常";
     String OPERATION_FREQUENTLY = "操作频繁";

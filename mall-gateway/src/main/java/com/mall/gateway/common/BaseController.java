@@ -1,7 +1,6 @@
 package com.mall.gateway.common;
 
 import com.mall.common.base.GenericResponse;
-import com.mall.gateway.common.exception.GatewayExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +39,8 @@ public abstract class BaseController {
     public <T> Function<Throwable, Mono<? extends GenericResponse<T>>> fallback() {
         return throwable -> {
             if (throwable instanceof WebExchangeBindException) {
-                return Mono.just(new GenericResponse<T>(GatewayExceptionEnum.ERROR_PARAM_FORMAT,
-                        ((WebExchangeBindException) throwable).getAllErrors()));
+                GenericResponse<String> format = GenericResponse.ERROR_PARAM_BY.format(((WebExchangeBindException) throwable).getAllErrors().get(0).getDefaultMessage());
+                return Mono.just(GenericResponse.format(format));
             } else {
                 return Mono.just(GenericResponse.format(GenericResponse.FAIL));
             }
