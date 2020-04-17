@@ -19,7 +19,7 @@
 `docker-compose restart`
 
 # logs
-`docker-compose logs`
+`docker-compose logs -f`
 `docker-compose events --json`
 
 # 验证 `docker-compose` 配置

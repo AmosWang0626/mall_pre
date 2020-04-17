@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  dockerhub:
+    image: registry
+    restart: always
+    container_name: registry
+    ports:
+      - 5000:5000
+    volumes:
+      - '/opt/docker/registry:/var/lib/registry'
