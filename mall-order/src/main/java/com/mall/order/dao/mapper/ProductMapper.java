@@ -1,6 +1,6 @@
 package com.mall.order.dao.mapper;
 
-import com.mall.order.dao.entity.OrderEntity;
+import com.mall.order.dao.entity.ProductEntity;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
  * DESCRIPTION: note
  *
  * @author Daoyuan
- * @date 2018/12/26
+ * @date 2020/4/21
  */
-public interface OrderInfoMapper extends CrudRepository<OrderEntity, String> {
+public interface ProductMapper extends CrudRepository<ProductEntity, String> {
 }

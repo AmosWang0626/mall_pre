@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "order_info")
-public class OrderInfoEntity extends BaseEntity {
+public class OrderEntity extends BaseEntity {
 
     /**
      * 用户ID

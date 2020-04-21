@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Daoyuan
  * @date 2018/12/26
  */
-public interface OrderDetailMapper extends CrudRepository<OrderDetailEntity, Long> {
+public interface OrderDetailMapper extends CrudRepository<OrderDetailEntity, String> {
 }

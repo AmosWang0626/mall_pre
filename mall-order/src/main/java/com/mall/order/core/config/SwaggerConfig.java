@@ -1,4 +1,4 @@
-package com.mall.order.config;
+package com.mall.order.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
