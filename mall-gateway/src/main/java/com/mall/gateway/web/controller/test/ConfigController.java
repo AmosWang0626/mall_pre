@@ -1,4 +1,4 @@
-package com.mall.gateway.web.controller;
+package com.mall.gateway.web.controller.test;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RefreshScope
 @RequestMapping("config")
-@Api(tags = "B01-Nacos配置")
+@Api(tags = "Z01-Nacos配置")
 public class ConfigController {
 
     @Value("${email:default@amos.wang}")

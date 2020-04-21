@@ -1,4 +1,4 @@
-package com.mall.gateway.web.controller;
+package com.mall.gateway.web.controller.test;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.mall.common.api.Token;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("sentinel")
-@Api(tags = "B02-Sentinel哨兵")
+@Api(tags = "Z03-Sentinel测试")
 public class SentinelController {
 
     @Token(check = false)

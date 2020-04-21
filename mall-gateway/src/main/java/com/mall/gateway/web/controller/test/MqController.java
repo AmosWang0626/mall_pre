@@ -1,4 +1,4 @@
-package com.mall.gateway.web.controller;
+package com.mall.gateway.web.controller.test;
 
 import com.mall.common.base.GenericResponse;
 import com.mall.gateway.core.mq.service.MessageProvider;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("mq")
-@Api(tags = "C01-MQ测试")
+@Api(tags = "Z02-MQ测试")
 public class MqController {
 
     @Resource
