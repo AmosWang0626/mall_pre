@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @Data
 @Entity
-@Table(name = "order")
-public class OrderEntity extends BaseEntity {
+@Table(name = "order_info")
+public class OrderInfoEntity extends BaseEntity {
 
     /**
      * 用户ID

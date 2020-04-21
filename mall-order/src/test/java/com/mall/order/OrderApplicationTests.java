@@ -2,8 +2,8 @@ package com.mall.order;
 
 import com.mall.order.common.OrderStatusEnum;
 import com.mall.order.dao.entity.OrderDetailEntity;
-import com.mall.order.dao.entity.OrderEntity;
-import com.mall.order.dao.mapper.ApplyOrderMapper;
+import com.mall.order.dao.entity.OrderInfoEntity;
+import com.mall.order.dao.mapper.OrderInfoMapper;
 import com.mall.order.dao.mapper.OrderDetailMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import java.util.List;
 public class OrderApplicationTests {
 
     @Resource
-    private ApplyOrderMapper applyOrderMapper;
+    private OrderInfoMapper orderInfoMapper;
     @Resource
     private OrderDetailMapper orderDetailMapper;
 
@@ -53,18 +53,18 @@ public class OrderApplicationTests {
             totalAmount = totalAmount.add(orderDetailEntity.getProductUnitPrice().multiply(new BigDecimal(orderDetailEntity.getProductCount())));
         }
 
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setOrderNo(orderNo);
-        orderEntity.setOrderStatus(OrderStatusEnum.AWAIT_PAY);
-        orderEntity.setConsumeAmount(totalAmount);
-        orderEntity.setConsumeDate(LocalDate.now());
-        orderEntity.setConsumeTime(LocalDateTime.now());
-        orderEntity.setReduceAmount(BigDecimal.ZERO);
-        orderEntity.setReduceReason(null);
+        OrderInfoEntity orderInfoEntity = new OrderInfoEntity();
+        orderInfoEntity.setOrderNo(orderNo);
+        orderInfoEntity.setOrderStatus(OrderStatusEnum.AWAIT_PAY);
+        orderInfoEntity.setConsumeAmount(totalAmount);
+        orderInfoEntity.setConsumeDate(LocalDate.now());
+        orderInfoEntity.setConsumeTime(LocalDateTime.now());
+        orderInfoEntity.setReduceAmount(BigDecimal.ZERO);
+        orderInfoEntity.setReduceReason(null);
         // applyOrderEntity.setSerialNo("ALI_PAY_" + System.currentTimeMillis());
-        orderEntity.setUserId(10000L);
+        orderInfoEntity.setUserId(10000L);
 
-        applyOrderMapper.save(orderEntity);
+        orderInfoMapper.save(orderInfoEntity);
         orderDetailMapper.saveAll(orderDetailEntities);
     }
 

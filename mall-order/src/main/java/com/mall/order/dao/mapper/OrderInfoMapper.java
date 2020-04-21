@@ -1,6 +1,6 @@
 package com.mall.order.dao.mapper;
 
-import com.mall.order.dao.entity.OrderEntity;
+import com.mall.order.dao.entity.OrderInfoEntity;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Daoyuan
  * @date 2018/12/26
  */
-public interface ApplyOrderMapper extends CrudRepository<OrderEntity, Long> {
+public interface OrderInfoMapper extends CrudRepository<OrderInfoEntity, Long> {
 }
