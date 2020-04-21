@@ -1,16 +1,2 @@
-# 基础配置
-spring:
-  application:
-    name: mall-order
-  cloud:
-    nacos:
-      discovery:
-        server-addr: amos.wang:8088
 server:
   port: 8020
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: 订单系统
-    version: 1.0.0

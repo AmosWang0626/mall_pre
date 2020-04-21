@@ -1,25 +1,6 @@
-# 基础配置
-spring:
-  application:
-    name: mall-warehouse
-  cloud:
-    nacos:
-      discovery:
-        server-addr: amos.wang:8088
-  redis:
-    host: localhost
-    database: 1
-    port: 6379
+server:
+  port: 8030
 
 redisson:
   singleServerConfig:
     address: 127.0.0.1:6379
-
-server:
-  port: 8030
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: 仓储系统
-    version: 1.0.0

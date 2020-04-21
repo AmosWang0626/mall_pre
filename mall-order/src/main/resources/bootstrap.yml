@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mall-order
+  profiles:
+    active: dev
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: 订单系统
+    version: 1.0.0

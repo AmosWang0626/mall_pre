@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mall-warehouse
+  profiles:
+    active: dev
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: 仓储系统
+    version: 1.0.0

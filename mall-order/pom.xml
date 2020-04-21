@@ -47,6 +47,10 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-spring-webmvc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+        </dependency>
     </dependencies>
 
 
