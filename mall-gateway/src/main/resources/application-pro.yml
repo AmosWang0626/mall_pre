@@ -1,4 +1,0 @@
-# access swagger
-# production environment must be set to false.
-swagger:
-  enable: false

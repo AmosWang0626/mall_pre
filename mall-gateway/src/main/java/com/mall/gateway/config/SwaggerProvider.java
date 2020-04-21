@@ -54,7 +54,9 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
         // 获取网关中配置的路由
         routeLocator.getRoutes().filter(route -> route.getUri().getHost() != null)
                 .filter(route -> !appName.equals(route.getUri().getHost()))
-                .subscribe(route -> routesMap.put(route.getUri().getHost(), route.getUri()));
+                .subscribe(route -> {
+                    routesMap.put(route.getUri().getHost(), route.getUri());
+                });
 
         routesMap.forEach((name, uri) -> {
             String url = "/" + uri.getHost() + API_URI;

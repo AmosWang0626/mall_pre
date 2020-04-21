@@ -1,17 +1,17 @@
-# custom devOps config
-devops:
-  host: amos.wang
-  redis-port: 1998
-  sentinel-port: 8001
-  mysql-addr: ${devops.host}:3306
-  nacos-addr: ${devops.host}:8088
-  kafka-addr: ${devops.host}:9092
-  sentinel-dashboard-addr: ${devops.host}:8002
-
 # nacos config need to be defined in bootstrap.yml
 spring:
   cloud:
     nacos:
       config:
-        server-addr: ${devops.nacos-addr}
+        server-addr: amos.wang:8088
         file-extension: yaml
+        group: DEV_GROUP
+        namespace: 63ff78df-8674-4479-8f90-65e32c903654
+        # shared-dataids: 如果配置了分组，要使用下边的方式 ext-config 
+        ext-config:
+          - data-id: global.properties
+            group: DEV_GROUP
+            refresh: false
+          - data-id: sentinel.properties
+            group: DEV_GROUP
+            refresh: true

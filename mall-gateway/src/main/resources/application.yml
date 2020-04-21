@@ -6,12 +6,13 @@ feign:
     enabled: true
 
 spring:
-  application:
-    name: mall-gateway
-  profiles:
-    active: dev
-
   cloud:
+    stream:
+      bindings:
+        hello_chan:
+          destination: hello
+          content-type: application/json
+
     gateway:
       routes:
         # mall-order
