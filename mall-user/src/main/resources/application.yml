@@ -1,40 +1,11 @@
+server:
+  port: 8010
+
 spring:
-  application:
-    name: mall-user
   cloud:
-    nacos:
-      discovery:
-        server-addr: amos.wang:8088
     stream:
       kafka:
-        binder:
-          brokers: 192.168.1.188:9092 # kafka url
-          auto-create-topics: true
         bindings:
           hello_chan:
             destination: hello
             content-type: application/json
-
-  redis:
-    host: amos.wang
-    database: 1
-    port: 1998
-
-server:
-  port: 8010
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: 用户系统
-    version: 1.0.0
-
-# set swagger logger level
-logging:
-  level:
-    springfox:
-      documentation: WARN
-
-# set enable status
-swagger:
-  enable: true

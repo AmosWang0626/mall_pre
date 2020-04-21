@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mall-user
+  profiles:
+    active: dev
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: 用户系统
+    version: 1.0.0
