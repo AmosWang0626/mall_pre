@@ -25,17 +25,32 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @Data
 @Entity
-@Table(name = "order_info")
+@Table(name = "po_order")
 public class OrderEntity extends BaseEntity {
 
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
     /**
      * 订单编号
      */
     private String orderNo;
+    /**
+     * 交易流水号
+     */
+    private String serialNo;
+    /**
+     * 消费金额
+     */
+    private BigDecimal consumeAmount;
+    /**
+     * 订单状态
+     */
+    @Enumerated(EnumType.STRING)
+    private OrderStatusEnum orderStatus;
+
+
     /**
      * 消费日期
      */
@@ -44,10 +59,11 @@ public class OrderEntity extends BaseEntity {
      * 消费时间
      */
     private LocalDateTime consumeTime;
+
     /**
-     * 消费金额
+     * 优惠券ID
      */
-    private BigDecimal consumeAmount;
+    private String reduceNo;
     /**
      * 优惠金额
      */
@@ -56,14 +72,10 @@ public class OrderEntity extends BaseEntity {
      * 优惠原因
      */
     private String reduceReason;
+
     /**
-     * 交易流水号
+     * 备注
      */
-    private String serialNo;
-    /**
-     * 订单状态
-     */
-    @Enumerated(EnumType.STRING)
-    private OrderStatusEnum orderStatus;
+    private String description;
 
 }

@@ -24,10 +24,9 @@ public enum OrderStatusEnum {
     FINISH("交易完成"),
     EVALUATION("评价"),
     AFTER_SALE("申请售后"),
-    DONE("交易终态"),
-    ;
+    DONE("交易终态");
 
-    private String value;
+    private final String value;
 
     OrderStatusEnum(String value) {
         this.value = value;

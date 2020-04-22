@@ -1,7 +1,11 @@
 package com.mall.order.core.service;
 
 import com.mall.common.base.GenericResponse;
+import com.mall.order.pojo.form.OrderForm;
+import com.mall.order.pojo.form.OrderSearchForm;
 import com.mall.order.pojo.vo.OrderVO;
+
+import java.util.List;
 
 /**
  * 模块名称: mall
@@ -13,11 +17,35 @@ import com.mall.order.pojo.vo.OrderVO;
 public interface OrderService {
 
     /**
-     * 根据订单号查询
+     * 预览订单
      *
-     * @param id 订单号
+     * @param form 订单表单
      * @return 订单信息
      */
-    GenericResponse<OrderVO> findById(String id);
+    GenericResponse<OrderVO> preview(OrderForm form);
+
+    /**
+     * 创建订单
+     *
+     * @param form 订单表单
+     * @return 订单信息
+     */
+    GenericResponse<OrderVO> create(OrderForm form);
+
+    /**
+     * 根据订单号查询
+     *
+     * @param no 订单号
+     * @return 订单信息
+     */
+    GenericResponse<OrderVO> getByOrderNo(String no);
+
+    /**
+     * 查询订单
+     *
+     * @param form 查询表单
+     * @return 订单信息
+     */
+    GenericResponse<List<OrderVO>> list(OrderSearchForm form);
 
 }

@@ -27,7 +27,7 @@ public class ProductVO extends BaseVO {
     private String name;
 
     @ApiModelProperty("商品单价")
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     @ApiModelProperty("商品描述")
     private String description;

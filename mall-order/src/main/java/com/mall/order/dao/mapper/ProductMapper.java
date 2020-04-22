@@ -1,7 +1,10 @@
 package com.mall.order.dao.mapper;
 
 import com.mall.order.dao.entity.ProductEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * PROJECT: order
@@ -10,5 +13,15 @@ import org.springframework.data.repository.CrudRepository;
  * @author Daoyuan
  * @date 2020/4/21
  */
-public interface ProductMapper extends CrudRepository<ProductEntity, String> {
+@Repository
+public interface ProductMapper extends JpaRepository<ProductEntity, String> {
+
+    /**
+     * 根据商品号查询
+     *
+     * @param no 商品号
+     * @return 商品
+     */
+    Optional<ProductEntity> findByProductNo(String no);
+
 }

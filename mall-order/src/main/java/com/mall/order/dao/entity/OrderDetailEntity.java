@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 @Data
 @Entity
-@Table(name = "order_detail")
+@Table(name = "po_order_detail")
 public class OrderDetailEntity extends BaseEntity {
 
     /**
@@ -28,20 +28,24 @@ public class OrderDetailEntity extends BaseEntity {
      */
     private String orderNo;
     /**
-     * 消费商品名称
+     * 商品ID
+     */
+    private String productNo;
+    /**
+     * 商品名称（冗余字段）
      */
     private String productName;
     /**
-     * 消费商品单价
+     * 商品单价（冗余字段）
      */
-    private BigDecimal productUnitPrice;
+    private BigDecimal unitPrice;
     /**
-     * 消费商品数量
+     * 商品数量
      */
-    private Integer productCount;
+    private Integer buyCount;
     /**
-     * 地址
+     * 收货地址
      */
-    private String address;
+    private String userAddress;
 
 }

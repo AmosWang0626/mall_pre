@@ -20,15 +20,24 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 @Data
 @Entity
-@Table(name = "product")
+@Table(name = "po_product")
 public class ProductEntity extends BaseEntity {
 
+    /**
+     * 商品ID
+     */
     private String productNo;
-
+    /**
+     * 商品名称
+     */
     private String name;
-
-    private BigDecimal price;
-
+    /**
+     * 商品单价
+     */
+    private BigDecimal unitPrice;
+    /**
+     * 商品描述
+     */
     private String description;
 
 }

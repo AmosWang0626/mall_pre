@@ -22,14 +22,14 @@ public class ProductForm implements Serializable {
 
     private static final long serialVersionUID = 5159898762849415647L;
 
-    @ApiModelProperty("ID（新增不传，修改必传）")
-    private String id;
+    @ApiModelProperty("商品编号（新增不传，修改必传）")
+    private String productNo;
 
     @ApiModelProperty(value = "商品名称", required = true)
     private String name;
 
     @ApiModelProperty(value = "商品单价", required = true)
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     @ApiModelProperty(value = "商品描述", required = true)
     private String description;
