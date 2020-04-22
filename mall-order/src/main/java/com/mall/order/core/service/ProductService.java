@@ -37,6 +37,15 @@ public interface ProductService {
      * @param form 查询表单
      * @return 订单信息
      */
-    GenericResponse<List<ProductVO>> list(ProductForm form);
+    List<ProductVO> list(ProductForm form);
+
+
+    /**
+     * 根据商品号删除
+     *
+     * @param no 商品号
+     * @return 订单信息
+     */
+    GenericResponse<String> delete(String no);
 
 }

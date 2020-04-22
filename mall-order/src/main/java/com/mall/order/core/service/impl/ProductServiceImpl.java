@@ -1,12 +1,15 @@
 package com.mall.order.core.service.impl;
 
 import com.mall.common.base.GenericResponse;
+import com.mall.common.util.IdUtils;
 import com.mall.order.common.ProductException;
 import com.mall.order.core.service.ProductService;
 import com.mall.order.dao.entity.ProductEntity;
 import com.mall.order.dao.mapper.ProductMapper;
+import com.mall.order.pojo.OrderConverter;
 import com.mall.order.pojo.form.ProductForm;
 import com.mall.order.pojo.vo.ProductVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,16 +30,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Resource
     private ProductMapper productMapper;
+    @Resource
+    private OrderConverter orderConverter;
 
 
     @Override
     public GenericResponse<ProductVO> save(ProductForm form) {
-        productMapper.save(new ProductEntity()
-                .setName(form.getName())
-                .setProductNo(form.getProductNo())
-                .setUnitPrice(form.getUnitPrice())
-                .setDescription(form.getDescription()));
-        return GenericResponse.format(GenericResponse.SUCCESS);
+        ProductEntity entity = orderConverter.convert(form);
+        if (StringUtils.isNotBlank(entity.getProductNo())) {
+            productMapper.findByProductNo(entity.getProductNo())
+                    .ifPresent(productEntity -> entity.setId(productEntity.getId())
+                            .setCreateTime(productEntity.getCreateTime())
+                            .setCreateUser(productEntity.getCreateUser()));
+        }
+        if (entity.getId() == null && entity.getProductNo() == null) {
+            entity.setProductNo(IdUtils.productNo());
+        }
+
+        productMapper.save(entity);
+
+        return new GenericResponse<>(orderConverter.reduction(entity));
     }
 
     @Override
@@ -51,19 +64,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public GenericResponse<List<ProductVO>> list(ProductForm form) {
-        List<ProductVO> productList =
-                Optional.of(productMapper.findAll())
-                        // list<entity>
-                        .map(entities -> entities.stream()
-                                .map(entity -> new ProductVO()
-                                        .setName(entity.getName())
-                                        .setProductNo(entity.getProductNo())
-                                        .setUnitPrice(entity.getUnitPrice())
-                                        .setDescription(entity.getDescription()))
-                                // list<vo>
-                                .collect(Collectors.toList()))
-                        .orElse(Collections.emptyList());
-        return new GenericResponse<>(productList);
+    public List<ProductVO> list(ProductForm form) {
+        return Optional.of(productMapper.findAll())
+                // list<entity>
+                .map(entities -> entities.stream()
+                        .map(entity -> new ProductVO()
+                                .setName(entity.getName())
+                                .setProductNo(entity.getProductNo())
+                                .setUnitPrice(entity.getUnitPrice())
+                                .setDescription(entity.getDescription()))
+                        // list<vo>
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
     }
+
+    @Override
+    public GenericResponse<String> delete(String no) {
+        productMapper.findByProductNo(no)
+                .ifPresent(productEntity -> productMapper.deleteLogic(productEntity));
+
+        return GenericResponse.SUCCESS;
+    }
+
 }

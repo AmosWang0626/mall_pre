@@ -1,5 +1,6 @@
 package com.mall.order.dao.mapper;
 
+import com.mall.common.api.BaseRepository;
 import com.mall.order.dao.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.Optional;
  * @date 2020/4/21
  */
 @Repository
-public interface ProductMapper extends JpaRepository<ProductEntity, String> {
+public interface ProductMapper extends BaseRepository<ProductEntity, String>, JpaRepository<ProductEntity, String> {
 
     /**
      * 根据商品号查询

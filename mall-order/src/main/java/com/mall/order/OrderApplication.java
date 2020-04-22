@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * 商城系统-订单系统
@@ -11,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author Daoyuan
  * @version 1.0.0
  */
+@EnableJpaAuditing
 @SpringBootApplication
 @EnableDiscoveryClient
 @EntityScan("com.mall.order.dao.entity")

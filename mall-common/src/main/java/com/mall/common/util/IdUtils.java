@@ -16,8 +16,24 @@ public class IdUtils {
         return uuid;
     }
 
+    /**
+     * 商品编号
+     */
+    public static String productNo() {
+        return "PROD" + DateUtils.getDateTimeSimple() + defaultId().substring(18);
+    }
+
+    /**
+     * 订单编号
+     */
+    public static String orderNo() {
+        return "ODER" + DateUtils.getDateTimeSimple() + defaultId().substring(18);
+    }
+
     public static void main(String[] args) {
         System.out.println(defaultId());
+        System.out.println(productNo());
+        System.out.println(orderNo());
     }
 
 }
