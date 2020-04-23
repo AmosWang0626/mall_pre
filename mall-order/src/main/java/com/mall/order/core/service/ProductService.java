@@ -44,7 +44,7 @@ public interface ProductService {
      * 根据商品号删除
      *
      * @param no 商品号
-     * @return 订单信息
+     * @return res
      */
     GenericResponse<String> delete(String no);
 

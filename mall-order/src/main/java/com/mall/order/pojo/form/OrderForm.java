@@ -18,16 +18,16 @@ public class OrderForm implements Serializable {
 
     private static final long serialVersionUID = -3061187999487020977L;
 
-    @ApiModelProperty("用户ID")
+    @ApiModelProperty(value = "用户ID", example = "8a80cb816f2bd9f6016f2bda3ee00000")
     private String userId;
 
     @ApiModelProperty("购买的商品信息")
     private List<OrderDetailForm> detailList;
 
-    @ApiModelProperty("优惠券编号")
+    @ApiModelProperty(value = "优惠券编号", example = "8a80cb816f2bd9f6016f2bda3ee00000")
     private String reduceNo;
 
-    @ApiModelProperty("备注")
+    @ApiModelProperty(value = "备注", example = "兜风专用")
     private String description;
 
 }

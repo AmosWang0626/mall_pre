@@ -38,7 +38,7 @@ public interface OrderService {
      * @param no 订单号
      * @return 订单信息
      */
-    GenericResponse<OrderVO> getByOrderNo(String no);
+    OrderVO getByOrderNo(String no);
 
     /**
      * 查询订单
@@ -46,6 +46,22 @@ public interface OrderService {
      * @param form 查询表单
      * @return 订单信息
      */
-    GenericResponse<List<OrderVO>> list(OrderSearchForm form);
+    List<OrderVO> list(OrderSearchForm form);
+
+    /**
+     * 根据订单号删除
+     *
+     * @param no 商品号
+     * @return res
+     */
+    GenericResponse<String> delete(String no);
+
+    /**
+     * 根据订单号删除
+     *
+     * @param no 商品号
+     * @return res
+     */
+    GenericResponse<String> realDelete(String no);
 
 }

@@ -1,9 +1,9 @@
 package com.mall.common.api;
 
 import com.mall.common.pojo.dao.BaseEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2019/12/17
  */
 @NoRepositoryBean
-public interface BaseRepository<T extends BaseEntity, ID> extends CrudRepository<T, ID> {
+public interface BaseRepository<T extends BaseEntity, ID> extends JpaRepository<T, ID> {
 
     /**
      * 根据 条件 进行逻辑删除

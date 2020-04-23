@@ -27,7 +27,7 @@ import java.util.List;
 public class OrderVO extends BaseVO {
 
     @ApiModelProperty("用户ID")
-    private Long userId;
+    private String userId;
 
     @ApiModelProperty("订单编号")
     private String orderNo;

@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 public class OrderDetailVO extends BaseVO {
 
     @ApiModelProperty("商品ID")
-    private String productId;
+    private String productNo;
 
     @ApiModelProperty("商品名称")
     private String productName;
@@ -30,7 +30,7 @@ public class OrderDetailVO extends BaseVO {
     private BigDecimal unitPrice;
 
     @ApiModelProperty("商品数量")
-    private Integer applyCount;
+    private Integer buyCount;
 
     @ApiModelProperty("收货地址")
     private String userAddress;

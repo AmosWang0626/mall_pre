@@ -3,6 +3,7 @@ package com.mall.order.pojo.dto;
 import com.mall.order.dao.entity.OrderDetailEntity;
 import com.mall.order.dao.entity.OrderEntity;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
  * @date 2020/4/22 18:43
  */
 @Data
-public class OrderInitDTO {
+@Accessors(chain = true)
+public class OrderDTO {
 
     private OrderEntity orderEntity;
 

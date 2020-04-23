@@ -39,9 +39,7 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity entity = orderConverter.convert(form);
         if (StringUtils.isNotBlank(entity.getProductNo())) {
             productMapper.findByProductNo(entity.getProductNo())
-                    .ifPresent(productEntity -> entity.setId(productEntity.getId())
-                            .setCreateTime(productEntity.getCreateTime())
-                            .setCreateUser(productEntity.getCreateUser()));
+                    .ifPresent(productEntity -> entity.setId(productEntity.getId()));
         }
         if (entity.getId() == null && entity.getProductNo() == null) {
             entity.setProductNo(IdUtils.productNo());
@@ -55,11 +53,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductVO getByProductNo(String no) {
         return productMapper.findByProductNo(no)
-                .map(entity -> new ProductVO()
-                        .setName(entity.getName())
-                        .setProductNo(entity.getProductNo())
-                        .setUnitPrice(entity.getUnitPrice())
-                        .setDescription(entity.getDescription()))
+                .map(entity -> orderConverter.reduction(entity))
                 .orElseThrow(() -> new ProductException("找不到该商品"));
     }
 
@@ -68,11 +62,7 @@ public class ProductServiceImpl implements ProductService {
         return Optional.of(productMapper.findAll())
                 // list<entity>
                 .map(entities -> entities.stream()
-                        .map(entity -> new ProductVO()
-                                .setName(entity.getName())
-                                .setProductNo(entity.getProductNo())
-                                .setUnitPrice(entity.getUnitPrice())
-                                .setDescription(entity.getDescription()))
+                        .map(entity -> orderConverter.reduction(entity))
                         // list<vo>
                         .collect(Collectors.toList()))
                 .orElse(Collections.emptyList());

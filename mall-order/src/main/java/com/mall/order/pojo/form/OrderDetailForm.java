@@ -19,10 +19,10 @@ public class OrderDetailForm implements Serializable {
 
     private static final long serialVersionUID = 64141582908771267L;
 
-    @ApiModelProperty(value = "商品编号", example = "xxx")
+    @ApiModelProperty(value = "商品编号", example = "PROD20200422225715507993d376bc38")
     private String productNo;
 
-    @ApiModelProperty(value = "购买数量", example = "5")
-    private Integer productCount;
+    @ApiModelProperty(value = "购买数量", example = "3")
+    private Integer buyCount;
 
 }
