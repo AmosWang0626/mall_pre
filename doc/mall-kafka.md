@@ -45,5 +45,17 @@
             - The command 'rmr' has been deprecated. Please use 'deleteall' instead.
 
 ## Kafka 基本概念
-
+> 示例配置如下
+```yaml
+spring:
+  cloud:
+    stream:
+      kafka:
+        bindings: # 服务的整合处理
+          order:  # 通道的名称
+            destination: order_create # Kafka中的 topic RabbitMQ中的 exchange
+            content-type: application/json # 设置消息类型，文本可设置为 text/plain
+            binder: xxx # 默认绑定器
+            group: order_notice # 分组
+```
 
