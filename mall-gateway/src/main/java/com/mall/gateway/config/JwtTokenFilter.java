@@ -92,24 +92,24 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
 
         // 校验 token 是否过期
         if (JwtUtils.isLoginExpired(token, authUserVO.getAccount(), authUserVO.getPassword())) {
-            return authError(response, new GenericResponse(GatewayExceptionEnum.USER_TOKEN_EXPIRED));
+            return authError(response, new GenericResponse<>(GatewayExceptionEnum.USER_TOKEN_EXPIRED));
         }
 
         // 校验 其他设备 登录
         if (JwtUtils.isLoginElsewhere(authUserVO.getUserId(), token)) {
-            return authError(response, new GenericResponse(GatewayExceptionEnum.USER_ACCOUNT_LOGIN_ELSEWHERE));
+            return authError(response, new GenericResponse<>(GatewayExceptionEnum.USER_ACCOUNT_LOGIN_ELSEWHERE));
         }
 
         // 校验 长时间不操作自动退出
         if (StringUtils.isBlank(RedisUtils.get(JwtConstant.REDIS_KEY_OPERATIONAL + authUserVO.getUserId(), 1))) {
-            return authError(response, new GenericResponse(GatewayExceptionEnum.USER_IDLE_TIME_TO_LONG));
+            return authError(response, new GenericResponse<>(GatewayExceptionEnum.USER_IDLE_TIME_TO_LONG));
         }
         JwtUtils.saveOperational(authUserVO.getUserId(), account);
 
         return chain.filter(exchange);
     }
 
-    private Mono<Void> authError(ServerHttpResponse response, GenericResponse genericResponse) {
+    private Mono<Void> authError(ServerHttpResponse response, GenericResponse<String> genericResponse) {
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         DataBuffer buffer = response.bufferFactory().wrap(genericResponse.toString().getBytes(StandardCharsets.UTF_8));

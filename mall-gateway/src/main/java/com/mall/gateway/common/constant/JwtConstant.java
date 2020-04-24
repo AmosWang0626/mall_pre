@@ -21,8 +21,8 @@ public interface JwtConstant extends JwtBaseConstant {
     int SECRET_EXPIRE_TIME = 129600;
 
     /**
-     * 长时间无操作自动退出 5分钟 (5 * 60) 秒
+     * 长时间无操作自动退出 60分钟 (60 * 60) 秒
      */
-    int OPERATIONAL_EXPIRE_TIME = 300;
+    int OPERATIONAL_EXPIRE_TIME = 3600;
 
 }
