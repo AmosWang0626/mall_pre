@@ -3,14 +3,16 @@
 >
 > 然后实践微服务部署，集群部署，K8S 部署一系列操作。
 
-## 1、user（ing）
+## 1、user（finish）
 - 登录、注册、获取用户信息 [已完成]
 - 濒临过期token刷新
-- 请求发到各业务系统，各业务系统如何拿到用户ID [疑问点]
+- 请求经网关验证，转发到各业务系统， [已完成]
 - 积分服务
 
-## 2、order（尚未开始）
-- 生成订单，查询订单
+## 2、order（finish）
+- 商品增删改查 [已完成]
+- 订单增删改查 [已完成]
+- 订单创建成功通过 MQ 通知用户和库存 [已完成]
 
 ## 3、warehouse（尚未开始）
 - 库存管理
@@ -19,7 +21,3 @@
 - 网关层，WEB 请求入口
 - 结合 Spring Cloud Gateway，配置相关路由实现 
 - register, login 因涉及 jwt 相关的，此处暂通过 Feign 远程调用实现，参数校验使用了 Webflux 相关 API
-
-### 4.1 gateway 模块兼容问题
-- Spring Cloud Gateway 使用 netty 和 webflux 实现, 不兼容 spring-boot-starter-web, 故需要移去相关依赖
-- Swagger 适用于 spring-boot-starter-web, 故暂时去掉 Swagger, 待兼容 Webflux 时再引入

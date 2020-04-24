@@ -7,7 +7,7 @@
 4. 遇到的问题
 
 
-## 1、MySQL环境准备
+## 1、Nacos —— MySQL环境准备
 - 1.1 创建数据库、相关表
 > 创建数据库 `nacos_config`
 >
@@ -39,7 +39,7 @@ db.password=@Nacos2020
 >[mysql-connector-java-8.0.16.jar](https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar)
 
 
-## 2、集群服务规划
+## 2、Nacos 集群服务规划
 
 | 节点 | 端口 |
 | --- | --- |
@@ -67,7 +67,7 @@ db.password=@Nacos2020
 JAVA_OPT="${JAVA_OPT} -server -Xms512m -Xmx512m -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
 ```
 
-## 3、配置Nginx同一入口
+## 3、Nginx反向代理
 ```text
 upstream nacos-server {
   server 127.0.0.1:8848;
@@ -84,5 +84,5 @@ server {
 }
 ```
 
-## 4、遇到的问题
+## 4、遇到的问题（OOM等）
 > 服务启动好好地，不知不觉就挂掉了，一定要检查下服务器内存之类的（谨防 OOM）。
