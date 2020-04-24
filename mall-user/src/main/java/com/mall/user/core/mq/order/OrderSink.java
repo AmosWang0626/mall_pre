@@ -1,4 +1,4 @@
-package com.mall.user.core.mq;
+package com.mall.user.core.mq.order;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
@@ -10,12 +10,12 @@ import org.springframework.messaging.SubscribableChannel;
  * @author amos.wang
  * @date 2020/4/9 21:23
  */
-public interface HelloSink {
+public interface OrderSink {
 
     /**
      * 接收消息的通道名称
      */
-    String HELLO_CHAN = "hello_chan";
+    String ORDER = "order";
 
 
     /**
@@ -23,7 +23,7 @@ public interface HelloSink {
      *
      * @return SubscribableChannel
      */
-    @Input(HelloSink.HELLO_CHAN)
+    @Input(OrderSink.ORDER)
     SubscribableChannel receiveChannel();
 
 }

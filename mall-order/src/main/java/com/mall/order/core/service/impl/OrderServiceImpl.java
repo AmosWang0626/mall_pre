@@ -3,6 +3,7 @@ package com.mall.order.core.service.impl;
 import com.mall.common.base.GenericResponse;
 import com.mall.common.util.IdUtils;
 import com.mall.order.common.OrderStatusEnum;
+import com.mall.order.core.mq.service.OrderProvider;
 import com.mall.order.core.service.OrderService;
 import com.mall.order.core.service.ProductService;
 import com.mall.order.dao.entity.OrderDetailEntity;
@@ -48,6 +49,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private OrderConverter orderConverter;
+    @Resource
+    private OrderProvider orderProvider;
 
 
     @Override
@@ -67,7 +70,11 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.save(orderDTO.getOrderEntity());
         orderDetailMapper.saveAll(orderDTO.getOrderDetailEntities());
 
-        return new GenericResponse<>(getOrderVO(orderDTO));
+        OrderVO orderVO = getOrderVO(orderDTO);
+        // 订单信息通过 MQ 通知用户服务和仓储服务
+        orderProvider.notice(orderVO.toString());
+
+        return new GenericResponse<>(orderVO);
     }
 
     @Override

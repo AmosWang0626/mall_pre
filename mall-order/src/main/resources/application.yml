@@ -1,2 +1,11 @@
 server:
   port: 8020
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        bindings:
+          order:
+            destination: order_create
+            content-type: application/json

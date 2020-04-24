@@ -9,3 +9,6 @@ spring:
           hello_chan:
             destination: hello
             content-type: application/json
+          order:
+            destination: order_create
+            content-type: application/json

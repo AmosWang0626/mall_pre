@@ -1,6 +1,6 @@
 package com.mall.warehouse.controller;
 
-import com.mall.warehouse.business.InventoryBusiness;
+import com.mall.warehouse.core.service.InventoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +25,11 @@ public class InventoryController {
     }
 
     @Resource
-    private InventoryBusiness inventoryBusiness;
+    private InventoryService inventoryService;
 
     @GetMapping("consume")
     public String consume() {
-        String response = inventoryBusiness.consume(UUID.randomUUID().toString());
+        String response = inventoryService.consume(UUID.randomUUID().toString());
         System.out.println(response);
 
         return response;

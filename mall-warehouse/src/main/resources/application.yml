@@ -4,3 +4,12 @@ server:
 redisson:
   singleServerConfig:
     address: 127.0.0.1:6379
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        bindings:
+          order:
+            destination: order_create
+            content-type: application/json

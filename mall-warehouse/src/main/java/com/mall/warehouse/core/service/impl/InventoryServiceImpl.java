@@ -1,5 +1,6 @@
-package com.mall.warehouse.business;
+package com.mall.warehouse.core.service.impl;
 
+import com.mall.warehouse.core.service.InventoryService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/4/2
  */
 @Service
-public class InventoryBusinessImpl implements InventoryBusiness {
+public class InventoryServiceImpl implements InventoryService {
 
     private final RedissonClient redissonClient;
     private final StringRedisTemplate redisTemplate;
@@ -25,7 +26,7 @@ public class InventoryBusinessImpl implements InventoryBusiness {
     private static final String LOCK_KEY = "LOCK_KEY";
     private static final long LOCK_EXPIRE_SECONDS = 10;
 
-    public InventoryBusinessImpl(StringRedisTemplate redisTemplate, RedissonClient redissonClient) {
+    public InventoryServiceImpl(StringRedisTemplate redisTemplate, RedissonClient redissonClient) {
         this.redisTemplate = redisTemplate;
         this.redissonClient = redissonClient;
     }

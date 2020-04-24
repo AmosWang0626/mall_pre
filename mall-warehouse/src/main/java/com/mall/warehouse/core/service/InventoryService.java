@@ -1,4 +1,4 @@
-package com.mall.warehouse.business;
+package com.mall.warehouse.core.service;
 
 /**
  * DESCRIPTION: 库存业务接口
@@ -6,7 +6,7 @@ package com.mall.warehouse.business;
  * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
  * @date 2020/4/2
  */
-public interface InventoryBusiness {
+public interface InventoryService {
 
     /**
      * 扣减库存

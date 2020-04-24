@@ -1,4 +1,4 @@
-package com.mall.user.core.mq;
+package com.mall.warehouse.core.mq.order;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -11,12 +11,12 @@ import org.springframework.cloud.stream.annotation.StreamListener;
  * @author amos.wang
  * @date 2020/3/17 18:09
  */
-@EnableBinding(HelloSink.class)
-public class MessageConsumer {
+@EnableBinding(OrderSink.class)
+public class OrderConsumer {
 
-    @StreamListener(HelloSink.HELLO_CHAN)
+    @StreamListener(OrderSink.ORDER)
     public void receive(Object payload) {
-        System.out.println("收到消息啦: " + payload);
+        System.out.println("mall-order: " + payload);
     }
 
 }
