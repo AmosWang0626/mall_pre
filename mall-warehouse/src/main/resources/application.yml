@@ -8,8 +8,8 @@ redisson:
 spring:
   cloud:
     stream:
-      kafka:
-        bindings:
-          order:
-            destination: order_create
-            content-type: application/json
+      bindings:
+        order:
+          group: warehouseProcess
+          destination: order_create
+          content-type: application/json

@@ -46,6 +46,22 @@
 
 ## Kafka 基本概念
 > 示例配置如下
+
+### 配置方式
+> 注意：bindings 节点在 stream 下边
+```yaml
+spring:
+  cloud:
+    stream:
+      bindings: # 服务的整合处理
+        order:  # 通道的名称
+          destination: order_create # Kafka中的 topic RabbitMQ中的 exchange
+          content-type: application/json # 设置消息类型，文本可设置为 text/plain
+          group: order_notice # 分组（防止重复消费，并且会持久化消息）
+```
+
+### 错误示例
+> 特别注意：这种配置方式 group 不生效，想来原因也很简单，bindings配置在 kafka 下边，kafka下边应该是一些 kafka 独有的配置
 ```yaml
 spring:
   cloud:
@@ -56,6 +72,5 @@ spring:
             destination: order_create # Kafka中的 topic RabbitMQ中的 exchange
             content-type: application/json # 设置消息类型，文本可设置为 text/plain
             binder: xxx # 默认绑定器
-            group: order_notice # 分组
+            group: order_notice # 分组（据说 group 不能带横杠 -）
 ```
-
