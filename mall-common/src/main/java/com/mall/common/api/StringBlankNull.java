@@ -1,14 +1,10 @@
 package com.mall.common.api;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
- * PROJECT: boot
- * DESCRIPTION: BLANK NULL 互转
+ * PROJECT: common
+ * DESCRIPTION: null 和 "" 互转
  *
  * @author amos.wang
  * @date 2019/4/30
@@ -22,10 +18,13 @@ public @interface StringBlankNull {
 
     enum Convert {
         /**
-         * B2N 空字符串 转化为 NULL
-         * N2B NULL 转化为 空字符串
+         * "" -> null
          */
-        B2N, N2B
+        B2N,
+        /**
+         * null -> ""
+         */
+        N2B
     }
 
 }
