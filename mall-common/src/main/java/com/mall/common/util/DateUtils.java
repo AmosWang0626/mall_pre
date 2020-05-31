@@ -20,13 +20,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     private static final ZoneId ZONE_ID = ZoneId.systemDefault();
 
-    private static ThreadLocal<DateFormat> DATE_TIME =
+    private static final ThreadLocal<DateFormat> DATE_TIME =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-    private static ThreadLocal<DateFormat> DATE_TIME_SIMPLE =
+    private static final ThreadLocal<DateFormat> DATE_TIME_SIMPLE =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyyMMddHHmmss"));
-    private static ThreadLocal<DateFormat> DATE =
+    private static final ThreadLocal<DateFormat> DATE =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
-    private static ThreadLocal<DateFormat> DATE_SIMPLE =
+    private static final ThreadLocal<DateFormat> DATE_SIMPLE =
             ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyyMMdd"));
 
     /**
