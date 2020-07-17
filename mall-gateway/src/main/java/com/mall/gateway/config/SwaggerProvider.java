@@ -27,7 +27,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
     /**
      * swagger默认的url后缀
      */
-    protected static final String API_URI = "/v2/api-docs";
+    protected static final String API_URI = "/v3/api-docs";
 
     /**
      * 网关路由
