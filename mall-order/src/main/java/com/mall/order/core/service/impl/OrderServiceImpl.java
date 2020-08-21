@@ -169,7 +169,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         orderEntity.setOrderNo(orderNo);
-        orderEntity.setOrderStatus(OrderStatusEnum.AWAIT_PAY);
+        orderEntity.setOrderStatus(OrderStatusEnum.CREATED);
         orderEntity.setUserId(form.getUserId());
         orderEntity.setConsumeAmount(consumeAmount);
         orderEntity.setDescription(form.getDescription());

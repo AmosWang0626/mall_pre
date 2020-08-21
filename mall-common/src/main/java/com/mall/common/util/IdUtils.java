@@ -10,6 +10,9 @@ import java.util.UUID;
  */
 public class IdUtils {
 
+    private static final Object ORDER_NO_LOCK = new Object();
+
+
     public static String defaultId() {
         String uuid = UUID.randomUUID().toString();
         uuid = uuid.replaceAll("-", "");
@@ -27,13 +30,9 @@ public class IdUtils {
      * 订单编号
      */
     public static String orderNo() {
-        return "ODER" + DateUtils.getDateTimeSimple() + defaultId().substring(18);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(defaultId());
-        System.out.println(productNo());
-        System.out.println(orderNo());
+        synchronized (ORDER_NO_LOCK) {
+            return "ORDER" + DateUtils.getDateTimeSimple() + defaultId().substring(17);
+        }
     }
 
 }

@@ -2,34 +2,36 @@ package com.mall.order.common;
 
 /**
  * PROJECT: order
- * DESCRIPTION: note
+ * DESCRIPTION: 订单状态
  *
  * @author Daoyuan
  * @date 2018/12/26
  */
 public enum OrderStatusEnum {
 
+    /***/
+    CREATED("待付款", "创建订单"),
+    PAID("待发货", "已付款"),
+    SHIPPED("待收货", "已发货"),
+    RECEIVED("评价", "已收货"),
+    AFTER_SALE("退款/售后", "退款/售后"),
+    REFUNDED("已退款", "已退款"),
+    CANCELED("已取消", "已取消"),
+    FINISHED("已完成", "已完成");
+
     /**
-     * 订单状态
+     * 用户状态
      */
-    AWAIT_PAY("待支付"),
-    PAY_SUCCESS("付款"),
-    PAY_CANCEL("取消订单"),
-    INFO_CONFIRM("确认信息(多件商品)"),
-    AWAIT_SHIP("待发货"),
-    AWAIT_SHIP_CANCEL("待发货退款"),
-    SHIPPED("待收货"),
-    RECEIVED("确认收货"),
-    SHIPPED_CANCEL("待收货退款"),
-    FINISH("交易完成"),
-    EVALUATION("评价"),
-    AFTER_SALE("申请售后"),
-    DONE("交易终态");
-
     private final String value;
+    /**
+     * 后台订单状态
+     */
+    private final String description;
 
-    OrderStatusEnum(String value) {
+
+    OrderStatusEnum(String value, String description) {
         this.value = value;
+        this.description = description;
     }
 
     private String getKey() {
@@ -38,5 +40,9 @@ public enum OrderStatusEnum {
 
     private String getValue() {
         return this.value;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
