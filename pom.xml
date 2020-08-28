@@ -21,39 +21,44 @@
         <module>mall-gateway</module>
         <!-- 用户模块 -->
         <module>mall-user</module>
+        <module>mall-user-api</module>
         <!-- 订单模块 -->
         <module>mall-order</module>
         <!-- 仓储模块 -->
         <module>mall-warehouse</module>
     </modules>
 
-    <parent>
-        <!-- spring.boot.version -->
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.12.RELEASE</version>
-        <relativePath/>
-    </parent>
-
     <properties>
-        <spring.cloud.version>2.1.5.RELEASE</spring.cloud.version>
-        <spring.cloud.alibaba.version>2.1.1.RELEASE</spring.cloud.alibaba.version>
         <mall.version>1.0.0</mall.version>
+        <!-- base config -->
+        <docker.server>amos0626</docker.server>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fasterxml.jackson.version>2.10.0</fasterxml.jackson.version>
-        <codehaus.jackson.version>1.9.8</codehaus.jackson.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <!-- spring begin -->
+        <spring.boot.version>2.1.12.RELEASE</spring.boot.version>
+        <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
+        <spring.cloud.alibaba.version>2.2.0.RELEASE</spring.cloud.alibaba.version>
+        <!-- spring end -->
         <alibaba.fastjson.version>1.2.62</alibaba.fastjson.version>
         <commons.lang3.version>3.9</commons.lang3.version>
         <google.guice.version>4.1.0</google.guice.version>
         <redis.version>3.0.1</redis.version>
-        <shiro-spring-boot.version>1.4.1</shiro-spring-boot.version>
         <auth0-java-jwt.version>3.8.1</auth0-java-jwt.version>
-        <swagger.version>3.0.0</swagger.version>
         <mapstruct.version>1.3.1.Final</mapstruct.version>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+        <servlet-api.version>4.0.1</servlet-api.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <!-- 与 spring-cloud-starter-dubbo 中的 dubbo 版本保持一致 -->
+        <dubbo.version>2.7.4.1</dubbo.version>
+        <lombok.version>1.18.10</lombok.version>
+        <redisson.version>3.12.4</redisson.version>
+        <jasypt.version>3.0.2</jasypt.version>
+        <springfox.version>3.0.0</springfox.version>
+        <mysql-java.version>8.0.18</mysql-java.version>
     </properties>
 
     <dependencies>
@@ -76,28 +81,26 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.plugin</groupId>
-            <artifactId>spring-plugin-core</artifactId>
-            <version>2.0.0.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>3.0.2</version>
+            <version>${jasypt.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <version>${springfox.version}</version>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -106,9 +109,37 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 当前项目依赖 -->
+            <dependency>
+                <groupId>com.mall</groupId>
+                <artifactId>mall-common</artifactId>
+                <version>${mall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mall</groupId>
+                <artifactId>mall-user-api</artifactId>
+                <version>${mall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>3.12.4</version>
+                <version>${redisson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.inject</groupId>
@@ -119,41 +150,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${alibaba.fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${fasterxml.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${fasterxml.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-hibernate4</artifactId>
-                <version>${fasterxml.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-core-asl</artifactId>
-                <version>${codehaus.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${codehaus.jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${spring.cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-gateway</artifactId>
-                <version>${spring.cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>redis.clients</groupId>
@@ -169,6 +165,21 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

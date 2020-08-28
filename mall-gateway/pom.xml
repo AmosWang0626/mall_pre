@@ -18,7 +18,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
-        <docker.server>dockerhub.amos.wang</docker.server>
     </properties>
 
 
@@ -26,7 +25,6 @@
         <dependency>
             <groupId>com.mall</groupId>
             <artifactId>mall-common</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,7 +33,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -62,7 +59,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-            <version>2.1.4.RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -73,6 +69,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -86,7 +83,7 @@
                         <id>build-image</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>build</goal>
+                            <!--<goal>build</goal>-->
                             <!-- open when you need to push -->
                             <!--<goal>push</goal>-->
                         </goals>
