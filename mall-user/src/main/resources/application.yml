@@ -12,3 +12,12 @@ spring:
           group: userProcess
           destination: order_create
           content-type: application/json
+dubbo:
+  scan:
+    base-packages: com.mall.user.api.service
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: spring-cloud://localhost
+    

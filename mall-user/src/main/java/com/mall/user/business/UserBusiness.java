@@ -1,8 +1,7 @@
 package com.mall.user.business;
 
 import com.mall.common.base.GenericResponse;
-import com.mall.common.pojo.response.AuthUserVO;
-import com.mall.user.common.pojo.request.LoginRequest;
+import com.mall.user.api.service.IUserLoginService;
 import com.mall.user.common.pojo.response.UserInfoVO;
 
 /**
@@ -12,31 +11,7 @@ import com.mall.user.common.pojo.response.UserInfoVO;
  * @author Daoyuan
  * @date 2018/12/11
  */
-public interface UserBusiness {
-
-    /**
-     * 注册
-     *
-     * @param loginRequest 注册表单
-     * @return AuthUserVO
-     */
-    GenericResponse<AuthUserVO> register(LoginRequest loginRequest);
-
-    /**
-     * 登录
-     *
-     * @param loginRequest 登录表单
-     * @return AuthUserVO
-     */
-    GenericResponse<AuthUserVO> login(LoginRequest loginRequest);
-
-    /**
-     * 获取登录鉴权信息
-     *
-     * @param loginRequest 登录表单
-     * @return AuthUserVO
-     */
-    GenericResponse<AuthUserVO> authLoginInfo(LoginRequest loginRequest);
+public interface UserBusiness extends IUserLoginService {
 
     /**
      * 获取用户信息

@@ -2,7 +2,7 @@ package com.mall.user.common.pojo;
 
 import com.mall.common.api.BaseConverter;
 import com.mall.common.pojo.response.AuthUserVO;
-import com.mall.user.common.pojo.request.LoginRequest;
+import com.mall.user.api.pojo.request.LoginRequest;
 import com.mall.user.dao.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

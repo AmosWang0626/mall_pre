@@ -1,8 +1,8 @@
 package com.mall.user.api.service;
 
 import com.mall.common.base.GenericResponse;
+import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.user.api.pojo.request.LoginRequest;
-import com.mall.user.api.pojo.response.AuthUserVO;
 
 /**
  * PROJECT: gateway

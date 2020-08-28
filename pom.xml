@@ -52,8 +52,6 @@
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <servlet-api.version>4.0.1</servlet-api.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
-        <!-- 与 spring-cloud-starter-dubbo 中的 dubbo 版本保持一致 -->
-        <dubbo.version>2.7.4.1</dubbo.version>
         <lombok.version>1.18.10</lombok.version>
         <redisson.version>3.12.4</redisson.version>
         <jasypt.version>3.0.2</jasypt.version>
