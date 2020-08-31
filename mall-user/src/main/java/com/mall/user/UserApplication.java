@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * 商城系统-用户系统
- * {@code @EnableEurekaClient} 可省略
  *
  * @author Daoyuan
  * @version 1.0.0

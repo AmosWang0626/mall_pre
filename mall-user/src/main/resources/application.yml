@@ -19,5 +19,4 @@ dubbo:
     name: dubbo
     port: 20880
   registry:
-    address: spring-cloud://localhost
-    
+    address: nacos://amos.wang:8088

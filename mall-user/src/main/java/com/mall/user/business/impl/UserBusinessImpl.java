@@ -5,6 +5,7 @@ import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.common.util.DesSecretUtil;
 import com.mall.common.util.RandomUtil;
 import com.mall.user.api.pojo.request.LoginRequest;
+import com.mall.user.api.service.IUserLoginService;
 import com.mall.user.business.UserBusiness;
 import com.mall.user.common.enums.UserExceptionEnum;
 import com.mall.user.common.pojo.UserConverter;
@@ -12,6 +13,7 @@ import com.mall.user.common.pojo.response.UserInfoVO;
 import com.mall.user.dao.entity.UserEntity;
 import com.mall.user.dao.mapper.UserMapper;
 import com.mall.user.web.exception.AccountErrorException;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -25,6 +27,11 @@ import java.util.Optional;
  * @author Daoyuan
  * @date 2018/12/11
  */
+@Service(version = "1.0.0",
+        interfaceClass = IUserLoginService.class,
+        cluster = "failfast",
+        loadbalance = "roundrobin"
+)
 @Component("userBusiness")
 public class UserBusinessImpl implements UserBusiness {
 
