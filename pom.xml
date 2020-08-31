@@ -39,8 +39,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <!-- spring begin -->
-        <spring.boot.version>2.1.12.RELEASE</spring.boot.version>
-        <spring.cloud.version>Greenwich.SR3</spring.cloud.version>
+        <spring.boot.version>2.2.9.RELEASE</spring.boot.version>
+        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <spring.cloud.kafka.version>3.0.8.RELEASE</spring.cloud.kafka.version>
+        <spring.cloud.gateway.version>2.2.5.RELEASE</spring.cloud.gateway.version>
         <spring.cloud.alibaba.version>2.2.0.RELEASE</spring.cloud.alibaba.version>
         <!-- spring end -->
         <alibaba.fastjson.version>1.2.62</alibaba.fastjson.version>
@@ -92,13 +94,13 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -178,6 +180,16 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${spring.cloud.gateway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+                <version>${spring.cloud.kafka.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
