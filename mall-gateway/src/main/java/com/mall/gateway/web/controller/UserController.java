@@ -4,12 +4,13 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.mall.common.base.GenericResponse;
 import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.gateway.common.BaseController;
-import com.mall.gateway.common.pojo.request.LoginRequest;
-import com.mall.gateway.common.pojo.response.LoginInfoVO;
 import com.mall.gateway.common.utils.JwtUtils;
-import com.mall.gateway.feign.UserFeignClient;
+import com.mall.user.api.pojo.request.LoginRequest;
+import com.mall.user.api.pojo.response.LoginInfoVO;
+import com.mall.user.api.service.IUserLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.UUID;
 
@@ -36,8 +36,12 @@ public class UserController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    @Resource
-    private UserFeignClient userFeignClient;
+    @Reference(
+            version = "1.0.0",
+            interfaceClass = IUserLoginService.class,
+            cluster = "failfast"
+    )
+    private IUserLoginService iUserLoginService;
 
 
     /**
@@ -50,7 +54,7 @@ public class UserController extends BaseController {
     @SentinelResource("/user/register")
     @ApiOperation(value = "注册接口")
     public Mono<GenericResponse<LoginInfoVO>> register(@Valid @RequestBody Mono<LoginRequest> login) {
-        return login.map(loginRequest -> formatLoginInfo(userFeignClient.register(loginRequest)))
+        return login.map(loginRequest -> formatLoginInfo(iUserLoginService.register(loginRequest)))
                 .onErrorResume(fallback());
     }
 
@@ -64,7 +68,7 @@ public class UserController extends BaseController {
     @SentinelResource("/user/login")
     @ApiOperation(value = "登录接口")
     public Mono<GenericResponse<LoginInfoVO>> login(@Valid @RequestBody Mono<LoginRequest> login) {
-        return login.map(loginRequest -> formatLoginInfo(userFeignClient.login(loginRequest)))
+        return login.map(loginRequest -> formatLoginInfo(iUserLoginService.login(loginRequest)))
                 .onErrorResume(fallback());
     }
 

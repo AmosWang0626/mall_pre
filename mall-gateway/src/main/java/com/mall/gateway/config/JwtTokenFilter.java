@@ -7,11 +7,12 @@ import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.common.util.RedisUtils;
 import com.mall.gateway.common.constant.JwtConstant;
 import com.mall.gateway.common.exception.GatewayExceptionEnum;
-import com.mall.gateway.common.pojo.request.LoginRequest;
 import com.mall.gateway.common.utils.JwtUtils;
-import com.mall.gateway.feign.UserFeignClient;
+import com.mall.user.api.pojo.request.LoginRequest;
+import com.mall.user.api.service.IUserLoginService;
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -23,7 +24,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,8 +38,12 @@ import java.util.Set;
 @Component
 public class JwtTokenFilter implements GlobalFilter, Ordered {
 
-    @Resource
-    private UserFeignClient userFeignClient;
+    @Reference(
+            version = "1.0.0",
+            interfaceClass = IUserLoginService.class,
+            cluster = "failfast"
+    )
+    private IUserLoginService iUserLoginService;
 
 
     @Override
@@ -82,7 +86,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
                 return authError(response, GenericResponse.REQUEST_ILLEGAL);
             }
         } else {
-            GenericResponse<AuthUserVO> loginInfo = userFeignClient.authLoginInfo(new LoginRequest().setAccount(account));
+            GenericResponse<AuthUserVO> loginInfo = iUserLoginService.authLoginInfo(new LoginRequest().setAccount(account));
             authUserVO = loginInfo.getBody();
             if (authUserVO == null) {
                 return authError(response, GenericResponse.REQUEST_ILLEGAL);

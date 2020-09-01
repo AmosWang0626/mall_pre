@@ -45,3 +45,11 @@ spring:
             - Path=/mall-user/**
           filters:
             - StripPrefix=1
+
+dubbo:
+  scan:
+    base-packages: com.mall.gateway
+  cloud:
+    subscribed-services: mall-user
+  registry:
+    address: nacos://amos.wang:8088

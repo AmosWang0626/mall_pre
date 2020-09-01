@@ -14,7 +14,7 @@ spring:
           content-type: application/json
 dubbo:
   scan:
-    base-packages: com.mall.user.api.service
+    base-packages: com.mall.user.business.impl
   protocol:
     name: dubbo
     port: 20880
