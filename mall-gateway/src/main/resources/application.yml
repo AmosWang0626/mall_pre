@@ -8,7 +8,7 @@ feign:
 spring:
   cloud:
     stream:
-      kafka:
+      rabbit:
         bindings:
           hello_chan:
             destination: hello

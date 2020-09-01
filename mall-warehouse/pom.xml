@@ -45,10 +45,10 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
-        <!-- stream-kafka -->
+        <!-- stream-mq -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
     </dependencies>
 

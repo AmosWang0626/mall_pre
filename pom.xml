@@ -41,7 +41,7 @@
         <!-- spring begin -->
         <spring.boot.version>2.2.9.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
-        <spring.cloud.kafka.version>3.0.8.RELEASE</spring.cloud.kafka.version>
+        <spring.cloud.stream.version>3.0.8.RELEASE</spring.cloud.stream.version>
         <spring.cloud.gateway.version>2.2.5.RELEASE</spring.cloud.gateway.version>
         <spring.cloud.alibaba.version>2.2.0.RELEASE</spring.cloud.alibaba.version>
         <!-- spring end -->
@@ -188,8 +188,8 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-                <version>${spring.cloud.kafka.version}</version>
+                <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+                <version>${spring.cloud.stream.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
