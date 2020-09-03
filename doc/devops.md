@@ -1,7 +1,7 @@
 # 各服务默认配置
 
 ## 先决条件
-- Zookeeper + Kafka
+- Zookeeper + Kafka 或者 rabbitmq
 - Redis
 - Nacos
 - Sentinel
@@ -17,11 +17,16 @@
 | ops | nacos      |8848|
 | ops | sentinel   |8001|
 | ops | sentinel dashboard |8002|
+| ops | rabbitmq |5672|
+| ops | rabbitmq management |15672|
 | --- | --- | --- |
-| dev | gateway    |8000|
-| dev | user       |8010|
-| dev | order      |8020|
-| dev | warehouse  |8030|
+| dev | gateway         |8000|
+| dev | user            |8010|
+| dev | user dubbo      |20810|
+| dev | order           |8020|
+| dev | order dubbo     |20820|
+| dev | warehouse       |8030|
+| dev | warehouse dubbo |20830|
 
 
 ## gateway 网关服务
@@ -45,3 +50,8 @@
 - 端口：8030
 - application-name：mall-warehouse
 - 涉及技术：暂无
+
+## rabbit mq
+`docker run -d -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3.8.7-management-alpine`
+- 5672 rabbitmq port
+- 15672 rabbitmq management port

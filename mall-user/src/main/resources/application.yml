@@ -17,6 +17,6 @@ dubbo:
     base-packages: com.mall.user.business.impl
   protocol:
     name: dubbo
-    port: 20880
+    port: 20810
   registry:
     address: nacos://amos.wang:8088
