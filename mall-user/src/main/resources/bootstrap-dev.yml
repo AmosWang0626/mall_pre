@@ -3,12 +3,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: amos.wang:8088
+        server-addr: 192.168.113.137:8848
         file-extension: yaml
         group: DEV_GROUP
         namespace: 63ff78df-8674-4479-8f90-65e32c903654
-        # shared-dataids: 如果配置了分组，要使用下边的方式 ext-config 
         extension-configs[0]:
-          data-id: global.properties
+          data-id: application-global.properties
           group: DEV_GROUP
-          refresh: false
+          refresh: true

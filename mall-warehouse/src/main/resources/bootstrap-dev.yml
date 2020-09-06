@@ -7,8 +7,7 @@ spring:
         file-extension: yaml
         group: DEV_GROUP
         namespace: 63ff78df-8674-4479-8f90-65e32c903654
-        # shared-dataids: 如果配置了分组，要使用下边的方式 ext-config 
-        ext-config:
-          - data-id: global.properties
-            group: DEV_GROUP
-            refresh: false
+        extension-configs[0]:
+          data-id: application-global.properties
+          group: DEV_GROUP
+          refresh: false

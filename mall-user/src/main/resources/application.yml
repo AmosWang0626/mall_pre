@@ -18,5 +18,3 @@ dubbo:
   protocol:
     name: dubbo
     port: 20810
-  registry:
-    address: nacos://amos.wang:8088

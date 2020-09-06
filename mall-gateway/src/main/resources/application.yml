@@ -51,5 +51,3 @@ dubbo:
     base-packages: com.mall.gateway
   cloud:
     subscribed-services: mall-user
-  registry:
-    address: nacos://amos.wang:8088
