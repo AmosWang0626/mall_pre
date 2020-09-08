@@ -7,6 +7,7 @@ import com.mall.user.dao.mapper.DbLockMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.concurrent.*;
  * @author amos.wang
  * @date 2020/3/19 9:45
  */
+@ApiIgnore
 @RestController
 @RequestMapping("lock")
 public class LockController {
@@ -26,8 +28,8 @@ public class LockController {
     /**
      * 线程池
      */
-    private ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("lock-pool-%d").build();
-    private ExecutorService singleThreadPool = new ThreadPoolExecutor(
+    private final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("lock-pool-%d").build();
+    private final ExecutorService singleThreadPool = new ThreadPoolExecutor(
             2, 3, 0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 

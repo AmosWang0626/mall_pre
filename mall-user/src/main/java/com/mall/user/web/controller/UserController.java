@@ -7,6 +7,8 @@ import com.mall.common.pojo.response.AuthUserVO;
 import com.mall.user.api.pojo.request.LoginRequest;
 import com.mall.user.business.UserBusiness;
 import com.mall.user.common.pojo.response.UserInfoVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("user")
+@Api(tags = "A01-用户相关")
 public class UserController {
 
     @Resource
@@ -28,23 +31,21 @@ public class UserController {
 
     @Token(check = false)
     @PostMapping("register")
+    @ApiOperation("用户注册")
     public GenericResponse<AuthUserVO> register(@RequestBody LoginRequest register) {
         return userBusiness.register(register);
     }
 
     @Token(check = false)
     @PostMapping("login")
+    @ApiOperation("用户登录")
     public GenericResponse<AuthUserVO> login(@RequestBody LoginRequest login) {
         return userBusiness.login(login);
     }
 
-    @Token(check = false)
-    @PostMapping("authLoginInfo")
-    public GenericResponse<AuthUserVO> authLoginInfo(@RequestBody LoginRequest login) {
-        return userBusiness.authLoginInfo(login);
-    }
 
     @GetMapping("getUserInfo")
+    @ApiOperation("获取用户信息")
     public GenericResponse<UserInfoVO> getUserInfo() {
         return userBusiness.getUserInfo(CurrentUserContext.getAuthUser().getUserId());
     }
