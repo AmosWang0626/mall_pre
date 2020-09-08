@@ -11,3 +11,7 @@ spring:
           data-id: application-global.properties
           group: DEV_GROUP
           refresh: true
+        extension-configs[1]:
+          data-id: application-druid.properties
+          group: DEV_GROUP
+          refresh: true

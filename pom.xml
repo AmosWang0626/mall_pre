@@ -59,6 +59,7 @@
         <jasypt.version>3.0.2</jasypt.version>
         <springfox.version>3.0.0</springfox.version>
         <mysql-java.version>8.0.18</mysql-java.version>
+        <alibaba-druid.version>1.1.17</alibaba-druid.version>
     </properties>
 
     <dependencies>
@@ -190,6 +191,11 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
                 <version>${spring.cloud.stream.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${alibaba-druid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

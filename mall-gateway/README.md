@@ -3,6 +3,8 @@
 >
 > 页面中的链接直达官方wiki
 
+[http://localhost:8000/swagger-ui/index.html/](http://localhost:8000/swagger-ui/index.html/)
+
 ## 1.Actuator
 > 服务监控与管理
 - 通过 logger post 在运行时改变日志等级,常用于线上排错
