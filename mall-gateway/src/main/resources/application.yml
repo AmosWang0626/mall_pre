@@ -8,11 +8,10 @@ feign:
 spring:
   cloud:
     stream:
-      rabbit:
-        bindings:
-          hello_chan:
-            destination: hello
-            content-type: application/json
+      bindings:
+        hello_chan:
+          destination: hello
+          content-type: application/json
 
     gateway:
       routes:
