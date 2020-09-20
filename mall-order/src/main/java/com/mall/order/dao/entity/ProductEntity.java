@@ -32,6 +32,10 @@ public class ProductEntity extends BaseEntity {
      */
     private String name;
     /**
+     * 商品类型
+     */
+    private String type;
+    /**
      * 商品单价
      */
     private BigDecimal unitPrice;

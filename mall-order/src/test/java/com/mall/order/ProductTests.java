@@ -1,6 +1,9 @@
 package com.mall.order;
 
+import com.mall.common.util.IdUtils;
 import com.mall.order.core.service.ProductService;
+import com.mall.order.dao.entity.ProductEntity;
+import com.mall.order.dao.mapper.ProductMapper;
 import com.mall.order.pojo.form.ProductForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 模块名称: mall
@@ -23,6 +29,8 @@ public class ProductTests {
 
     @Resource
     private ProductService productService;
+    @Resource
+    private ProductMapper productMapper;
 
     @Test
     public void save() {
@@ -47,4 +55,23 @@ public class ProductTests {
         System.out.println(productService.list(null));
     }
 
+    @Test
+    public void saveMany() {
+        long initDataBegin = System.currentTimeMillis();
+        Random random = new Random();
+        List<ProductEntity> productEntityList = new ArrayList<>(1000);
+        for (int i = 10000; i < 99999; i++) {
+            productEntityList.add(new ProductEntity()
+                    .setName("PRD_" + i)
+                    .setProductNo(IdUtils.defaultId())
+                    .setType(String.valueOf(5 + random.nextInt(5)))
+                    .setUnitPrice(new BigDecimal(10 + random.nextInt(99)))
+                    .setDescription("this is test prd!"));
+        }
+        System.out.printf("准备数据完成，耗时: %d\n", (System.currentTimeMillis() - initDataBegin));
+
+        long saveDataBegin = System.currentTimeMillis();
+        productMapper.saveAll(productEntityList);
+        System.out.printf("保存数据完成，耗时: %d\n", (System.currentTimeMillis() - saveDataBegin));
+    }
 }
