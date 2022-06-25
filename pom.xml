@@ -58,7 +58,7 @@
         <redisson.version>3.12.4</redisson.version>
         <jasypt.version>3.0.2</jasypt.version>
         <springfox.version>3.0.0</springfox.version>
-        <mysql-java.version>8.0.18</mysql-java.version>
+        <mysql-java.version>8.0.28</mysql-java.version>
         <alibaba-druid.version>1.1.17</alibaba-druid.version>
     </properties>
 
