@@ -46,7 +46,7 @@
         <spring.cloud.alibaba.version>2.2.0.RELEASE</spring.cloud.alibaba.version>
         <!-- spring end -->
         <alibaba.fastjson.version>1.2.83</alibaba.fastjson.version>
-        <commons.lang3.version>3.9</commons.lang3.version>
+        <commons.lang3.version>3.18.0</commons.lang3.version>
         <google.guice.version>4.1.0</google.guice.version>
         <redis.version>3.0.1</redis.version>
         <auth0-java-jwt.version>3.8.1</auth0-java-jwt.version>
